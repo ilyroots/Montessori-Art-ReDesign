@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors */
+  --color-ivory: #FAF8F5;
+  --color-paper: #FFFFFF;
+  --color-canvas: #F3EDE4;
+  --color-terracotta: #C4705A;
+  --color-terracotta-dark: #A85D4A;
+  --color-ochre: #D4A24A;
+  --color-espresso: #3D2B1F;
+  --color-charcoal: #5A524C;
+  --color-sage: #8FA68E;
+  --color-dusty-blue: #7A9EB8;
+  --color-red-oxide: #B85C4F;
+  --color-wood: #C8A97E;
+  --color-linen: #E8E2DA;
+  --color-linen-dark: #D5CFC7;
+
+  /* Semantic colors */
+  --color-background: var(--color-ivory);
+  --color-foreground: var(--color-espresso);
+  --color-primary: var(--color-terracotta);
+  --color-primary-hover: var(--color-terracotta-dark);
+  --color-secondary: var(--color-ochre);
+  --color-muted: var(--color-charcoal);
+  --color-border: var(--color-linen);
+
+  /* Typography */
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-30: 7.5rem;
+  --spacing-34: 8.5rem;
+  --spacing-38: 9.5rem;
+  --spacing-42: 10.5rem;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(61, 43, 31, 0.06);
+  --shadow-card-hover: 0 8px 32px rgba(61, 43, 31, 0.10);
+  --shadow-soft: 0 2px 12px rgba(61, 43, 31, 0.05);
+
+  /* Border radius */
+  --radius-card: 16px;
+  --radius-card-sm: 12px;
+  --radius-button: 8px;
+}

@@ -1,0 +1,105 @@
+"use client";
+
+import Link from "next/link";
+import { BuyButton } from "./BuyButton";
+import { Check } from "lucide-react";
+
+interface ProductCardProps {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  originalPrice?: string;
+  href: string;
+  badge?: string;
+  features?: string[];
+  ageRange?: string;
+  format?: string;
+  variant?: "default" | "featured";
+}
+
+export function ProductCard({
+  id,
+  title,
+  description,
+  price,
+  originalPrice,
+  href,
+  badge,
+  features,
+  ageRange,
+  format,
+  variant = "default",
+}: ProductCardProps) {
+  const isFeatured = variant === "featured";
+
+  return (
+    <div
+      className={`relative flex flex-col rounded-card border bg-paper transition-shadow duration-200 hover:shadow-card-hover ${
+        isFeatured ? "border-terracotta/30 shadow-card" : "border-linen"
+      }`}
+    >
+      {badge && (
+        <div className="absolute -top-3 left-6">
+          <span className="inline-block rounded-full bg-terracotta px-3 py-1 text-xs font-semibold text-paper">
+            {badge}
+          </span>
+        </div>
+      )}
+
+      <div className="p-6 sm:p-8 flex flex-col flex-1">
+        <div className="mb-4">
+          <h3 className="font-serif text-xl sm:text-2xl font-semibold text-espresso">
+            {title}
+          </h3>
+          {ageRange && (
+            <p className="mt-1 text-xs uppercase tracking-wider text-charcoal/60">
+              Ages {ageRange}
+            </p>
+          )}
+        </div>
+
+        <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
+          {description}
+        </p>
+
+        {features && features.length > 0 && (
+          <ul className="mb-6 space-y-2">
+            {features.map((feature) => (
+              <li key={feature} className="flex items-start gap-2 text-sm text-charcoal">
+                <Check size={16} className="mt-0.5 text-sage shrink-0" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {format && (
+          <p className="text-xs text-charcoal/50 mb-4">{format}</p>
+        )}
+
+        <div className="mt-auto pt-6 border-t border-linen">
+          <div className="flex items-baseline gap-2 mb-4">
+            <span className="font-serif text-2xl font-bold text-espresso">
+              {price}
+            </span>
+            {originalPrice && (
+              <span className="text-sm text-charcoal/40 line-through">
+                {originalPrice}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-col gap-2">
+            <BuyButton productId={id} fullWidth />
+            <Link
+              href={href}
+              className="text-center text-sm font-medium text-terracotta hover:text-terracotta-dark transition-colors"
+            >
+              Learn more
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
