@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, GraduationCap, ShoppingBag, Gift, Video } from "lucide-react";
 import { ArtDirectedHero } from "@/components/sections/ArtDirectedHero";
@@ -188,7 +189,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/curriculum"
-                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
                 View all offers
                 <ArrowRight size={16} />
@@ -413,13 +414,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
-              <div className="aspect-[3/4] max-w-md mx-auto relative rounded-card bg-canvas border border-linen overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-charcoal/25">
-                  <div className="text-center">
-                    <GraduationCap size={64} className="mx-auto mb-4" />
-                    <p className="text-sm font-medium">Spramani Elaun Portrait</p>
-                  </div>
-                </div>
+              <div className="aspect-[4/3] max-w-lg mx-auto relative rounded-card overflow-hidden shadow-card">
+                <Image
+                  src="/images/spramani-elaun.png"
+                  alt="Spramani Elaun, founder of Nature of Art®, surrounded by Montessori art materials and her published books"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
               </div>
             </ScrollReveal>
 
