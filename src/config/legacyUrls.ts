@@ -127,4 +127,20 @@ export const legacyUrls: LegacyUrlEntry[] = [
     priority: "high",
     notes: "Lead magnet",
   },
+  {
+    oldUrl: "https://keap.page/hj952/painting-work-art-album.html",
+    newPath: "/curriculum/painting-work",
+    platform: "Keap",
+    status: "planned",
+    priority: "high",
+    notes: "Companion album to Kids Painting",
+  },
+  {
+    oldUrl: "https://spramani.lpages.co/october-online-training/",
+    newPath: "/training/painting-key-lessons",
+    platform: "Leadpages",
+    status: "planned",
+    priority: "high",
+    notes: "Painting Key Lessons 101",
+  },
 ];

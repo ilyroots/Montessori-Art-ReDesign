@@ -1,8 +1,7 @@
 // ============================================================
-// Existing Site Map — Montessori Art Website Redesign
+// Existing Site Map — Nature of Art® Website Redesign
 // ============================================================
-// This is the SOURCE OF TRUTH mapping from current live pages
-// to new redesigned pages.
+// SOURCE OF TRUTH mapping from current live pages to new redesigned pages.
 //
 // Rule: Every old URL must have ONE of these fates:
 // - "redirect"    → new native page replaces it
@@ -10,8 +9,7 @@
 // - "retire"      → page removed (document why)
 // - "keep-external" → remains on external platform for now
 //
-// Do NOT remove old sales paths before native replacements are
-// live and tested.
+// Do NOT remove old sales paths before native replacements are live and tested.
 // ============================================================
 
 export type MigrationAction = "redirect" | "merge" | "retire" | "keep-external";
@@ -25,17 +23,11 @@ export type IntegrationStatus =
   | "live";
 
 export interface ExistingPageEntry {
-  /** Current live URL (the source of truth) */
   legacyUrl: string;
-  /** New redesigned page path */
   newPath: string;
-  /** Human-readable page title */
   title: string;
-  /** Platform the old page lives on */
   platform: Platform;
-  /** What happens to the old page */
   action: MigrationAction;
-  /** Category for grouping */
   category:
     | "curriculum"
     | "training"
@@ -48,22 +40,16 @@ export interface ExistingPageEntry {
     | "legal"
     | "store"
     | "newsletter";
-  /** Current integration status */
   integrationStatus: IntegrationStatus;
-  /** Current fallback URL if native checkout/form is not ready */
   fallbackExternalUrl?: string;
-  /** Keap form/checkout URL if applicable */
   keapUrl?: string;
-  /** Leadpages URL if applicable */
   leadpagesUrl?: string;
-  /** Volusion/store URL if applicable */
   storeUrl?: string;
-  /** Notes for the migration team */
   notes: string;
 }
 
 // ------------------------------------------------------------------
-// MAIN NAVIGATION / CORE PAGES
+// CORE PAGES
 // ------------------------------------------------------------------
 
 export const corePages: ExistingPageEntry[] = [
@@ -75,8 +61,7 @@ export const corePages: ExistingPageEntry[] = [
     action: "redirect",
     category: "company",
     integrationStatus: "native-page-built",
-    notes:
-      "Current WordPress homepage with blog-style content. Redesigning as premium brand hub with manifesto hero, audience paths, featured offers.",
+    notes: "WordPress homepage with blog post grid. Core positioning: 'Montessori provides the learning environment. Nature of Art® provides the art pedagogy.'",
   },
   {
     legacyUrl: "https://montessori-art.com/about-2/",
@@ -85,9 +70,8 @@ export const corePages: ExistingPageEntry[] = [
     platform: "WordPress",
     action: "redirect",
     category: "company",
-    integrationStatus: "mapped",
-    notes:
-      "Preserve founder/about content. Redesign as editorial founder authority page.",
+    integrationStatus: "native-page-built",
+    notes: "Hub page for Nature of Art®, Spramani, books, curriculum, services, certification, art supplies, newsletter, and contact.",
   },
   {
     legacyUrl: "https://montessori-art.com/blog/",
@@ -97,8 +81,7 @@ export const corePages: ExistingPageEntry[] = [
     action: "redirect",
     category: "blog",
     integrationStatus: "mapped",
-    notes:
-      "Preserve all posts, categories, and slugs for SEO. Redesign with editorial typography, sticky TOC, Montessori callouts.",
+    notes: "Preserve all posts, categories, and slugs for SEO. Full WordPress export needed for complete migration.",
   },
   {
     legacyUrl: "https://keap.app/contact-us/5358701398091591",
@@ -109,8 +92,7 @@ export const corePages: ExistingPageEntry[] = [
     category: "newsletter",
     integrationStatus: "mapped",
     keapUrl: "https://keap.app/contact-us/5358701398091591",
-    notes:
-      "Keap contact form currently handles newsletter signup. Build native page with NewsletterSignup component. Connect to Keap form later.",
+    notes: "Keap contact form currently handles newsletter signup. Build native page with NewsletterSignup component.",
   },
   {
     legacyUrl: "https://montessori-art.com/terms-of-service/",
@@ -120,7 +102,7 @@ export const corePages: ExistingPageEntry[] = [
     action: "redirect",
     category: "legal",
     integrationStatus: "mapped",
-    notes: "Preserve legal copy. Simple content page.",
+    notes: "Preserve legal copy. Covers Science Art Method™ proprietary rights, copyright, individual use license.",
   },
   {
     legacyUrl: "https://montessori-art.com/accessibility-statement/",
@@ -130,12 +112,12 @@ export const corePages: ExistingPageEntry[] = [
     action: "redirect",
     category: "legal",
     integrationStatus: "mapped",
-    notes: "Preserve accessibility content. Simple content page.",
+    notes: "Needs manual verification. Crawler had issues accessing.",
   },
 ];
 
 // ------------------------------------------------------------------
-// CURRICULUM PAGES (Leadpages → Native)
+// CURRICULUM PAGES
 // ------------------------------------------------------------------
 
 export const curriculumPages: ExistingPageEntry[] = [
@@ -149,20 +131,18 @@ export const curriculumPages: ExistingPageEntry[] = [
     integrationStatus: "native-page-built",
     fallbackExternalUrl: "https://spramani.lpages.co/painting-curriculum-sales-page-/",
     leadpagesUrl: "https://spramani.lpages.co/painting-curriculum-sales-page-/",
-    notes:
-      "Top-selling curriculum. Native page built. CTA uses fallback URL until Keap/Volusion checkout is mapped.",
+    notes: "Top-selling curriculum. 57 studio experiences. Dual pricing: $155 paperback / $97 digital.",
   },
   {
     legacyUrl: "https://keap.page/hj952/painting-work-art-album.html",
     newPath: "/curriculum/painting-work",
-    title: "Painting Work Curriculum",
+    title: "Painting Work / Montessori Elementary",
     platform: "Keap",
     action: "redirect",
     category: "curriculum",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/painting-work-art-album.html",
-    notes:
-      "Keap page for painting work. Needs native CurriculumSalesPageTemplate with Keap checkout placeholder.",
+    notes: "Companion to Kids Painting. 7 key lessons. NOT the same product. Pricing: $97 printed / $45 digital.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/drawing-curriculum/",
@@ -174,7 +154,7 @@ export const curriculumPages: ExistingPageEntry[] = [
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/drawing-curriculum/",
     leadpagesUrl: "https://spramani.lpages.co/drawing-curriculum/",
-    notes: "Leadpages drawing sales page. Rebuild with CurriculumSalesPageTemplate.",
+    notes: "Two editions: Early Childhood (16 studios, $135/$72) and Elementary (47 studios, $155/$97).",
   },
   {
     legacyUrl: "https://spramani.lpages.co/color-theory-curriculum-sales-page/",
@@ -186,7 +166,7 @@ export const curriculumPages: ExistingPageEntry[] = [
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/color-theory-curriculum-sales-page/",
     leadpagesUrl: "https://spramani.lpages.co/color-theory-curriculum-sales-page/",
-    notes: "Leadpages color theory sales page. Rebuild with CurriculumSalesPageTemplate.",
+    notes: "37 sequential color exploration lessons. Pricing: $155 paperback / $97 digital.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/clay-modeling-curriculum/",
@@ -198,24 +178,12 @@ export const curriculumPages: ExistingPageEntry[] = [
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/clay-modeling-curriculum/",
     leadpagesUrl: "https://spramani.lpages.co/clay-modeling-curriculum/",
-    notes: "Leadpages clay modeling sales page. Rebuild with CurriculumSalesPageTemplate.",
-  },
-  {
-    legacyUrl: "https://spramani.lpages.co/crafting-building-curriculum/",
-    newPath: "/curriculum/crafting-building",
-    title: "Crafting & Building Curriculum",
-    platform: "Leadpages",
-    action: "redirect",
-    category: "curriculum",
-    integrationStatus: "mapped",
-    fallbackExternalUrl: "https://spramani.lpages.co/crafting-building-curriculum/",
-    leadpagesUrl: "https://spramani.lpages.co/crafting-building-curriculum/",
-    notes: "Leadpages crafting & building sales page. Rebuild with CurriculumSalesPageTemplate.",
+    notes: "29 clay studio experiences. CONFLICT: bookstore says 27 lessons. Pricing: $145 paperback / $97 digital.",
   },
 ];
 
 // ------------------------------------------------------------------
-// TRAINING PAGES (Keap / Leadpages → Native)
+// TRAINING PAGES (Paid)
 // ------------------------------------------------------------------
 
 export const trainingPages: ExistingPageEntry[] = [
@@ -228,79 +196,122 @@ export const trainingPages: ExistingPageEntry[] = [
     category: "training",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/homeschooling-art-where-to-start.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate + Keap checkout placeholder.",
+    notes: "The Homeschooling Art Starter. $29.00. 3 videos + 1 bonus Watercolor Joy.",
   },
   {
     legacyUrl: "https://keap.page/hj952/infant-toddler-webinar.html",
     newPath: "/training/infant-toddler-art",
-    title: "Infant & Toddler Art",
+    title: "Infant & Toddler Art Webinar",
     platform: "Keap",
     action: "redirect",
     category: "training",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/infant-toddler-webinar.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate.",
+    notes: "1 hour pre-recorded live training. Price pending backend verification.",
   },
   {
     legacyUrl: "https://keap.page/hj952/new-landing-page3.html",
     newPath: "/training/art-shelf",
-    title: "Art Shelf Setup",
+    title: "How To Stage An Art Shelf",
     platform: "Keap",
     action: "redirect",
     category: "training",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/new-landing-page3.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate.",
+    notes: "Proprietary Art Shelf System. $45.00. 1:15 hr video. 11 structures.",
   },
   {
     legacyUrl: "https://keap.page/hj952/process-based-video-training.html",
     newPath: "/training/process-based-art",
-    title: "Process-Based Art",
+    title: "Process-Based Art Video Training",
     platform: "Keap",
     action: "redirect",
     category: "training",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/process-based-video-training.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate.",
+    notes: "Price pending backend verification. 1 year access.",
   },
   {
     legacyUrl: "https://keap.page/hj952/positive-artful-talk-vide-training.html",
     newPath: "/training/positive-art-talk",
-    title: "Positive Artful Talk",
+    title: "Positive Art Talk",
     platform: "Keap",
     action: "redirect",
     category: "training",
     integrationStatus: "mapped",
     keapUrl: "https://keap.page/hj952/positive-artful-talk-vide-training.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate.",
-  },
-  {
-    legacyUrl: "https://keap.page/hj952/theming-art-the-natural-world.html",
-    newPath: "/training/nature-art",
-    title: "Nature Art",
-    platform: "Keap",
-    action: "redirect",
-    category: "training",
-    integrationStatus: "mapped",
-    keapUrl: "https://keap.page/hj952/theming-art-the-natural-world.html",
-    notes: "Keap training page. Rebuild with TrainingSalesPageTemplate.",
+    notes: "Positive Artful Ways To Talk To Your Students. $19.00.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/october-online-training/",
     newPath: "/training/painting-key-lessons",
-    title: "Painting Key Lessons",
+    title: "Painting Key Lessons 101",
     platform: "Leadpages",
     action: "redirect",
     category: "training",
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/october-online-training/",
     leadpagesUrl: "https://spramani.lpages.co/october-online-training/",
-    notes: "Leadpages training page. Rebuild with TrainingSalesPageTemplate.",
+    notes: "Limited Time $65.00 (was $197.00). 1.5 PD hours. 1 year access.",
+  },
+  {
+    legacyUrl: "https://keap.page/hj952/theming-art-the-natural-world.html",
+    newPath: "/training/nature-art",
+    title: "Theme Art & The Natural World",
+    platform: "Keap",
+    action: "redirect",
+    category: "training",
+    integrationStatus: "mapped",
+    keapUrl: "https://keap.page/hj952/theming-art-the-natural-world.html",
+    notes: "$57.00. 3 videos. 2 hr CPD. Includes PDFs/checklists/book list.",
   },
 ];
 
 // ------------------------------------------------------------------
-// CERTIFICATION PAGES (Leadpages → Native)
+// FREE RESOURCE PAGES
+// ------------------------------------------------------------------
+
+export const freeResourcePages: ExistingPageEntry[] = [
+  {
+    legacyUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
+    newPath: "/free-resources/color-mixing-video",
+    title: "Color Mixing Free Video Lesson",
+    platform: "Leadpages",
+    action: "redirect",
+    category: "free-resource",
+    integrationStatus: "mapped",
+    fallbackExternalUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
+    leadpagesUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
+    notes: "Free lead magnet. 'How to set-up one color prompt.' CTA: YES, I WANT MY DOWNLOAD!",
+  },
+  {
+    legacyUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
+    newPath: "/free-resources/storybook-art-video",
+    title: "Theme Art With Storybooks",
+    platform: "Leadpages",
+    action: "redirect",
+    category: "free-resource",
+    integrationStatus: "mapped",
+    fallbackExternalUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
+    leadpagesUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
+    notes: "Free 1 hour video training on theming art with storybooks.",
+  },
+  {
+    legacyUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
+    newPath: "/free-resources/phases-of-art-development",
+    title: "Phases of Art Development",
+    platform: "Leadpages",
+    action: "redirect",
+    category: "free-resource",
+    integrationStatus: "mapped",
+    fallbackExternalUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
+    leadpagesUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
+    notes: "Free 3-video series: Toddler, 3–6 years, 6–12 years.",
+  },
+];
+
+// ------------------------------------------------------------------
+// CERTIFICATION PAGES
 // ------------------------------------------------------------------
 
 export const certificationPages: ExistingPageEntry[] = [
@@ -314,8 +325,7 @@ export const certificationPages: ExistingPageEntry[] = [
     integrationStatus: "native-page-built",
     fallbackExternalUrl: "https://spramani.lpages.co/arttraining2020-waitlist/",
     leadpagesUrl: "https://spramani.lpages.co/arttraining2020-waitlist/",
-    notes:
-      "Certification interest/waitlist page. Native page built. CTA uses fallback URL until Keap checkout is mapped.",
+    notes: "CONFLICT: waitlist shows $668/$1,499. artteachingblueprint shows $699/$1,500. Prices pending backend verification.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/artteachingblueprint/",
@@ -327,84 +337,37 @@ export const certificationPages: ExistingPageEntry[] = [
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/artteachingblueprint/",
     leadpagesUrl: "https://spramani.lpages.co/artteachingblueprint/",
-    notes:
-      "Certification detail page. Rebuild with CertificationPageTemplate. Currently most premium offer ($497).",
+    notes: "CONFLICT: artteachingblueprint shows $699/$1,500. waitlist shows $668/$1,499. Prices pending backend verification.",
   },
 ];
 
 // ------------------------------------------------------------------
-// FREE RESOURCES (Leadpages → Native)
-// ------------------------------------------------------------------
-
-export const freeResourcePages: ExistingPageEntry[] = [
-  {
-    legacyUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
-    newPath: "/free-resources/color-mixing-video",
-    title: "Color Mixing Video Lesson",
-    platform: "Leadpages",
-    action: "redirect",
-    category: "free-resource",
-    integrationStatus: "mapped",
-    fallbackExternalUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
-    leadpagesUrl: "https://spramani.lpages.co/color-mixing-free-video-lesson/",
-    notes:
-      "Lead magnet. Rebuild with LeadMagnetPageTemplate + LeadMagnetForm. Connect to Keap opt-in later.",
-  },
-  {
-    legacyUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
-    newPath: "/free-resources/storybook-art-video",
-    title: "Storybook Art Video",
-    platform: "Leadpages",
-    action: "redirect",
-    category: "free-resource",
-    integrationStatus: "mapped",
-    fallbackExternalUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
-    leadpagesUrl: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
-    notes: "Lead magnet. Rebuild with LeadMagnetPageTemplate.",
-  },
-  {
-    legacyUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
-    newPath: "/free-resources/phases-of-art-development",
-    title: "Phases of Art Development",
-    platform: "Leadpages",
-    action: "redirect",
-    category: "free-resource",
-    integrationStatus: "mapped",
-    fallbackExternalUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
-    leadpagesUrl: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
-    notes: "Lead magnet. Rebuild with LeadMagnetPageTemplate.",
-  },
-];
-
-// ------------------------------------------------------------------
-// BOOKS & STORE (Leadpages / Volusion → Native)
+// BOOKS & STORE
 // ------------------------------------------------------------------
 
 export const storePages: ExistingPageEntry[] = [
   {
     legacyUrl: "https://spramani.lpages.co/all-my-books/",
     newPath: "/bookstore",
-    title: "Bookstore",
+    title: "Art Books",
     platform: "Leadpages",
     action: "redirect",
     category: "book",
     integrationStatus: "mapped",
     fallbackExternalUrl: "https://spramani.lpages.co/all-my-books/",
     leadpagesUrl: "https://spramani.lpages.co/all-my-books/",
-    notes:
-      "Books landing page. Rebuild as native bookstore with ProductCollectionTemplate. Use fallback external URLs until checkout mapped.",
+    notes: "Book and curriculum catalog. CONFLICT: Clay Play says 27 lessons, sales page says 29.",
   },
   {
     legacyUrl: "https://atosb-raxtf.volusion.store/",
     newPath: "/art-supplies",
-    title: "Art Supplies",
+    title: "Art Store",
     platform: "Volusion",
     action: "redirect",
     category: "art-supplies",
     integrationStatus: "mapped",
     storeUrl: "https://atosb-raxtf.volusion.store/",
-    notes:
-      "Volusion store. Build native /art-supplies page with product cards. Link to Volusion for checkout until ecommerce migration is decided.",
+    notes: "Volusion storefront. Categories: Paints, Art Curriculum, Painting Materials, Drawing, Clay, Crayons, Paper, Crafts, Art Teaching Books, Art Books.",
   },
 ];
 
@@ -416,8 +379,8 @@ export const existingSiteMap: ExistingPageEntry[] = [
   ...corePages,
   ...curriculumPages,
   ...trainingPages,
-  ...certificationPages,
   ...freeResourcePages,
+  ...certificationPages,
   ...storePages,
 ];
 

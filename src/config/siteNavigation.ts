@@ -4,38 +4,51 @@ export interface NavItem {
   children?: NavItem[];
 }
 
+// ------------------------------------------------------------------
+// Main Navigation — Matches current public site structure
+// ------------------------------------------------------------------
+
 export const mainNavigation: NavItem[] = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
   {
-    label: "Curriculum",
+    label: "Art Curriculum",
     href: "/curriculum",
     children: [
       { label: "Painting", href: "/curriculum/painting" },
-      { label: "Drawing", href: "/curriculum/drawing" },
-      { label: "Color Theory", href: "/curriculum/color-theory" },
+      { label: "Painting Work / Montessori Elementary", href: "/curriculum/painting-work" },
       { label: "Clay Modeling", href: "/curriculum/clay-modeling" },
-      { label: "Painting Work", href: "/curriculum/painting-work" },
-      { label: "Crafting & Building", href: "/curriculum/crafting-building" },
+      { label: "Color Theory", href: "/curriculum/color-theory" },
+      { label: "Drawing", href: "/curriculum/drawing" },
     ],
   },
   {
-    label: "Training",
+    label: "Video Training",
     href: "/training",
     children: [
-      { label: "Homeschooling Art", href: "/training/homeschooling-art" },
-      { label: "Infant & Toddler Art", href: "/training/infant-toddler-art" },
-      { label: "Art Shelf Setup", href: "/training/art-shelf" },
-      { label: "Process-Based Art", href: "/training/process-based-art" },
-      { label: "Positive Art Talk", href: "/training/positive-art-talk" },
-      { label: "Nature Art", href: "/training/nature-art" },
+      { label: "FREE – How to Set-Up One Color Prompt", href: "/free-resources/color-mixing-video" },
+      { label: "FREE – Theme Art With Story Books", href: "/free-resources/storybook-art-video" },
+      { label: "BUY – Homeschooling Art Starter", href: "/training/homeschooling-art" },
+      { label: "VIDEO – Infant & Toddler Art Webinar", href: "/training/infant-toddler-art" },
+      { label: "FREE – Phases of Art Development", href: "/free-resources/phases-of-art-development" },
+      { label: "BUY – How To Stage An Art Shelf", href: "/training/art-shelf" },
+      { label: "Process-Based Art Video Training", href: "/training/process-based-art" },
+      { label: "BUY – Positive Art Talk", href: "/training/positive-art-talk" },
+      { label: "BUY – Painting Key Lessons 101", href: "/training/painting-key-lessons" },
+      { label: "BUY – Theme Art & The Natural World", href: "/training/nature-art" },
     ],
   },
-  { label: "Certification", href: "/certification" },
-  { label: "Books", href: "/bookstore" },
-  { label: "Art Supplies", href: "/art-supplies" },
-  { label: "Free Resources", href: "/free-resources" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
+  {
+    label: "Art Certification",
+    href: "/certification",
+    children: [
+      { label: "Montessori Art Certification", href: "/certification" },
+    ],
+  },
+  { label: "Art Books", href: "/bookstore" },
+  { label: "Art Store", href: "/art-supplies" },
+  { label: "Newsletter", href: "/newsletter" },
 ];
 
 export const navCta = {
@@ -43,13 +56,17 @@ export const navCta = {
   href: "/curriculum",
 };
 
+// ------------------------------------------------------------------
+// Footer Navigation
+// ------------------------------------------------------------------
+
 export const footerNavigation = {
   offers: [
     { label: "Curriculum", href: "/curriculum" },
     { label: "Training", href: "/training" },
     { label: "Certification", href: "/certification" },
-    { label: "Books", href: "/bookstore" },
-    { label: "Art Supplies", href: "/art-supplies" },
+    { label: "Art Books", href: "/bookstore" },
+    { label: "Art Store", href: "/art-supplies" },
     { label: "Free Resources", href: "/free-resources" },
   ],
   company: [

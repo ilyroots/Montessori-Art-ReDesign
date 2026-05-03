@@ -354,7 +354,7 @@ export default function HomePage() {
             <ScrollReveal delay={0.1}>
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
                 Read all articles
                 <ArrowRight size={16} />
@@ -365,22 +365,22 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                title: "How to Set Up a Montessori Art Shelf That Children Actually Use",
-                category: "Art Shelf",
+                title: "Easy Drawing Ideas for Young Children",
+                category: "Drawing",
                 excerpt:
-                  "The art shelf is the heart of the Montessori art environment. Here is how to arrange it for independence, beauty, and daily use.",
+                  "Simple, developmentally appropriate drawing activities that build confidence and fine motor skills in young children.",
               },
               {
-                title: "The 3 Phases of Art Development in Early Childhood",
-                category: "Process Art",
+                title: "Boost Strength with Clay Play",
+                category: "Clay",
                 excerpt:
-                  "Understanding scribbling, pre-schematic, and schematic stages helps you meet children where they are.",
+                  "Discover how clay modeling strengthens hand muscles, improves coordination, and supports early creative expression.",
               },
               {
-                title: "Why Process-Based Art Matters More Than Perfect Products",
-                category: "Montessori Environment",
+                title: "Clay Modeling Play for Toddlers | Why and How It Supports Early Creativity",
+                category: "Clay",
                 excerpt:
-                  "When we prioritize the process, children develop creativity, resilience, and a genuine love for making art.",
+                  "Why toddlers benefit from clay play and how to introduce it in ways that support sensory development and imagination.",
               },
             ].map((post, i) => (
               <ScrollReveal key={i} delay={i * 0.08}>
