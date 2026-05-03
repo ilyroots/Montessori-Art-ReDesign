@@ -28,10 +28,10 @@ export default function CertificationPage() {
       primaryCtaLabel="Enroll Now — $497"
       primaryCtaHref="#"
       stats={[
-        { label: "Certified Alumni", value: "2,000+" },
-        { label: "Countries", value: "20+" },
+        { label: "Modules", value: "6" },
         { label: "Years of Experience", value: "20+" },
-        { label: "Satisfaction Rate", value: "98%" },
+        { label: "Self-Paced", value: "Yes" },
+        { label: "Certificate", value: "Included" },
       ]}
       problemParagraphs={[
         "You may have a teaching credential, a Montessori diploma, or years of classroom experience — but when it comes to visual arts, you are often left to figure it out alone.",

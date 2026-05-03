@@ -1,12 +1,11 @@
-import { BookOpen, Video, FileText, Users, Clock, Check } from "lucide-react";
 import { CurriculumSalesPageTemplate } from "@/components/templates/CurriculumSalesPageTemplate";
 import { getPageByNewPath } from "@/config/existingSiteMap";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "Painting Curriculum — Montessori Art Lessons",
+  title: "Kids Painting — Montessori Art Curriculum",
   description:
-    "A sequenced curriculum that introduces brushstrokes, color, materials, and process step by step. For Montessori guides, homeschool parents, and art educators.",
+    "A comprehensive painting curriculum with 57 studio experiences. Spiral-bound book or digital PDF. Science Art Method™ by Nature of Art®.",
 });
 
 // TODO: Connect this page to Keap checkout URL after Keap inventory is complete.
@@ -21,21 +20,21 @@ export default function PaintingCurriculumPage() {
       siteMapEntry={siteMapEntry}
       heroHeadline={
         <>
-          Painting lessons that feel{" "}
+          57 painting studio experiences that feel{" "}
           <span className="text-terracotta italic">prepared, purposeful,</span>{" "}
           and child-led.
         </>
       }
-      heroSubheadline="A sequenced curriculum that introduces brushstrokes, color, materials, and process step by step. No more messy, random, or overly adult-directed painting sessions."
+      heroSubheadline="A Science Art Method™ Painting Studio Application by Nature of Art®. Comprehensive curriculum organized by increasing brushstroke and material complexity."
       problemParagraphs={[
         "You want to offer painting, but it quickly becomes messy, random, or overly adult-directed. You are not sure which materials to buy, what order to teach skills, or how to step back without losing structure.",
         "You have seen beautiful Montessori art environments online, but replicating them feels overwhelming. You need a system, not another Pinterest board.",
       ]}
       methodSteps={[
         {
-          title: "Prepare the shelf",
+          title: "Prepare the environment",
           description:
-            "Learn exactly which materials to select, how to organize them, and how to maintain the environment.",
+            "Learn exactly which materials to select, how to organize them, and how to maintain the painting shelf for independent use.",
         },
         {
           title: "Present the invitation",
@@ -50,47 +49,10 @@ export default function PaintingCurriculumPage() {
         {
           title: "Observe growth",
           description:
-            "Document developmental progress and know exactly when to introduce the next lesson.",
+            "Document developmental progress and know exactly when to introduce the next studio experience.",
         },
       ]}
-      includedFeatures={[
-        {
-          icon: <BookOpen size={22} />,
-          title: "12 Sequenced Lessons",
-          description:
-            "From brush introduction to watercolor techniques to creative expression.",
-        },
-        {
-          icon: <Video size={22} />,
-          title: "Video Presentations",
-          description:
-            "Watch Spramani demonstrate each lesson with real children in a real classroom.",
-        },
-        {
-          icon: <FileText size={22} />,
-          title: "Printable Lesson Plans",
-          description:
-            "Downloadable PDFs with objectives, materials, procedure, and extensions.",
-        },
-        {
-          icon: <Users size={22} />,
-          title: "Observation Guides",
-          description:
-            "Know what to look for and how to document each child's artistic growth.",
-        },
-        {
-          icon: <Clock size={22} />,
-          title: "Material Lists",
-          description:
-            "Exact product recommendations with links and budget-friendly alternatives.",
-        },
-        {
-          icon: <Check size={22} />,
-          title: "Troubleshooting Guide",
-          description:
-            "Solutions for common challenges — messy sessions, reluctant painters, and more.",
-        },
-      ]}
+      // Features are pulled from products.ts (verified) — no invented claims
       whoItsFor={[
         "Montessori guides who want a sequenced painting program",
         "Homeschool parents seeking structure and confidence",
@@ -104,32 +66,11 @@ export default function PaintingCurriculumPage() {
         "Anyone seeking a one-time activity book rather than a curriculum",
       ]}
       instructorBio={[
-        "Spramani has spent over two decades refining this curriculum in real Montessori classrooms. Every lesson has been tested, observed, and adjusted based on how children actually respond.",
-        "She holds certifications in Montessori education and has trained thousands of teachers worldwide. Her work bridges the gap between art pedagogy and Montessori practice.",
+        "Spramani Elaun is a Montessori art educator and founder of Nature of Art®. She has spent over two decades refining curriculum in real Montessori classrooms.",
+        "Her Science Art Method™ bridges the gap between art pedagogy and Montessori practice, giving educators a clear sequence for bringing visual arts into the prepared environment.",
       ]}
-      testimonials={[
-        {
-          quote:
-            "Finally, a painting curriculum that feels prepared and purposeful. My students are more confident and creative than ever.",
-          author: "Maria T.",
-          role: "Montessori Guide",
-          location: "Portland, OR",
-        },
-        {
-          quote:
-            "I was overwhelmed by art before this. Now I have a clear sequence and my children ask to paint every day.",
-          author: "Jennifer L.",
-          role: "Homeschool Mom",
-          location: "Austin, TX",
-        },
-        {
-          quote:
-            "The lesson videos alone are worth the price. Spramani explains each presentation with such clarity.",
-          author: "David R.",
-          role: "Art Specialist",
-          location: "Chicago, IL",
-        },
-      ]}
+      // No invented testimonials — only include verified testimonials from public pages
+      testimonials={[]}
       faqItems={[
         {
           question: "Do I need to be a Montessori teacher to use this?",
@@ -139,22 +80,32 @@ export default function PaintingCurriculumPage() {
         {
           question: "What age range is this for?",
           answer:
-            "The curriculum is designed for children ages 3–12, with specific lesson adaptations for early childhood (3–6) and elementary (6–12) levels.",
+            "The curriculum is designed for children ages 3–12, with studio experiences organized by increasing brushstroke and material complexity.",
         },
         {
           question: "What materials do I need?",
           answer:
-            "You will need basic watercolor and tempera paints, quality brushes in various sizes, watercolor paper, palettes, and a few organization tools. A complete material list is included with the curriculum.",
+            "You will need basic watercolor and tempera paints, quality brushes in various sizes, watercolor paper, palettes, and a few organization tools. A complete materials list is included with the curriculum.",
         },
         {
-          question: "Is this a digital download?",
+          question: "Is this a digital download or a printed book?",
           answer:
-            "Yes. You receive instant access to downloadable lesson plans, printable resources, and video presentations.",
+            "Both options are available. You can purchase the spiral-bound printed book with free U.S. shipping, or the digital PDF for instant download.",
         },
         {
           question: "Can I use this in a classroom setting?",
           answer:
-            "Absolutely. The curriculum is designed for both classroom and homeschool use. Many Montessori schools use it as their primary painting program.",
+            "Absolutely. The curriculum is designed for both classroom and homeschool use.",
+        },
+        {
+          question: "What is the refund policy?",
+          answer:
+            "We offer a 30-day satisfaction guarantee for the printed version only. Digital curriculum purchases cannot be refunded.",
+        },
+        {
+          question: "Does this curriculum certify me to teach the Science Art Method™?",
+          answer:
+            "No. Purchase of curriculum does not grant permission to teach or represent the Science Art Method™. The Science Art Method™ is taught through The Art Teaching Blueprint™ certification program.",
         },
       ]}
     />

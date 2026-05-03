@@ -363,11 +363,21 @@ Book and curriculum catalog for educators.
 
 ---
 
+## Content Integration Log
+
+| Date | Action | Status |
+|------|--------|--------|
+| 2026-05-02 | Painting Curriculum prices synced to `products.ts` | ✅ Done |
+| 2026-05-02 | Dual pricing format added to Product type | ✅ Done |
+| 2026-05-02 | Science Art Method™ disclaimer added to template | ✅ Done |
+| 2026-05-02 | Refund policy text added to template | ✅ Done |
+| 2026-05-02 | Invented testimonials removed from Painting page | ✅ Done |
+| 2026-05-02 | Invented stats ("20+ countries", "lifetime updates") removed | ✅ Done |
+
 ## Next Steps for Content Integration
 
-1. **Replace placeholder curriculum prices** in `products.ts` with extracted real prices
-2. **Add paperback/digital format options** to product config (currently only single price)
-3. **Add Science Art Method™ disclaimers** to all curriculum page templates
-4. **Add refund policy text** to all curriculum sales pages
-5. **Verify bookstore product prices** by visiting individual product detail pages
-6. **Map checkout URLs** once Keap/Leadpages backend access is obtained
+1. **Sync Drawing, Color Theory, Clay pages** with verified content from this doc
+2. **Verify bookstore product prices** by visiting individual product detail pages
+3. **Map checkout URLs** once Keap/Leadpages backend access is obtained
+4. **Extract Certification page content** from `spramani.lpages.co/artteachingblueprint/`
+5. **Audit all pages** for invented claims before going live

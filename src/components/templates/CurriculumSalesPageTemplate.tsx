@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Check, X, Users, Video, FileText, GraduationCap } from "lucide-react";
+import { Check, X, GraduationCap, Mail } from "lucide-react";
 import { ArtDirectedHero } from "@/components/sections/ArtDirectedHero";
-import { FunnelCTASection } from "@/components/sections/FunnelCTASection";
 import { FAQ, FAQItem } from "@/components/sections/FAQ";
 import { Testimonials, TestimonialItem } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -23,16 +22,16 @@ interface CurriculumSalesPageTemplateProps {
   problemParagraphs: string[];
   /** Method steps: title + description */
   methodSteps: { title: string; description: string }[];
-  /** What's included features */
-  includedFeatures: { icon: React.ReactNode; title: string; description: string }[];
+  /** What's included features (optional — falls back to product.features) */
+  includedFeatures?: { icon: React.ReactNode; title: string; description: string }[];
   /** Who it's for list */
   whoItsFor: string[];
   /** Who it's NOT for list */
   whoItsNotFor: string[];
   /** Instructor bio paragraphs */
   instructorBio: string[];
-  /** Testimonials data */
-  testimonials: TestimonialItem[];
+  /** Testimonials data (optional — omit if no verified testimonials) */
+  testimonials?: TestimonialItem[];
   /** FAQ items */
   faqItems: FAQItem[];
   /** Site map entry for this page (for fallback URLs and migration notes) */
@@ -63,16 +62,26 @@ export function CurriculumSalesPageTemplate({
     );
   }
 
-  // TODO: Replace fallback URL with native checkout or Keap checkout URL
-  //       after checkout mapping is complete in integrations.ts.
-  //       Current fallback preserves the legacy sales path.
   const fallbackUrl = siteMapEntry?.fallbackExternalUrl;
+
+  // Build features list from product config if page-level features not provided
+  const features = includedFeatures ??
+    product.features?.map((f) => ({
+      icon: <Check size={22} />,
+      title: f,
+      description: "",
+    })) ?? [];
+
+  // Primary CTA: first price variant or product price
+  const primaryCtaLabel = product.priceVariants?.[0]
+    ? product.priceVariants[0].ctaLabel
+    : `Buy Now — ${product.price}`;
 
   return (
     <>
       {/* Sticky mobile CTA */}
       <StickyCTA
-        label={`Get Access — ${product.price}`}
+        label={primaryCtaLabel}
         href={fallbackUrl || "#"}
         visibleAfter={400}
       />
@@ -82,13 +91,11 @@ export function CurriculumSalesPageTemplate({
         overline="Curriculum"
         headline={heroHeadline}
         subheadline={heroSubheadline}
-        primaryCta={{ label: `Get Access — ${product.price}`, href: fallbackUrl || "#" }}
+        primaryCta={{ label: primaryCtaLabel, href: fallbackUrl || "#" }}
         secondaryCta={{ label: "See What's Inside", href: "#whats-included" }}
         trustBadges={[
           product.ageRange ? `Ages ${product.ageRange}` : undefined,
           product.format,
-          "Video lessons included",
-          "Printable resources",
         ].filter(Boolean) as string[]}
         annotation="Every child is an artist."
         annotationAuthor="Pablo Picasso"
@@ -99,16 +106,17 @@ export function CurriculumSalesPageTemplate({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-charcoal/60">
             {[
-              "Instant digital access",
-              "Lifetime updates",
-              "30-day satisfaction guarantee",
-              "Used in 20+ countries",
-            ].map((item) => (
-              <span key={item} className="flex items-center gap-1.5">
-                <Check size={14} className="text-sage" />
-                {item}
-              </span>
-            ))}
+              product.priceVariants ? "Paperback + Digital options" : "Instant digital access",
+              product.refundPolicy ? "30-day printed satisfaction guarantee" : null,
+              product.contactEmail ? "Art educator support via email" : null,
+            ]
+              .filter(Boolean)
+              .map((item) => (
+                <span key={item} className="flex items-center gap-1.5">
+                  <Check size={14} className="text-sage" />
+                  {item}
+                </span>
+              ))}
           </div>
         </div>
       </section>
@@ -187,7 +195,7 @@ export function CurriculumSalesPageTemplate({
           </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {includedFeatures.map((feature, i) => (
+            {features.map((feature, i) => (
               <ScrollReveal key={feature.title} delay={i * 0.06}>
                 <div className="bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow duration-200 h-full">
                   <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center mb-4 text-terracotta">
@@ -196,7 +204,9 @@ export function CurriculumSalesPageTemplate({
                   <h3 className="font-semibold text-espresso mb-1">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-charcoal/70">{feature.description}</p>
+                  {feature.description && (
+                    <p className="text-sm text-charcoal/70">{feature.description}</p>
+                  )}
                 </div>
               </ScrollReveal>
             ))}
@@ -204,8 +214,48 @@ export function CurriculumSalesPageTemplate({
         </div>
       </section>
 
+      {/* Dual Pricing CTA (if applicable) */}
+      {product.priceVariants && product.priceVariants.length > 1 && (
+        <section className="py-16 sm:py-20 bg-canvas">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <div className="text-center mb-10">
+                <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-espresso tracking-[-0.02em] mb-3">
+                  Choose Your Format
+                </h2>
+                <p className="text-charcoal/70">
+                  Select the option that works best for your teaching environment.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {product.priceVariants.map((variant, i) => (
+                <ScrollReveal key={variant.format} delay={i * 0.08}>
+                  <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 text-center h-full flex flex-col">
+                    <p className="text-sm font-medium text-charcoal/60 mb-2">
+                      {variant.format}
+                    </p>
+                    <p className="font-serif text-3xl sm:text-4xl font-bold text-espresso mb-4">
+                      {variant.price}
+                    </p>
+                    <div className="flex-1" />
+                    <Link
+                      href={fallbackUrl || "#"}
+                      className="block w-full text-center rounded-button bg-terracotta px-6 py-3.5 text-sm font-semibold text-paper hover:bg-terracotta-dark transition-colors"
+                    >
+                      {variant.ctaLabel}
+                    </Link>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Who It's For */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <section className="py-20 sm:py-28 bg-ivory">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <ScrollReveal>
@@ -244,11 +294,11 @@ export function CurriculumSalesPageTemplate({
       </section>
 
       {/* About Instructor */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="py-20 sm:py-28 bg-canvas">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
-              <div className="aspect-square max-w-sm mx-auto relative rounded-card bg-canvas border border-linen overflow-hidden">
+              <div className="aspect-square max-w-sm mx-auto relative rounded-card bg-paper border border-linen overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center text-charcoal/25">
                   <div className="text-center">
                     <GraduationCap size={64} className="mx-auto mb-4" />
@@ -279,17 +329,67 @@ export function CurriculumSalesPageTemplate({
         </div>
       </section>
 
-      {/* Testimonials */}
-      <Testimonials items={testimonials} />
+      {/* Testimonials (only if verified testimonials provided) */}
+      {testimonials && testimonials.length > 0 && (
+        <Testimonials items={testimonials} />
+      )}
 
       {/* FAQ */}
       <FAQ items={faqItems} />
 
+      {/* Disclaimer */}
+      {product.disclaimer && (
+        <section className="py-12 sm:py-16 bg-ivory">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal>
+              <div className="bg-paper border border-linen rounded-card p-6">
+                <h3 className="font-semibold text-espresso mb-2">
+                  Important Notice
+                </h3>
+                <p className="text-sm text-charcoal/70 leading-relaxed">
+                  {product.disclaimer}
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* Refund Policy */}
+      {product.refundPolicy && (
+        <section className="py-8 sm:py-12 bg-ivory border-t border-linen">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+            <ScrollReveal>
+              <p className="text-sm text-charcoal/60">
+                <strong>Refund Policy:</strong> {product.refundPolicy}
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
+      {/* Contact */}
+      {product.contactEmail && (
+        <section className="py-8 sm:py-10 bg-canvas border-t border-linen">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+            <ScrollReveal>
+              <a
+                href={`mailto:${product.contactEmail}`}
+                className="inline-flex items-center gap-2 text-sm text-charcoal/60 hover:text-terracotta transition-colors"
+              >
+                <Mail size={16} />
+                Questions? Contact {product.contactEmail}
+              </a>
+            </ScrollReveal>
+          </div>
+        </section>
+      )}
+
       {/* Final CTA */}
       <FinalCTA
         title={`Start teaching ${product.title.toLowerCase()} with confidence`}
-        description={`Join thousands of educators who have transformed their art environment with the Nature of Art ${product.title}.`}
-        primaryCta={{ label: `Get Access — ${product.price}`, href: fallbackUrl || "#" }}
+        description={`Explore the ${product.title} curriculum and bring structured, joyful art experiences into your environment.`}
+        primaryCta={{ label: primaryCtaLabel, href: fallbackUrl || "#" }}
         secondaryCta={{ label: "View All Curriculum", href: "/curriculum" }}
       />
     </>
