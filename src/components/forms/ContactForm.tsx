@@ -44,14 +44,14 @@ export function ContactForm() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h4 className="font-serif text-xl font-semibold text-espresso mb-2">Message sent!</h4>
+          <h4 className="font-serif text-xl font-semibold text-ink mb-2">Message sent!</h4>
           <p className="text-sm text-charcoal/70">{message}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="contact-name" className="block text-sm font-medium text-espresso mb-1">
+              <label htmlFor="contact-name" className="block text-sm font-medium text-ink mb-1">
                 Name
               </label>
               <input
@@ -60,11 +60,11 @@ export function ContactForm() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+                className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
               />
             </div>
             <div>
-              <label htmlFor="contact-email" className="block text-sm font-medium text-espresso mb-1">
+              <label htmlFor="contact-email" className="block text-sm font-medium text-ink mb-1">
                 Email
               </label>
               <input
@@ -73,12 +73,12 @@ export function ContactForm() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+                className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
               />
             </div>
           </div>
           <div>
-            <label htmlFor="contact-subject" className="block text-sm font-medium text-espresso mb-1">
+            <label htmlFor="contact-subject" className="block text-sm font-medium text-ink mb-1">
               Subject
             </label>
             <input
@@ -87,11 +87,11 @@ export function ContactForm() {
               required
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
             />
           </div>
           <div>
-            <label htmlFor="contact-message" className="block text-sm font-medium text-espresso mb-1">
+            <label htmlFor="contact-message" className="block text-sm font-medium text-ink mb-1">
               Message
             </label>
             <textarea
@@ -100,13 +100,13 @@ export function ContactForm() {
               rows={5}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors resize-none"
+              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors resize-none"
             />
           </div>
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full rounded-button bg-terracotta px-6 py-3 text-sm font-semibold text-paper hover:bg-terracotta-dark disabled:opacity-60 transition-colors"
+            className="w-full rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark disabled:opacity-60 transition-colors"
           >
             {status === "submitting" ? "Sending..." : "Send Message"}
           </button>

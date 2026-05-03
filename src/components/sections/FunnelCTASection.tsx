@@ -28,13 +28,13 @@ export function FunnelCTASection({
   const isDark = variant === "dark";
 
   return (
-    <section className={`py-20 sm:py-28 ${isDark ? "bg-espresso" : "bg-ivory"}`}>
+    <section className={`py-20 sm:py-28 ${isDark ? "bg-ink" : "bg-ivory"}`}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal>
           {overline && (
             <p
               className={`text-xs uppercase tracking-[0.15em] font-semibold mb-5 ${
-                isDark ? "text-ochre" : "text-terracotta"
+                isDark ? "text-bee-yellow" : "text-honey"
               }`}
             >
               {overline}
@@ -45,7 +45,7 @@ export function FunnelCTASection({
         <ScrollReveal delay={0.05}>
           <h2
             className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] mb-5 ${
-              isDark ? "text-paper" : "text-espresso"
+              isDark ? "text-paper" : "text-ink"
             }`}
           >
             {headline}
@@ -73,7 +73,7 @@ export function FunnelCTASection({
               >
                 <Check
                   size={18}
-                  className={`mt-0.5 shrink-0 ${isDark ? "text-ochre" : "text-sage"}`}
+                  className={`mt-0.5 shrink-0 ${isDark ? "text-bee-yellow" : "text-sage"}`}
                 />
                 <span>{benefit}</span>
               </li>
@@ -87,8 +87,8 @@ export function FunnelCTASection({
               href={primaryCta.href}
               className={`inline-flex items-center justify-center rounded-button px-8 py-4 text-base font-semibold transition-colors duration-200 ${
                 isDark
-                  ? "bg-ochre text-espresso hover:bg-ochre/90"
-                  : "bg-terracotta text-paper hover:bg-terracotta-dark"
+                  ? "bg-bee-yellow text-ink hover:bg-bee-yellow/90"
+                  : "bg-ink text-paper hover:bg-charcoal"
               }`}
             >
               {primaryCta.label}
@@ -99,7 +99,7 @@ export function FunnelCTASection({
                 className={`inline-flex items-center justify-center rounded-button border px-8 py-4 text-base font-semibold transition-colors duration-200 ${
                   isDark
                     ? "border-paper/30 text-paper hover:bg-paper/10"
-                    : "border-espresso text-espresso hover:bg-espresso hover:text-paper"
+                    : "border-ink text-ink hover:bg-ink hover:text-paper"
                 }`}
               >
                 {secondaryCta.label}

@@ -22,7 +22,7 @@ export function OfferGrid({ offers, title, subtitle }: OfferGridProps) {
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-espresso mb-4">
+              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink mb-4">
                 {title}
               </h2>
             )}
@@ -39,17 +39,17 @@ export function OfferGrid({ offers, title, subtitle }: OfferGridProps) {
               className="group bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow"
             >
               {offer.icon && (
-                <div className="w-12 h-12 rounded-full bg-canvas flex items-center justify-center mb-4 text-terracotta">
+                <div className="w-12 h-12 rounded-full bg-canvas flex items-center justify-center mb-4 text-honey">
                   {offer.icon}
                 </div>
               )}
-              <h3 className="font-serif text-xl font-semibold text-espresso mb-2 group-hover:text-terracotta transition-colors">
+              <h3 className="font-serif text-xl font-semibold text-ink mb-2 group-hover:text-honey transition-colors">
                 {offer.title}
               </h3>
               <p className="text-sm text-charcoal/70 leading-relaxed mb-4">
                 {offer.description}
               </p>
-              <span className="inline-flex items-center gap-1 text-sm font-medium text-terracotta">
+              <span className="inline-flex items-center gap-1 text-sm font-medium text-honey">
                 Learn more
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </span>

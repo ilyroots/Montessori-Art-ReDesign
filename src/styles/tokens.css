@@ -1,29 +1,62 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Colors */
-  --color-ivory: #FAF8F5;
-  --color-paper: #FFFFFF;
-  --color-canvas: #F3EDE4;
-  --color-terracotta: #C4705A;
-  --color-terracotta-dark: #A85D4A;
-  --color-ochre: #D4A24A;
-  --color-espresso: #3D2B1F;
-  --color-charcoal: #5A524C;
-  --color-sage: #8FA68E;
-  --color-dusty-blue: #7A9EB8;
-  --color-red-oxide: #B85C4F;
-  --color-wood: #C8A97E;
-  --color-linen: #E8E2DA;
-  --color-linen-dark: #D5CFC7;
+  /* ============================================================
+     Nature of Art® Brand Palette
+     ============================================================
+     Dominant: warm white, paper ivory, charcoal text
+     Accents: honey/ochre (natural), bee yellow, creative pink, kids blue
+     Use bright accents sparingly — art-material highlights, not loud gimmicks.
+  */
 
-  /* Semantic colors */
+  /* Backgrounds */
+  --color-ivory: #FAF7EF;
+  --color-paper: #FFFFFF;
+  --color-canvas: #F4EEDC;
+  --color-canvas-warm: #EDE6D6;
+
+  /* Text */
+  --color-ink: #1C1B18;
+  --color-charcoal: #3D3A34;
+  --color-muted: #6B655C;
+
+  /* Primary accent — Honey / Ochre (natural warmth) */
+  --color-terracotta: #D89A27;
+  --color-terracotta-dark: #B07D1A;
+  --color-honey: #D89A27;
+  --color-honey-soft: #F5E6CC;
+
+  /* Earth accent — Wing Brown */
+  --color-earth-brown: #8A5528;
+  --color-earth-brown-soft: #E8D5C0;
+
+  /* Bright accent — Bee Yellow */
+  --color-bee-yellow: #F2D300;
+  --color-bee-yellow-soft: #FEF6B8;
+
+  /* Energetic accent — Creative Pink */
+  --color-creative-pink: #E91E8F;
+  --color-creative-pink-soft: #FCE0F0;
+
+  /* Playful accent — Kids Blue */
+  --color-kids-blue: #44C9D4;
+  --color-kids-blue-soft: #D8F5F7;
+
+  /* Natural balance — Sage */
+  --color-sage: #A7B89A;
+  --color-sage-soft: #E3EBDE;
+
+  /* Functional */
+  --color-linen: #E5DDD0;
+  --color-linen-dark: #D5CFC7;
+  --color-ochre: #C98B2C;
+
+  /* Semantic aliases */
   --color-background: var(--color-ivory);
-  --color-foreground: var(--color-espresso);
-  --color-primary: var(--color-terracotta);
-  --color-primary-hover: var(--color-terracotta-dark);
-  --color-secondary: var(--color-ochre);
-  --color-muted: var(--color-charcoal);
+  --color-foreground: var(--color-ink);
+  --color-primary: var(--color-honey);
+  --color-primary-hover: var(--color-earth-brown);
+  --color-secondary: var(--color-bee-yellow);
   --color-border: var(--color-linen);
 
   /* Typography */
@@ -40,9 +73,11 @@
   --spacing-42: 10.5rem;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(61, 43, 31, 0.06);
-  --shadow-card-hover: 0 8px 32px rgba(61, 43, 31, 0.10);
-  --shadow-soft: 0 2px 12px rgba(61, 43, 31, 0.05);
+  --shadow-card: 0 4px 24px rgba(28, 27, 24, 0.05);
+  --shadow-card-hover: 0 8px 32px rgba(28, 27, 24, 0.09);
+  --shadow-soft: 0 2px 12px rgba(28, 27, 24, 0.04);
+  --shadow-glow-yellow: 0 0 20px rgba(242, 211, 0, 0.25);
+  --shadow-glow-pink: 0 0 20px rgba(233, 30, 143, 0.18);
 
   /* Border radius */
   --radius-card: 16px;

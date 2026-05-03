@@ -3,34 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { mainNavigation, navCta } from "@/config/siteNavigation";
+import { Logo } from "./Logo";
 import { Menu, X } from "lucide-react";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-ivory/90 backdrop-blur-md border-b border-linen">
+    <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-linen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 sm:h-[72px] items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="font-serif text-xl font-semibold text-espresso tracking-tight">
-              Nature of Art
-            </span>
-            <span className="hidden sm:inline-block text-xs uppercase tracking-widest text-charcoal font-sans">
-              Montessori Art Education
-            </span>
-          </Link>
+          <Logo variant="full" size="md" theme="light" linked />
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
             {mainNavigation.map((item) => (
               <div key={item.href} className="relative group">
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-charcoal hover:text-terracotta transition-colors duration-200"
+                  className="text-sm font-medium text-charcoal hover:text-honey transition-colors duration-200 relative"
                 >
                   {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bee-yellow group-hover:w-full transition-all duration-300 rounded-full" />
                 </Link>
                 {item.children && (
                   <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -39,7 +34,7 @@ export function Navbar() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block px-3 py-2 text-sm text-charcoal hover:text-terracotta hover:bg-canvas rounded-md transition-colors"
+                          className="block px-3 py-2 text-sm text-charcoal hover:text-honey hover:bg-canvas rounded-md transition-colors"
                         >
                           {child.label}
                         </Link>
@@ -52,16 +47,16 @@ export function Navbar() {
           </nav>
 
           {/* CTA + Mobile Toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link
               href={navCta.href}
-              className="hidden sm:inline-flex items-center justify-center rounded-button bg-terracotta px-5 py-2.5 text-sm font-semibold text-paper hover:bg-terracotta-dark transition-colors duration-200"
+              className="hidden sm:inline-flex items-center justify-center rounded-button bg-ink px-5 py-2.5 text-sm font-semibold text-paper hover:bg-charcoal transition-colors duration-200"
             >
               {navCta.label}
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-espresso"
+              className="lg:hidden p-2 text-ink rounded-md hover:bg-canvas transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -72,14 +67,14 @@ export function Navbar() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-linen bg-ivory">
+        <div className="lg:hidden border-t border-linen bg-paper">
           <div className="mx-auto max-w-7xl px-4 py-4 space-y-1">
             {mainNavigation.map((item) => (
               <div key={item.href}>
                 <Link
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block py-2 text-base font-medium text-charcoal hover:text-terracotta"
+                  className="block py-2 text-base font-medium text-charcoal hover:text-honey"
                 >
                   {item.label}
                 </Link>
@@ -90,7 +85,7 @@ export function Navbar() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block py-1.5 text-sm text-charcoal/80 hover:text-terracotta"
+                        className="block py-1.5 text-sm text-muted hover:text-honey"
                       >
                         {child.label}
                       </Link>
@@ -102,7 +97,7 @@ export function Navbar() {
             <Link
               href={navCta.href}
               onClick={() => setMobileOpen(false)}
-              className="mt-4 block w-full text-center rounded-button bg-terracotta px-5 py-3 text-sm font-semibold text-paper"
+              className="mt-4 block w-full text-center rounded-button bg-ink px-5 py-3 text-sm font-semibold text-paper"
             >
               {navCta.label}
             </Link>

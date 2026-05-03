@@ -19,7 +19,7 @@ export function FAQ({ items, title = "Frequently Asked Questions" }: FAQProps) {
   return (
     <section className="py-16 sm:py-24 bg-ivory">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-espresso text-center mb-12">
+        <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink text-center mb-12">
           {title}
         </h2>
         <div className="space-y-4">
@@ -35,7 +35,7 @@ export function FAQ({ items, title = "Frequently Asked Questions" }: FAQProps) {
                   className="w-full flex items-center justify-between px-6 py-5 text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-medium text-espresso pr-4">
+                  <span className="font-medium text-ink pr-4">
                     {item.question}
                   </span>
                   <ChevronDown

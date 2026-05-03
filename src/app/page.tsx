@@ -153,7 +153,7 @@ export default function HomePage() {
         headline={
           <>
             Teach Children Visual Arts With{" "}
-            <span className="text-terracotta">Structure, Freedom,</span> and{" "}
+            <span className="text-honey">Structure, Freedom,</span> and{" "}
             <span className="italic">Wonder.</span>
           </>
         }
@@ -179,16 +179,16 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-terracotta font-semibold mb-2">
+                <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-2">
                   Everything We Offer
                 </p>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em]">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
                   Explore the Atelier
                 </h2>
               </div>
               <Link
                 href="/curriculum"
-                className="inline-flex items-center gap-1 text-sm font-medium text-terracotta hover:text-terracotta-dark transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
               >
                 View all offers
                 <ArrowRight size={16} />
@@ -223,7 +223,7 @@ export default function HomePage() {
       />
 
       {/* Certification Feature */}
-      <section className="py-20 sm:py-28 bg-espresso text-paper">
+      <section className="py-20 sm:py-28 bg-ink text-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
@@ -239,7 +239,7 @@ export default function HomePage() {
 
             <ScrollReveal delay={0.1}>
               <div className="order-1 lg:order-2">
-                <p className="text-xs uppercase tracking-[0.15em] text-ochre font-semibold mb-3">
+                <p className="text-xs uppercase tracking-[0.15em] text-bee-yellow font-semibold mb-3">
                   Professional Certification
                 </p>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-5 tracking-[-0.02em]">
@@ -271,7 +271,7 @@ export default function HomePage() {
                 </div>
                 <Link
                   href="/certification"
-                  className="inline-flex items-center justify-center rounded-button bg-terracotta px-8 py-4 text-base font-semibold text-paper hover:bg-terracotta-dark transition-colors"
+                  className="inline-flex items-center justify-center rounded-button bg-ink px-8 py-4 text-base font-semibold text-paper hover:bg-ink-dark transition-colors"
                 >
                   Explore Certification
                 </Link>
@@ -286,7 +286,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-4">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
                 Books & Art Supplies
               </h2>
               <p className="text-charcoal/70 max-w-2xl mx-auto">
@@ -322,10 +322,10 @@ export default function HomePage() {
                   href={item.href}
                   className="group block bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow duration-200 text-center"
                 >
-                  <div className="w-12 h-12 mx-auto rounded-full bg-canvas flex items-center justify-center mb-4 text-terracotta">
+                  <div className="w-12 h-12 mx-auto rounded-full bg-canvas flex items-center justify-center mb-4 text-honey">
                     {item.icon}
                   </div>
-                  <h3 className="font-serif text-xl font-semibold text-espresso mb-2 group-hover:text-terracotta transition-colors">
+                  <h3 className="font-serif text-xl font-semibold text-ink mb-2 group-hover:text-honey transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-sm text-charcoal/70">{item.desc}</p>
@@ -342,10 +342,10 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
             <ScrollReveal>
               <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-terracotta font-semibold mb-2">
+                <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-2">
                   From the Blog
                 </p>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em]">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
                   Art Education Insights
                 </h2>
               </div>
@@ -353,7 +353,7 @@ export default function HomePage() {
             <ScrollReveal delay={0.1}>
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-1 text-sm font-medium text-terracotta hover:text-terracotta-dark transition-colors"
+                className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
               >
                 Read all articles
                 <ArrowRight size={16} />
@@ -391,10 +391,10 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <p className="text-xs uppercase tracking-wider text-terracotta font-semibold mb-2">
+                    <p className="text-xs uppercase tracking-wider text-honey font-semibold mb-2">
                       {post.category}
                     </p>
-                    <h3 className="font-serif text-lg font-semibold text-espresso mb-2 leading-snug">
+                    <h3 className="font-serif text-lg font-semibold text-ink mb-2 leading-snug">
                       {post.title}
                     </h3>
                     <p className="text-sm text-charcoal/70 line-clamp-3">
@@ -425,10 +425,10 @@ export default function HomePage() {
 
             <ScrollReveal delay={0.1}>
               <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-terracotta font-semibold mb-2">
+                <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-2">
                   About the Founder
                 </p>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-5">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-5">
                   Meet Spramani Elaun
                 </h2>
                 <div className="space-y-4 text-charcoal/80 leading-relaxed">
@@ -453,7 +453,7 @@ export default function HomePage() {
                 <div className="mt-8">
                   <Link
                     href="/about"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-terracotta hover:text-terracotta-dark transition-colors"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
                   >
                     Read the full story
                     <ArrowRight size={16} />

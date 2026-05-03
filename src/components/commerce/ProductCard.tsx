@@ -36,12 +36,12 @@ export function ProductCard({
   return (
     <div
       className={`relative flex flex-col rounded-card border bg-paper transition-shadow duration-200 hover:shadow-card-hover ${
-        isFeatured ? "border-terracotta/30 shadow-card" : "border-linen"
+        isFeatured ? "border-honey/30 shadow-card" : "border-linen"
       }`}
     >
       {badge && (
         <div className="absolute -top-3 left-6">
-          <span className="inline-block rounded-full bg-terracotta px-3 py-1 text-xs font-semibold text-paper">
+          <span className="inline-block rounded-full bg-ink px-3 py-1 text-xs font-semibold text-paper">
             {badge}
           </span>
         </div>
@@ -49,7 +49,7 @@ export function ProductCard({
 
       <div className="p-6 sm:p-8 flex flex-col flex-1">
         <div className="mb-4">
-          <h3 className="font-serif text-xl sm:text-2xl font-semibold text-espresso">
+          <h3 className="font-serif text-xl sm:text-2xl font-semibold text-ink">
             {title}
           </h3>
           {ageRange && (
@@ -80,7 +80,7 @@ export function ProductCard({
 
         <div className="mt-auto pt-6 border-t border-linen">
           <div className="flex items-baseline gap-2 mb-4">
-            <span className="font-serif text-2xl font-bold text-espresso">
+            <span className="font-serif text-2xl font-bold text-ink">
               {price}
             </span>
             {originalPrice && (
@@ -93,7 +93,7 @@ export function ProductCard({
             <BuyButton productId={id} fullWidth />
             <Link
               href={href}
-              className="text-center text-sm font-medium text-terracotta hover:text-terracotta-dark transition-colors"
+              className="text-center text-sm font-medium text-honey hover:text-honey-dark transition-colors"
             >
               Learn more
             </Link>

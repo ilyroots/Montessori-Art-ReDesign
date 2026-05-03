@@ -9,15 +9,15 @@ interface BlogCalloutProps {
 
 const variantStyles = {
   tip: {
-    border: "border-ochre/30",
-    bg: "bg-ochre/5",
-    icon: <Lightbulb size={18} className="text-ochre" />,
+    border: "border-bee-yellow/30",
+    bg: "bg-bee-yellow/5",
+    icon: <Lightbulb size={18} className="text-bee-yellow" />,
     defaultTitle: "Teaching Tip",
   },
   material: {
-    border: "border-terracotta/30",
-    bg: "bg-terracotta/5",
-    icon: <Palette size={18} className="text-terracotta" />,
+    border: "border-honey/30",
+    bg: "bg-ink/5",
+    icon: <Palette size={18} className="text-honey" />,
     defaultTitle: "Materials Needed",
   },
   montessori: {
@@ -40,7 +40,7 @@ export function BlogCallout({ variant, title, children }: BlogCalloutProps) {
     <div className={`my-8 rounded-card border ${style.border} ${style.bg} p-5 sm:p-6`}>
       <div className="flex items-center gap-2 mb-3">
         {style.icon}
-        <span className="text-xs uppercase tracking-wider font-semibold text-espresso/70">
+        <span className="text-xs uppercase tracking-wider font-semibold text-ink/70">
           {title || style.defaultTitle}
         </span>
       </div>

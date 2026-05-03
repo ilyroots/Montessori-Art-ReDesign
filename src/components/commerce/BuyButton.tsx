@@ -36,7 +36,7 @@ export function BuyButton({
       target={checkout.isExternal ? "_blank" : undefined}
       rel={checkout.isExternal ? "noopener noreferrer" : undefined}
       onClick={handleClick}
-      className={`inline-flex items-center justify-center rounded-button bg-terracotta px-6 py-3 text-sm font-semibold text-paper hover:bg-terracotta-dark active:scale-[0.98] transition-all duration-200 ${
+      className={`inline-flex items-center justify-center rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark active:scale-[0.98] transition-all duration-200 ${
         fullWidth ? "w-full" : ""
       } ${className}`}
     >

@@ -55,13 +55,13 @@ export function LeadMagnetForm({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h4 className="font-serif text-xl font-semibold text-espresso mb-2">You&apos;re all set!</h4>
+          <h4 className="font-serif text-xl font-semibold text-ink mb-2">You&apos;re all set!</h4>
           <p className="text-sm text-charcoal/70">{message}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="lead-magnet-name" className="block text-sm font-medium text-espresso mb-1">
+            <label htmlFor="lead-magnet-name" className="block text-sm font-medium text-ink mb-1">
               First name
             </label>
             <input
@@ -70,11 +70,11 @@ export function LeadMagnetForm({
               placeholder="Your first name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
             />
           </div>
           <div>
-            <label htmlFor="lead-magnet-email" className="block text-sm font-medium text-espresso mb-1">
+            <label htmlFor="lead-magnet-email" className="block text-sm font-medium text-ink mb-1">
               Email address
             </label>
             <input
@@ -84,13 +84,13 @@ export function LeadMagnetForm({
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+              className="w-full rounded-button border border-linen bg-ivory px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
             />
           </div>
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full rounded-button bg-terracotta px-6 py-3 text-sm font-semibold text-paper hover:bg-terracotta-dark disabled:opacity-60 transition-colors"
+            className="w-full rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark disabled:opacity-60 transition-colors"
           >
             {status === "submitting" ? "Sending..." : buttonLabel}
           </button>

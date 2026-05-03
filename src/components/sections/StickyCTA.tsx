@@ -28,7 +28,7 @@ export function StickyCTA({ label, href, visibleAfter = 400 }: StickyCTAProps) {
     >
       <Link
         href={href}
-        className="block w-full text-center rounded-button bg-terracotta px-6 py-3 text-sm font-semibold text-paper hover:bg-terracotta-dark transition-colors"
+        className="block w-full text-center rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-charcoal transition-colors"
       >
         {label}
       </Link>

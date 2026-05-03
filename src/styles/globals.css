@@ -36,13 +36,13 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: rgba(196, 112, 90, 0.2);
-  color: var(--color-espresso);
+  background-color: rgba(242, 211, 0, 0.25);
+  color: var(--color-ink);
 }
 
 /* Focus */
 :focus-visible {
-  outline: 2px solid var(--color-terracotta);
+  outline: 2px solid var(--color-honey);
   outline-offset: 2px;
 }
 
@@ -71,5 +71,60 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-wood);
+  background: var(--color-earth-brown);
+}
+
+/* ============================================================
+   Brand utility classes
+   ============================================================ */
+
+/* Soft paper background */
+.bg-paper-soft {
+  background-color: var(--color-ivory);
+}
+
+/* Honeycomb accent pattern (very subtle) */
+.honeycomb-accent {
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='49' viewBox='0 0 28 49' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23D89A27' fill-opacity='0.04'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Color swatch row */
+.color-swatch-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Editorial card shadow */
+.shadow-editorial {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-editorial-hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Subtle grain overlay */
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Bee-yellow hover glow for interactive elements */
+.hover-glow-yellow:hover {
+  box-shadow: var(--shadow-glow-yellow);
+}
+
+/* Creative-pink hover glow */
+.hover-glow-pink:hover {
+  box-shadow: var(--shadow-glow-pink);
+}
+
+/* Logo-safe navbar spacing */
+.navbar-logo-safe {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
 }

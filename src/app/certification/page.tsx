@@ -20,7 +20,7 @@ export default function CertificationPage() {
       heroHeadline={
         <>
           Teach children visual arts with{" "}
-          <span className="text-ochre">confidence</span>, sequence, and
+          <span className="text-bee-yellow">confidence</span>, sequence, and
           developmental understanding.
         </>
       }

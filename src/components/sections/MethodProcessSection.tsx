@@ -24,7 +24,7 @@ export function MethodProcessSection({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="mb-16 sm:mb-20">
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-4">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
               {title}
             </h2>
             <p className="text-charcoal/70 text-base sm:text-lg max-w-2xl">
@@ -45,10 +45,10 @@ export function MethodProcessSection({
                 >
                   {/* Number + Title block */}
                   <div className={`lg:col-span-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                    <span className="block font-serif text-7xl sm:text-8xl lg:text-9xl font-bold text-terracotta/10 leading-none mb-2 select-none">
+                    <span className="block font-serif text-7xl sm:text-8xl lg:text-9xl font-bold text-honey/10 leading-none mb-2 select-none">
                       {step.number}
                     </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-espresso -mt-4 sm:-mt-6 relative">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-ink -mt-4 sm:-mt-6 relative">
                       {step.title}
                     </h3>
                   </div>

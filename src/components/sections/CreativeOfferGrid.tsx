@@ -35,7 +35,7 @@ export function CreativeOfferGrid({
         {(title || subtitle) && (
           <div className="mb-14 sm:mb-16">
             {title && (
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-4">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
                 {title}
               </h2>
             )}
@@ -55,7 +55,7 @@ export function CreativeOfferGrid({
                 className="group block bg-paper border border-linen rounded-card p-6 sm:p-8 hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Oversized number */}
-                <span className="block font-serif text-6xl sm:text-7xl font-bold text-terracotta/10 leading-none mb-2 group-hover:text-terracotta/15 transition-colors">
+                <span className="block font-serif text-6xl sm:text-7xl font-bold text-honey/10 leading-none mb-2 group-hover:text-honey/15 transition-colors">
                   {offer.number}
                 </span>
 
@@ -65,7 +65,7 @@ export function CreativeOfferGrid({
                 </p>
 
                 {/* Title */}
-                <h3 className="font-serif text-xl sm:text-2xl font-semibold text-espresso mb-3 group-hover:text-terracotta transition-colors duration-200">
+                <h3 className="font-serif text-xl sm:text-2xl font-semibold text-ink mb-3 group-hover:text-honey transition-colors duration-200">
                   {offer.title}
                 </h3>
 
@@ -82,7 +82,7 @@ export function CreativeOfferGrid({
                 )}
 
                 {/* CTA */}
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-terracotta group-hover:gap-2.5 transition-all duration-200">
+                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-honey group-hover:gap-2.5 transition-all duration-200">
                   {offer.ctaLabel || "Explore"}
                   <ArrowRight size={15} />
                 </span>

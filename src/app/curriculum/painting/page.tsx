@@ -21,7 +21,7 @@ export default function PaintingCurriculumPage() {
       heroHeadline={
         <>
           57 painting studio experiences that feel{" "}
-          <span className="text-terracotta italic">prepared, purposeful,</span>{" "}
+          <span className="text-honey italic">prepared, purposeful,</span>{" "}
           and child-led.
         </>
       }

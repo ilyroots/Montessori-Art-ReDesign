@@ -44,7 +44,7 @@ export function NewsletterSignup({
     <div className={isCard ? "bg-canvas rounded-card p-6 sm:p-8" : ""}>
       {!isFooter && (
         <div className="mb-4">
-          <h3 className="font-serif text-lg font-semibold text-espresso">
+          <h3 className="font-serif text-lg font-semibold text-ink">
             Get art inspiration in your inbox
           </h3>
           <p className="mt-1 text-sm text-charcoal/70">
@@ -65,12 +65,12 @@ export function NewsletterSignup({
             placeholder="Your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 rounded-button border border-linen bg-paper px-4 py-3 text-sm text-espresso placeholder:text-charcoal/40 focus:border-terracotta focus:outline-none transition-colors"
+            className="flex-1 rounded-button border border-linen bg-paper px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
           />
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="rounded-button bg-terracotta px-6 py-3 text-sm font-semibold text-paper hover:bg-terracotta-dark disabled:opacity-60 transition-colors"
+            className="rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark disabled:opacity-60 transition-colors"
           >
             {status === "submitting" ? "Subscribing..." : "Subscribe"}
           </button>

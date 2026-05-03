@@ -16,7 +16,7 @@ interface CertificationModule {
 }
 
 interface CertificationPageTemplateProps {
-  /** Hero headline with ochre accent words wrapped in <span className="text-ochre"> */
+  /** Hero headline with ochre accent words wrapped in <span className="text-bee-yellow"> */
   heroHeadline: React.ReactNode;
   /** Hero subheadline */
   heroSubheadline: string;
@@ -88,7 +88,7 @@ export function CertificationPageTemplate({
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <p className="font-serif text-2xl sm:text-3xl font-bold text-espresso">
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-ink">
                   {stat.value}
                 </p>
                 <p className="text-xs text-charcoal/60 mt-1">{stat.label}</p>
@@ -102,7 +102,7 @@ export function CertificationPageTemplate({
       <section className="py-20 sm:py-28 bg-ivory">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-8">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-8">
               Most educators never received training in how to teach art
             </h2>
           </ScrollReveal>
@@ -123,7 +123,7 @@ export function CertificationPageTemplate({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-espresso tracking-[-0.02em] mb-4">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
                 A complete system for art education leadership
               </h2>
               <p className="text-charcoal/70 max-w-2xl mx-auto">
@@ -137,10 +137,10 @@ export function CertificationPageTemplate({
             {modules.map((mod, i) => (
               <ScrollReveal key={mod.number} delay={i * 0.06}>
                 <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 relative overflow-hidden h-full">
-                  <span className="absolute top-4 right-4 font-serif text-6xl font-bold text-terracotta/10 leading-none select-none">
+                  <span className="absolute top-4 right-4 font-serif text-6xl font-bold text-honey/10 leading-none select-none">
                     {mod.number}
                   </span>
-                  <h3 className="font-serif text-xl font-semibold text-espresso mb-2 relative">
+                  <h3 className="font-serif text-xl font-semibold text-ink mb-2 relative">
                     {mod.title}
                   </h3>
                   <p className="text-sm text-charcoal/70 leading-relaxed relative">
@@ -159,7 +159,7 @@ export function CertificationPageTemplate({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
               <div>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-espresso tracking-[-0.02em] mb-8">
+                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-8">
                   What you&apos;ll be able to do
                 </h2>
                 <ul className="space-y-4">
@@ -195,7 +195,7 @@ export function CertificationPageTemplate({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <ScrollReveal>
               <div className="bg-paper border border-linen rounded-card p-8 h-full">
-                <h3 className="font-serif text-2xl font-semibold text-espresso mb-6 flex items-center gap-2">
+                <h3 className="font-serif text-2xl font-semibold text-ink mb-6 flex items-center gap-2">
                   <Check size={24} className="text-sage" />
                   Who it&apos;s for
                 </h3>
@@ -212,7 +212,7 @@ export function CertificationPageTemplate({
 
             <ScrollReveal delay={0.1}>
               <div className="bg-paper border border-linen rounded-card p-8 h-full">
-                <h3 className="font-serif text-2xl font-semibold text-espresso/40 mb-6 flex items-center gap-2">
+                <h3 className="font-serif text-2xl font-semibold text-ink/40 mb-6 flex items-center gap-2">
                   <X size={24} className="text-charcoal/30" />
                   Who it&apos;s not for
                 </h3>
@@ -237,7 +237,7 @@ export function CertificationPageTemplate({
             <div className="flex items-start gap-4 bg-paper border border-linen rounded-card p-6">
               <Shield size={24} className="text-dusty-blue shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-espresso mb-1">
+                <h3 className="font-semibold text-ink mb-1">
                   Licensing clarification
                 </h3>
                 <p className="text-sm text-charcoal/70 leading-relaxed">

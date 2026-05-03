@@ -20,11 +20,11 @@ export function FinalCTA({
   const isDark = variant === "dark";
 
   return (
-    <section className={isDark ? "bg-espresso py-16 sm:py-24" : "bg-canvas py-16 sm:py-24"}>
+    <section className={isDark ? "bg-ink py-16 sm:py-24" : "bg-canvas py-16 sm:py-24"}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <h2
           className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-6 ${
-            isDark ? "text-paper" : "text-espresso"
+            isDark ? "text-paper" : "text-ink"
           }`}
         >
           {title}
@@ -39,7 +39,7 @@ export function FinalCTA({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href={primaryCta.href}
-            className="inline-flex items-center justify-center rounded-button bg-terracotta px-8 py-4 text-base font-semibold text-paper hover:bg-terracotta-dark transition-colors"
+            className="inline-flex items-center justify-center rounded-button bg-ink px-8 py-4 text-base font-semibold text-paper hover:bg-charcoal transition-colors"
           >
             {primaryCta.label}
           </Link>
@@ -49,7 +49,7 @@ export function FinalCTA({
               className={`inline-flex items-center justify-center rounded-button border px-8 py-4 text-base font-semibold transition-colors ${
                 isDark
                   ? "border-paper/30 text-paper hover:bg-paper/10"
-                  : "border-espresso text-espresso hover:bg-espresso hover:text-paper"
+                  : "border-ink text-ink hover:bg-ink hover:text-paper"
               }`}
             >
               {secondaryCta.label}
