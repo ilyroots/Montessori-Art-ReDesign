@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { createMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
@@ -57,13 +58,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
-              <div className="aspect-[4/3] max-w-lg mx-auto relative rounded-card overflow-hidden shadow-card bg-canvas">
-                <div className="absolute inset-0 flex items-center justify-center text-charcoal/30">
-                  <div className="text-center">
-                    <Palette size={64} className="mx-auto mb-4" />
-                    <p className="text-sm font-medium">Spramani Elaun Portrait</p>
-                  </div>
-                </div>
+              <div className="aspect-[4/3] max-w-lg mx-auto relative rounded-card overflow-hidden shadow-card">
+                <Image
+                  src="/images/spramani-elaun.png"
+                  alt="Spramani Elaun, founder of Nature of Art®, surrounded by Montessori art materials and her published books"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </ScrollReveal>
 
