@@ -1,3 +1,16 @@
+// ============================================================
+// SEO Helper
+// ============================================================
+// Centralized metadata factory for Next.js App Router.
+// Creates consistent Open Graph, Twitter, and canonical metadata.
+//
+// TODO: After content migration:
+// 1. Add structured data (JSON-LD) for products, courses, and articles
+// 2. Add dynamic sitemap generation
+// 3. Verify metadataBase is correct for production domain
+// 4. Add article-specific metadata for blog posts (author, date, etc.)
+// ============================================================
+
 import type { Metadata } from "next";
 
 export interface SeoProps {

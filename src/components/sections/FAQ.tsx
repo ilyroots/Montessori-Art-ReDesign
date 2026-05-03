@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-interface FAQItem {
+export interface FAQItem {
   question: string;
   answer: string;
 }
 
-interface FAQProps {
+export interface FAQProps {
   items: FAQItem[];
   title?: string;
 }
