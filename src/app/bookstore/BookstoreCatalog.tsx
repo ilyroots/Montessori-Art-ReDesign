@@ -228,6 +228,41 @@ function BookCard({
 }
 
 // ------------------------------------------------------------------
+// Render helper — TypeScript-safe discriminated union narrowing
+// ------------------------------------------------------------------
+
+function renderCatalogItem(item: CatalogItem) {
+  if (item.type === "product") {
+    return (
+      <ProductCard
+        id={item.product.id}
+        title={item.product.title}
+        description={item.product.description}
+        price={item.product.price}
+        originalPrice={item.product.originalPrice}
+        href={item.product.href}
+        badge={item.product.badge}
+        features={item.product.features}
+        ageRange={item.product.ageRange}
+        format={item.product.format}
+        variant={
+          item.product.badge === "Most Popular" ? "featured" : "default"
+        }
+        image={item.product.image}
+      />
+    );
+  }
+
+  return (
+    <BookCard
+      name={item.bookName}
+      category={item.bookCategory}
+      id={item.id}
+    />
+  );
+}
+
+// ------------------------------------------------------------------
 // Main catalog component
 // ------------------------------------------------------------------
 
@@ -316,32 +351,7 @@ export function BookstoreCatalog() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems.map((item, i) => (
               <ScrollReveal key={item.id} delay={i * 0.08}>
-                {item.type === "product" && item.product ? (
-                  <ProductCard
-                    id={item.product.id}
-                    title={item.product.title}
-                    description={item.product.description}
-                    price={item.product.price}
-                    originalPrice={item.product.originalPrice}
-                    href={item.product.href}
-                    badge={item.product.badge}
-                    features={item.product.features}
-                    ageRange={item.product.ageRange}
-                    format={item.product.format}
-                    variant={
-                      item.product.badge === "Most Popular"
-                        ? "featured"
-                        : "default"
-                    }
-                    image={item.product.image}
-                  />
-                ) : (
-                  <BookCard
-                    name={item.bookName!}
-                    category={item.bookCategory!}
-                    id={item.id}
-                  />
-                )}
+                {renderCatalogItem(item)}
               </ScrollReveal>
             ))}
           </div>
