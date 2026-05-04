@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { MagneticPills } from "@/components/motion/MagneticPills";
 import {
   BookOpen,
   GraduationCap,
@@ -218,17 +219,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal>
-            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-              {serviceCategories.map((service) => (
-                <span
-                  key={service.label}
-                  className="inline-flex items-center gap-2 bg-paper border border-linen rounded-full px-4 py-2 text-sm text-charcoal/80"
-                >
-                  <span className="text-honey">{service.icon}</span>
-                  {service.label}
-                </span>
-              ))}
-            </div>
+            <MagneticPills items={serviceCategories} className="max-w-3xl mx-auto" />
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
