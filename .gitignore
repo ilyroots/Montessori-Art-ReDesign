@@ -20,6 +20,10 @@
 # production
 /build
 
+# web artifacts (standalone demos)
+/artifacts/
+/build
+
 # misc
 .DS_Store
 *.pem
