@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Check, X, GraduationCap, Mail } from "lucide-react";
 import { ArtDirectedHero } from "@/components/sections/ArtDirectedHero";
-import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
+import { SectionTransition } from "@/components/visual/SectionTransition";
 import { FAQ, FAQItem } from "@/components/sections/FAQ";
 import { Testimonials, TestimonialItem } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -104,7 +104,7 @@ export function CurriculumSalesPageTemplate({
         imageAlt={product.title}
       />
 
-      <BrushstrokeDivider variant="wave" />
+      <SectionTransition variant="soft" height="md" />
       {/* Trust Bar */}
       <section className="border-y border-linen bg-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
@@ -146,7 +146,7 @@ export function CurriculumSalesPageTemplate({
         </div>
       </section>
 
-      <BrushstrokeDivider variant="curve" flip />
+      <SectionTransition variant="gradient-warm" height="lg" />
       {/* Method */}
       <section className="relative py-20 sm:py-28 bg-canvas">
         <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
@@ -262,7 +262,7 @@ export function CurriculumSalesPageTemplate({
         </section>
       )}
 
-      <BrushstrokeDivider variant="slant" />
+      <SectionTransition variant="swatches" height="md" />
       {/* Who It's For */}
       <section className="relative py-20 sm:py-28 bg-gradient-warm">
         <div className="absolute inset-0 grain-overlay pointer-events-none" />

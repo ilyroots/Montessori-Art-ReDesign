@@ -7,6 +7,9 @@ import { Testimonials, TestimonialItem } from "@/components/sections/Testimonial
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { StickyCTA } from "@/components/sections/StickyCTA";
+import { SectionTransition } from "@/components/visual/SectionTransition";
+import { InteractiveCard } from "@/components/visual/InteractiveCard";
+import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import type { ExistingPageEntry } from "@/config/existingSiteMap";
 
 interface CertificationModule {
@@ -72,7 +75,9 @@ export function CertificationPageTemplate({
       />
 
       {/* Premium Dark Hero */}
-      <ArtDirectedHero
+      <div className="relative">
+        <AnimatedColorBlobs intensity="subtle" className="opacity-20" />
+        <ArtDirectedHero
         overline="Professional Certification"
         headline={heroHeadline}
         subheadline={heroSubheadline}
@@ -81,6 +86,8 @@ export function CertificationPageTemplate({
         trustBadges={["8–12 weeks", "6 core modules", "Certificate on completion"]}
         dark
       />
+      </div>
+      <SectionTransition variant="soft" height="sm" />
 
       {/* Trust / Authority Stats */}
       <section className="border-y border-linen bg-paper">
@@ -99,7 +106,7 @@ export function CertificationPageTemplate({
       </section>
 
       {/* Problem */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="py-20 sm:py-28 bg-ivory relative">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-8">
@@ -117,9 +124,10 @@ export function CertificationPageTemplate({
           </div>
         </div>
       </section>
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Program Overview */}
-      <section id="program-overview" className="py-20 sm:py-28 bg-canvas">
+      <section id="program-overview" className="py-20 sm:py-28 bg-canvas relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-16">
@@ -136,25 +144,28 @@ export function CertificationPageTemplate({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {modules.map((mod, i) => (
               <ScrollReveal key={mod.number} delay={i * 0.06}>
-                <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 relative overflow-hidden h-full">
-                  <span className="absolute top-4 right-4 font-serif text-6xl font-bold text-honey/10 leading-none select-none">
-                    {mod.number}
-                  </span>
-                  <h3 className="font-serif text-xl font-semibold text-ink mb-2 relative">
-                    {mod.title}
-                  </h3>
-                  <p className="text-sm text-charcoal/70 leading-relaxed relative">
-                    {mod.description}
-                  </p>
-                </div>
+                <InteractiveCard hoverLift={-4} glowColor="honey">
+                  <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 relative overflow-hidden h-full">
+                    <span className="absolute top-4 right-4 font-serif text-6xl font-bold text-honey/10 leading-none select-none">
+                      {mod.number}
+                    </span>
+                    <h3 className="font-serif text-xl font-semibold text-ink mb-2 relative">
+                      {mod.title}
+                    </h3>
+                    <p className="text-sm text-charcoal/70 leading-relaxed relative">
+                      {mod.description}
+                    </p>
+                  </div>
+                </InteractiveCard>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
+      <SectionTransition variant="gradient-warm" height="lg" />
 
       {/* Outcomes */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="py-20 sm:py-28 bg-ivory relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
@@ -188,9 +199,10 @@ export function CertificationPageTemplate({
           </div>
         </div>
       </section>
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Who It's For / Not For */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <section className="py-20 sm:py-28 bg-canvas relative">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <ScrollReveal>
@@ -229,9 +241,10 @@ export function CertificationPageTemplate({
           </div>
         </div>
       </section>
+      <SectionTransition variant="soft" height="md" />
 
       {/* Licensing */}
-      <section className="py-12 sm:py-16 bg-ivory">
+      <section className="py-12 sm:py-16 bg-ivory relative">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="flex items-start gap-4 bg-paper border border-linen rounded-card p-6">
@@ -248,12 +261,15 @@ export function CertificationPageTemplate({
           </ScrollReveal>
         </div>
       </section>
+      <SectionTransition variant="gradient-canvas" height="lg" />
 
       {/* Testimonials */}
       <Testimonials items={testimonials} title="What certified educators say" />
+      <SectionTransition variant="soft" height="md" />
 
       {/* FAQ */}
       <FAQ items={faqItems} />
+      <SectionTransition variant="gradient-warm" height="lg" />
 
       {/* Final CTA */}
       <FinalCTA

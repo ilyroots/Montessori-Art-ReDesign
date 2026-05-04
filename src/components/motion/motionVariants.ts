@@ -15,6 +15,7 @@ import { Variants } from "framer-motion";
 // Easing curves
 export const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 export const easeInOutQuad = [0.45, 0, 0.55, 1] as const;
+export const easeSpring = { type: "spring", stiffness: 300, damping: 30 } as const;
 
 // Fade up (default scroll reveal)
 export const fadeUp: Variants = {
@@ -62,6 +63,38 @@ export const slideFromRight: Variants = {
     opacity: 1,
     x: 0,
     transition: { duration: 0.6, ease: easeOutExpo },
+  },
+};
+
+// Blur in (premium reveal)
+export const blurIn: Variants = {
+  hidden: { opacity: 0, filter: "blur(8px)", y: 16 },
+  show: {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    transition: { duration: 0.7, ease: easeOutExpo },
+  },
+};
+
+// Rotate in (for icons, badges)
+export const rotateIn: Variants = {
+  hidden: { opacity: 0, rotate: -8, scale: 0.9 },
+  show: {
+    opacity: 1,
+    rotate: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: easeOutExpo },
+  },
+};
+
+// Clip reveal (for images, sections)
+export const clipReveal: Variants = {
+  hidden: { opacity: 0, clipPath: "inset(10% 10% 10% 10%)" },
+  show: {
+    opacity: 1,
+    clipPath: "inset(0% 0% 0% 0%)",
+    transition: { duration: 0.8, ease: easeOutExpo },
   },
 };
 
@@ -169,5 +202,56 @@ export const brushMaskReveal: Variants = {
   show: {
     clipPath: "inset(0 0% 0 0)",
     transition: { duration: 1, ease: easeOutExpo },
+  },
+};
+
+// SVG draw-on (for paths, dividers, icons)
+export const drawSVG: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  show: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.2, ease: easeOutExpo },
+  },
+};
+
+// Counter / number animation helper
+export const countUp = {
+  hidden: { opacity: 0, y: 10 },
+  show: (value: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easeOutExpo },
+  }),
+};
+
+// Path reveal for learning pathways
+export const pathwayLine: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  show: {
+    pathLength: 1,
+    opacity: 1,
+    transition: { duration: 1.5, ease: easeOutExpo },
+  },
+};
+
+// Honeycomb cell reveal
+export const honeycombReveal: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.4, ease: easeOutExpo },
+  },
+};
+
+// Price card emphasis (for pricing toggle)
+export const priceEmphasis: Variants = {
+  hidden: { opacity: 0, scale: 0.95, y: 10 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: easeSpring },
   },
 };

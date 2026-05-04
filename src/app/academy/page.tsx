@@ -8,6 +8,7 @@ import { AcademyArtBoxPreview } from "@/components/academy/AcademyArtBoxPreview"
 import { CertificationUpsell } from "@/components/academy/CertificationUpsell";
 import { AcademyFAQ } from "@/components/academy/AcademyFAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { SectionTransition } from "@/components/visual/SectionTransition";
 
 export const metadata = createMetadata({
   title: "Nature of Art Academy",
@@ -19,13 +20,29 @@ export default function AcademyPage() {
   return (
     <>
       <AcademyHero />
+      <SectionTransition variant="swatches" height="md" />
+
       <AcademyHowItWorks />
+      <SectionTransition variant="soft" height="md" />
+
       <AcademyAudienceCards />
+      <SectionTransition variant="gradient-warm" height="lg" />
+
       <AcademyFeaturedPaths />
+      <SectionTransition variant="honeycomb" height="md" />
+
       <AcademyPricingPreview />
+      <SectionTransition variant="soft" height="md" />
+
       <AcademyArtBoxPreview />
+      <SectionTransition variant="gradient-canvas" height="lg" />
+
       <CertificationUpsell />
+      <SectionTransition variant="swatches" height="md" />
+
       <AcademyFAQ />
+      <SectionTransition variant="gradient-warm" height="lg" />
+
       <FinalCTA
         title="Start your family's art journey today"
         description="Create a free account and begin the Color Mixing Starter Path. No credit card required."

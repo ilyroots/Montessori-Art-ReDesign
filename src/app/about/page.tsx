@@ -4,7 +4,7 @@ import { createMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MagneticPills } from "@/components/motion/MagneticPills";
 import { LayeredSection } from "@/components/sections/LayeredSection";
-import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
+import { SectionTransition } from "@/components/visual/SectionTransition";
 import { FloatingAccentShapes } from "@/components/motion/FloatingAccentShapes";
 import {
   BookOpen,
@@ -102,7 +102,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <BrushstrokeDivider variant="wave" />
+      <SectionTransition variant="soft" height="md" />
 
       {/* About the Author */}
       <LayeredSection
@@ -201,7 +201,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <BrushstrokeDivider variant="curve" flip />
+      <SectionTransition variant="gradient-warm" height="lg" />
 
       {/* About the Company */}
       <LayeredSection
@@ -279,7 +279,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <BrushstrokeDivider variant="wave" />
+      <SectionTransition variant="soft" height="md" />
 
       {/* Services */}
       <LayeredSection
@@ -310,7 +310,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <BrushstrokeDivider variant="curve" flip />
+      <SectionTransition variant="gradient-warm" height="lg" />
 
       {/* Professional Development */}
       <LayeredSection
@@ -406,7 +406,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <BrushstrokeDivider variant="slant" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Connect */}
       <LayeredSection

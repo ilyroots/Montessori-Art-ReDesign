@@ -3,36 +3,39 @@
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
+import { ColorSwatchTrail } from "@/components/visual/ColorSwatchTrail";
 
 export function AcademyHero() {
   return (
     <section className="relative overflow-hidden bg-ivory">
+      <AnimatedColorBlobs intensity="subtle" className="opacity-40" />
       <div className="absolute inset-0 honeycomb-accent opacity-30 pointer-events-none" />
       <div className="absolute inset-0 grain-overlay pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
         <div className="max-w-3xl mx-auto text-center">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-bee-yellow/15 border border-bee-yellow/20 px-3 py-1 text-xs font-semibold text-honey uppercase tracking-wider mb-6">
               <Play size={12} />
               New — Guided Learning Paths
             </span>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.05}>
+          <ScrollReveal delay={0.05} variant="blurIn">
             <h1 className="font-serif text-[clamp(2.5rem,5.5vw,5rem)] font-semibold text-ink leading-[1.05] tracking-[-0.02em] mb-6">
               Nature of Art{" "}
               <span className="text-honey">Academy</span>
             </h1>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.1}>
+          <ScrollReveal delay={0.1} variant="fadeUp">
             <p className="text-lg sm:text-xl text-charcoal/80 leading-relaxed max-w-2xl mx-auto mb-10">
               A guided art learning path for children, families, homeschoolers, and Montessori educators. Start free, follow step-by-step lessons, save progress, and unlock deeper curriculum when ready.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.15}>
+          <ScrollReveal delay={0.15} variant="fadeUp">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/academy/start"
@@ -53,6 +56,12 @@ export function AcademyHero() {
               >
                 View Memberships →
               </Link>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.25} variant="fadeUp">
+            <div className="mt-10 flex justify-center">
+              <ColorSwatchTrail size="sm" />
             </div>
           </ScrollReveal>
         </div>

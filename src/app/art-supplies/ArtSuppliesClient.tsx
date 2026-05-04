@@ -27,7 +27,8 @@ import {
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
+import { SectionTransition } from "@/components/visual/SectionTransition";
+import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import type { StoreCategory } from "@/config/storeCategories";
 
 // Map category IDs to Lucide icons
@@ -87,26 +88,26 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Text */}
             <div className="lg:col-span-7">
-              <ScrollReveal>
+              <ScrollReveal variant="blurIn">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-bee-yellow/15 border border-bee-yellow/20 px-3 py-1 text-xs font-semibold text-honey uppercase tracking-wider mb-5">
                   <ShieldCheck size={12} />
                   Premium Safe Non-Toxic
                 </span>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.05}>
+              <ScrollReveal delay={0.05} variant="blurIn">
                 <h1 className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-ink leading-[1.05] tracking-[-0.02em] mb-6">
                   Art Supplies for Prepared Creative Environments
                 </h1>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.1}>
+              <ScrollReveal delay={0.1} variant="fadeUp">
                 <p className="text-lg sm:text-xl text-charcoal/80 leading-relaxed max-w-xl mb-8">
                   Premium safe non-toxic art supplies, curriculum materials, and teaching resources for Montessori and children&apos;s art environments.
                 </p>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.15}>
+              <ScrollReveal delay={0.15} variant="fadeUp">
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <a
                     href={notice.storefrontUrl}
@@ -126,7 +127,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.2}>
+              <ScrollReveal delay={0.2} variant="fadeUp">
                 <div className="flex flex-wrap gap-x-5 gap-y-2">
                   <span className="text-xs text-charcoal/50">11 supply categories</span>
                   <span className="text-xs text-charcoal/50">USPS shipping</span>
@@ -137,7 +138,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
             {/* Image */}
             <div className="lg:col-span-5 relative">
-              <ScrollReveal delay={0.1} y={40}>
+              <ScrollReveal delay={0.1} variant="scaleUp">
                 <div className="relative aspect-[4/3] rounded-card bg-canvas border border-linen overflow-hidden shadow-card">
                   <Image
                     src="/images/art-shelf-painting.jpg"
@@ -161,7 +162,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Store Notice Banner ── */}
-      <BrushstrokeDivider variant="wave" />
+      <SectionTransition variant="soft" height="sm" />
       <section className="border-y border-linen bg-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-charcoal/70">
@@ -187,7 +188,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       <section className="relative py-20 sm:py-28 bg-canvas">
         <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <div className="text-center mb-14">
               <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
                 Browse by Category
@@ -208,21 +209,23 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
               return (
                 <StaggerItem key={cat.id}>
-                  <Card
-                    {...cardProps}
-                    className="group block bg-paper border border-linen rounded-card p-6 h-full hover:shadow-card-hover transition-all duration-200 hover:border-honey/30"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-4 group-hover:bg-honey/20 transition-colors">
-                      {categoryIcons[cat.id] ?? <Palette size={24} />}
-                    </div>
-                    <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors flex items-center gap-1.5">
-                      {cat.name}
-                      {external && <ExternalLink size={12} className="text-charcoal/30" />}
-                    </h3>
-                    {cat.description && (
-                      <p className="text-sm text-charcoal/60 line-clamp-2">{cat.description}</p>
-                    )}
-                  </Card>
+                  <InteractiveCard glowColor="honey" hoverLift={-4}>
+                    <Card
+                      {...cardProps}
+                      className="group block bg-paper border border-linen rounded-card p-6 h-full hover:shadow-card-hover transition-all duration-200 hover:border-honey/30"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-4 group-hover:bg-honey/20 transition-colors">
+                        {categoryIcons[cat.id] ?? <Palette size={24} />}
+                      </div>
+                      <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors flex items-center gap-1.5">
+                        {cat.name}
+                        {external && <ExternalLink size={12} className="text-charcoal/30" />}
+                      </h3>
+                      {cat.description && (
+                        <p className="text-sm text-charcoal/60 line-clamp-2">{cat.description}</p>
+                      )}
+                    </Card>
+                  </InteractiveCard>
                 </StaggerItem>
               );
             })}
@@ -230,12 +233,13 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
         </div>
       </section>
 
+      <SectionTransition variant="soft" height="md" />
+
       {/* ── Featured Supply Areas ── */}
-      <BrushstrokeDivider variant="curve" flip />
       <section className="relative py-20 sm:py-28 bg-ivory">
         <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <div className="text-center mb-14">
               <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
                 Curated Collections
@@ -248,54 +252,57 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {featuredAreas.map((area, i) => (
-              <ScrollReveal key={area.title} delay={i * 0.06}>
-                <div className="bg-paper border border-linen rounded-card overflow-hidden hover:shadow-card-hover transition-shadow duration-200">
-                  {area.image ? (
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-canvas">
-                      <Image
-                        src={area.image}
-                        alt={area.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
+              <ScrollReveal key={area.title} delay={i * 0.06} variant="fadeUp">
+                <InteractiveCard glowColor="honey" hoverLift={-4}>
+                  <div className="bg-paper border border-linen rounded-card overflow-hidden hover:shadow-card-hover transition-shadow duration-200">
+                    {area.image ? (
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-canvas">
+                        <Image
+                          src={area.image}
+                          alt={area.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-[16/9] w-full bg-canvas flex items-center justify-center">
+                        {area.icon}
+                      </div>
+                    )}
+                    <div className="p-5">
+                      <h3 className="font-semibold text-ink mb-1">{area.title}</h3>
+                      <p className="text-sm text-charcoal/60 mb-4">{area.description}</p>
+                      <a
+                        href={area.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
+                      >
+                        Browse current store selection
+                        <ArrowRight size={14} />
+                      </a>
                     </div>
-                  ) : (
-                    <div className="aspect-[16/9] w-full bg-canvas flex items-center justify-center">
-                      {area.icon}
-                    </div>
-                  )}
-                  <div className="p-5">
-                    <h3 className="font-semibold text-ink mb-1">{area.title}</h3>
-                    <p className="text-sm text-charcoal/60 mb-4">{area.description}</p>
-                    <a
-                      href={area.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
-                    >
-                      Browse current store selection
-                      <ArrowRight size={14} />
-                    </a>
                   </div>
-                </div>
+                </InteractiveCard>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
+      <SectionTransition variant="swatches" height="md" />
+
       {/* ── Why These Supplies ── */}
-      <BrushstrokeDivider variant="wave" />
       <section className="relative py-20 sm:py-28 bg-canvas">
         <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-6">
               Materials for Prepared Creative Spaces
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={0.08}>
+          <ScrollReveal delay={0.08} variant="fadeUp">
             <p className="text-lg text-charcoal/80 leading-relaxed mb-10">
               Every item in the store is selected with child-centered art environments in mind. 
               Safe, simple materials that support process-based art, independence, and creative confidence.
@@ -305,25 +312,28 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-left" staggerDelay={0.08}>
             {valueProps.map((prop) => (
               <StaggerItem key={prop.title}>
-                <div className="bg-paper border border-linen rounded-card p-6 h-full">
-                  <div className="w-10 h-10 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-3">
-                    {prop.icon}
+                <InteractiveCard hoverLift={-4}>
+                  <div className="bg-paper border border-linen rounded-card p-6 h-full">
+                    <div className="w-10 h-10 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-3">
+                      {prop.icon}
+                    </div>
+                    <h3 className="font-semibold text-ink mb-2">{prop.title}</h3>
+                    <p className="text-sm text-charcoal/70">{prop.description}</p>
                   </div>
-                  <h3 className="font-semibold text-ink mb-2">{prop.title}</h3>
-                  <p className="text-sm text-charcoal/70">{prop.description}</p>
-                </div>
+                </InteractiveCard>
               </StaggerItem>
             ))}
           </StaggerContainer>
         </div>
       </section>
 
+      <SectionTransition variant="soft" height="md" />
+
       {/* ── Store Help / Support ── */}
-      <BrushstrokeDivider variant="slant" flip />
       <section className="relative py-16 sm:py-20 bg-ivory border-t border-linen">
         <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <div className="text-center mb-10">
               <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-[-0.02em]">
                 Store Help & Support
@@ -359,7 +369,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       <section className="relative py-16 sm:py-20 bg-canvas border-t border-linen">
         <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+          <ScrollReveal variant="blurIn">
             <div className="text-center mb-10">
               <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-[-0.02em] mb-3">
                 Explore the Ecosystem
@@ -372,19 +382,21 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {relatedPaths.map((item, i) => (
-              <ScrollReveal key={item.href} delay={i * 0.06}>
-                <Link
-                  href={item.href}
-                  className="group block bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow duration-200 h-full"
-                >
-                  <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center text-honey mb-3 group-hover:bg-honey/10 transition-colors">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-charcoal/60">{item.description}</p>
-                </Link>
+              <ScrollReveal key={item.href} delay={i * 0.06} variant="fadeUp">
+                <InteractiveCard hoverLift={-4}>
+                  <Link
+                    href={item.href}
+                    className="group block bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow duration-200 h-full"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center text-honey mb-3 group-hover:bg-honey/10 transition-colors">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-charcoal/60">{item.description}</p>
+                  </Link>
+                </InteractiveCard>
               </ScrollReveal>
             ))}
           </div>
