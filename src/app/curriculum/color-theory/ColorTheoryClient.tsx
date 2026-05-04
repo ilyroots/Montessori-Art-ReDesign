@@ -1,11 +1,30 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SectionTransition } from "@/components/visual/SectionTransition";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import { Droplets, Sparkles } from "lucide-react";
 
 export default function ColorTheoryClient() {
+  const [iframeHeight, setIframeHeight] = useState<number>(1600);
+
+  const handleMessage = useCallback((event: MessageEvent) => {
+    if (
+      event.data &&
+      typeof event.data === "object" &&
+      event.data.type === "atelier-resize" &&
+      typeof event.data.height === "number"
+    ) {
+      setIframeHeight(event.data.height);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [handleMessage]);
+
   return (
     <>
       {/* Hero */}
@@ -57,12 +76,15 @@ export default function ColorTheoryClient() {
                 </div>
               </div>
 
-              {/* Iframe — fixed height, no internal scrolling */}
-              <div className="relative w-full overflow-hidden" style={{ height: "min(85vh, 800px)" }}>
+              {/* Iframe — exact content height, no internal scrolling */}
+              <div
+                className="w-full overflow-hidden"
+                style={{ height: iframeHeight }}
+              >
                 <iframe
                   src="/atelier/color-mixing.html"
                   title="Color Mixing Atelier"
-                  className="absolute inset-0 w-full h-full border-0 block"
+                  className="w-full h-full border-0 block"
                   loading="eager"
                   sandbox="allow-scripts allow-same-origin"
                   scrolling="no"

@@ -530,6 +530,18 @@
     document.head.appendChild(style);
 
     render(html`<${App} />`, document.getElementById('root'));
+
+    // Report exact content height to parent for seamless embedding
+    function reportHeight() {
+      const height = document.documentElement.scrollHeight;
+      if (window.parent !== window) {
+        window.parent.postMessage({ type: 'atelier-resize', height }, '*');
+      }
+    }
+    reportHeight();
+    setTimeout(reportHeight, 300);
+    setTimeout(reportHeight, 800);
+    window.addEventListener('resize', reportHeight);
   </script>
 </body>
 </html>
