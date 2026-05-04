@@ -17,6 +17,8 @@ interface MagneticPillsProps {
 /*
  * Full-width scattered text with proximity magnify + hover cards
  * that expand directly from the word (up for top row, down for bottom row).
+ *
+ * The text stays anchored in place — only the background & description grow.
  */
 
 interface Position {
@@ -97,8 +99,10 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
           const pull = maxPull * eased;
           const tx = (dx / dist) * pull || 0;
           const ty = (dy / dist) * pull || 0;
+          el.style.setProperty("--scale", scale.toFixed(3));
           el.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
         } else {
+          el.style.setProperty("--scale", "1");
           el.style.transform = "translate(0px, 0px) scale(1)";
         }
       });
@@ -141,7 +145,13 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
             >
-              {/* Single container that morphs into a card on hover */}
+              {/*
+                Inner wrapper:
+                - padding grows on hover
+                - a counter-translate keeps the text visually anchored
+                  (translate is divided by --scale so it stays exact regardless
+                  of the proximity magnification)
+              */}
               <div
                 className={`
                   inline-flex rounded-card transition-all duration-300 ease-out
@@ -156,9 +166,14 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                   padding: isHovered ? "16px" : "0px",
                   flexDirection: pos.expandUp ? "column-reverse" : "column",
                   alignItems: "flex-start",
+                  transform: isHovered
+                    ? pos.expandUp
+                      ? "translateY(calc(16px / var(--scale, 1)))"
+                      : "translateY(calc(-16px / var(--scale, 1)))"
+                    : "translateY(0px)",
                 }}
               >
-                {/* Text + icon — always visible, becomes the card header */}
+                {/* Text + icon — anchor point, never shifts visually */}
                 <span
                   className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
                   style={{
@@ -180,7 +195,7 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                     maxHeight: isHovered ? 160 : 0,
                     opacity: isHovered ? 1 : 0,
                     marginTop: pos.expandUp ? 0 : isHovered ? 8 : 0,
-                    marginBottom: pos.expandUp ? isHovered ? 8 : 0 : 0,
+                    marginBottom: pos.expandUp ? (isHovered ? 8 : 0) : 0,
                   }}
                 >
                   <p className="text-sm text-charcoal/80 leading-relaxed max-w-[220px]">
