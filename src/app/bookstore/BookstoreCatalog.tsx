@@ -52,6 +52,8 @@ const itemTags: Record<string, string[]> = {
   "painting-curriculum": ["curriculum", "painting"],
   "painting-work": ["curriculum", "painting", "elementary"],
   "drawing-curriculum": ["curriculum", "drawing", "early-childhood", "elementary"],
+  "early-childhood-drawing-curriculum": ["curriculum", "drawing", "early-childhood"],
+  "elementary-drawing-curriculum": ["curriculum", "drawing", "elementary"],
   "color-theory-curriculum": ["curriculum", "color-theory"],
   "clay-modeling-curriculum": ["curriculum", "clay"],
   // Books (from bookstoreExtract)
@@ -111,7 +113,8 @@ const catalogOrder: { id: string; type: "product" | "book" }[] = [
   { id: "painting-curriculum", type: "product" },
   { id: "clay-play", type: "book" },
   { id: "art-teaching-curriculum", type: "book" },
-  { id: "drawing-curriculum", type: "product" },
+  { id: "elementary-drawing-curriculum", type: "product" },
+  { id: "early-childhood-drawing-curriculum", type: "product" },
   { id: "kids-painting-plus-elementary", type: "book" },
   { id: "color-theory-curriculum", type: "product" },
   { id: "clay-modeling-curriculum", type: "product" },

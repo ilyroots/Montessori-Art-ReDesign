@@ -115,6 +115,7 @@ export function ProductCard({
                   className="flex justify-between items-center text-sm"
                 >
                   <span className="text-charcoal/60">{v.format}</span>
+                  <span className="text-charcoal/30 mx-1.5">—</span>
                   <span className="font-medium text-ink">{v.price}</span>
                 </div>
               ))}
