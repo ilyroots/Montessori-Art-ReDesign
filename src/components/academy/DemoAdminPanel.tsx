@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { upgradeMockTier, resetDemoProgress, seedDemoUser, logoutMockUser } from "@/lib/mockAuth";
+import { upgradeMockTier, resetDemoProgress, seedDemoUser, seedDemoTeacher, logoutMockUser } from "@/lib/mockAuth";
 import type { AcademyTier } from "@/config/academyLessons";
-import { Settings, RotateCcw, UserCheck, LogOut, Sparkles } from "lucide-react";
+import { Settings, RotateCcw, UserCheck, LogOut, Sparkles, GraduationCap } from "lucide-react";
 
 export function DemoAdminPanel() {
   const [open, setOpen] = useState(false);
@@ -18,8 +18,13 @@ export function DemoAdminPanel() {
     window.location.reload();
   };
 
-  const handleSeed = () => {
+  const handleSeedParent = () => {
     seedDemoUser();
+    window.location.reload();
+  };
+
+  const handleSeedTeacher = () => {
+    seedDemoTeacher();
     window.location.reload();
   };
 
@@ -44,7 +49,7 @@ export function DemoAdminPanel() {
       {open && (
         <div className="mt-4 space-y-4 border-t border-linen pt-4">
           <p className="text-xs text-charcoal/50 leading-relaxed">
-            Temporary demo controls for concepting only. This will be replaced by real account, billing, and admin tools later.
+            Prototype controls only — this will be replaced by real auth, billing, and admin tools later.
           </p>
 
           <div className="space-y-2">
@@ -65,6 +70,26 @@ export function DemoAdminPanel() {
             </div>
           </div>
 
+          <div className="space-y-2">
+            <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider">Seed Demo Account</p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={handleSeedParent}
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-button border border-linen bg-canvas hover:bg-honey/10 hover:border-honey/30 transition-colors text-ink"
+              >
+                <UserCheck size={12} />
+                Demo Parent
+              </button>
+              <button
+                onClick={handleSeedTeacher}
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-button border border-linen bg-canvas hover:bg-sage/10 hover:border-sage/30 transition-colors text-ink"
+              >
+                <GraduationCap size={12} />
+                Demo Teacher
+              </button>
+            </div>
+          </div>
+
           <div className="flex flex-wrap gap-2">
             <button
               onClick={handleReset}
@@ -72,13 +97,6 @@ export function DemoAdminPanel() {
             >
               <RotateCcw size={12} />
               Reset Progress
-            </button>
-            <button
-              onClick={handleSeed}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-button border border-linen bg-canvas hover:bg-honey/10 hover:border-honey/30 transition-colors text-ink"
-            >
-              <Sparkles size={12} />
-              Seed Demo User
             </button>
             <button
               onClick={handleLogout}

@@ -39,6 +39,16 @@ const DEFAULT_DEMO_USER: MockUser = {
   isAdminDemo: true,
 };
 
+const DEFAULT_DEMO_TEACHER: MockUser = {
+  name: "Demo Teacher",
+  email: "teacher@natureofart.local",
+  role: "teacher",
+  tier: "teacher",
+  completedLessons: ["welcome-to-color-mixing", "primary-colors", "what-is-nature-art-method"],
+  activePath: "teacher-certification-preview",
+  isAdminDemo: true,
+};
+
 // ── Helpers ─────────────────────────────────────────────────
 
 function isBrowser(): boolean {
@@ -109,6 +119,11 @@ export function upgradeMockTier(tier: AcademyTier): MockUser | null {
 export function seedDemoUser(): MockUser {
   setMockUser(DEFAULT_DEMO_USER);
   return DEFAULT_DEMO_USER;
+}
+
+export function seedDemoTeacher(): MockUser {
+  setMockUser(DEFAULT_DEMO_TEACHER);
+  return DEFAULT_DEMO_TEACHER;
 }
 
 export function resetDemoProgress(): MockUser | null {

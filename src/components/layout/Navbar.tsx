@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { mainNavigation, navCta } from "@/config/siteNavigation";
 import { Logo } from "./Logo";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import { getMockUser } from "@/lib/mockAuth";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hasUser, setHasUser] = useState(false);
+
+  useEffect(() => {
+    setHasUser(!!getMockUser());
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-linen">
@@ -46,8 +52,24 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA + Mobile Toggle */}
+          {/* CTA + Login + Mobile Toggle */}
           <div className="flex items-center gap-3">
+            {hasUser ? (
+              <Link
+                href="/academy/dashboard"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-charcoal hover:text-honey transition-colors"
+              >
+                <User size={16} />
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden sm:inline-flex items-center text-sm font-medium text-charcoal hover:text-honey transition-colors"
+              >
+                Log in
+              </Link>
+            )}
             <Link
               href={navCta.href}
               className="hidden sm:inline-flex items-center justify-center rounded-button bg-ink px-5 py-2.5 text-sm font-semibold text-paper hover:bg-charcoal transition-colors duration-200"
@@ -85,7 +107,7 @@ export function Navbar() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block py-1.5 text-sm text-muted hover:text-honey"
+                        className="block py-1.5 text-sm text-charcoal/60 hover:text-honey"
                       >
                         {child.label}
                       </Link>
@@ -94,13 +116,33 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <Link
-              href={navCta.href}
-              onClick={() => setMobileOpen(false)}
-              className="mt-4 block w-full text-center rounded-button bg-ink px-5 py-3 text-sm font-semibold text-paper"
-            >
-              {navCta.label}
-            </Link>
+            <div className="pt-3 border-t border-linen mt-3 space-y-2">
+              {hasUser ? (
+                <Link
+                  href="/academy/dashboard"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 py-2 text-sm font-medium text-charcoal hover:text-honey"
+                >
+                  <User size={16} />
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-2 text-sm font-medium text-charcoal hover:text-honey"
+                >
+                  Log in
+                </Link>
+              )}
+              <Link
+                href={navCta.href}
+                onClick={() => setMobileOpen(false)}
+                className="block w-full text-center rounded-button bg-ink px-5 py-3 text-sm font-semibold text-paper"
+              >
+                {navCta.label}
+              </Link>
+            </div>
           </div>
         </div>
       )}
