@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BuyButton } from "./BuyButton";
 import { Check } from "lucide-react";
+import type { PriceVariant } from "@/config/products";
 
 interface ProductCardProps {
   id: string;
@@ -18,6 +19,7 @@ interface ProductCardProps {
   format?: string;
   variant?: "default" | "featured";
   image?: string;
+  priceVariants?: PriceVariant[];
 }
 
 export function ProductCard({
@@ -33,6 +35,7 @@ export function ProductCard({
   format,
   variant = "default",
   image,
+  priceVariants,
 }: ProductCardProps) {
   const isFeatured = variant === "featured";
 
@@ -103,6 +106,21 @@ export function ProductCard({
               </span>
             )}
           </div>
+
+          {priceVariants && priceVariants.length > 0 && (
+            <div className="mb-4 space-y-1">
+              {priceVariants.map((v) => (
+                <div
+                  key={v.format}
+                  className="flex justify-between items-center text-sm"
+                >
+                  <span className="text-charcoal/60">{v.format}</span>
+                  <span className="font-medium text-ink">{v.price}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="flex flex-col gap-2">
             <BuyButton productId={id} fullWidth />
             <Link

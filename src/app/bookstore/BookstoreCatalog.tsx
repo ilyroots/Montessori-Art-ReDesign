@@ -249,6 +249,7 @@ function renderCatalogItem(item: CatalogItem) {
           item.product.badge === "Most Popular" ? "featured" : "default"
         }
         image={item.product.image}
+        priceVariants={item.product.priceVariants}
       />
     );
   }
@@ -285,9 +286,9 @@ export function BookstoreCatalog() {
       case "name-az":
         items = [...items].sort((a, b) => {
           const nameA =
-            a.type === "product" ? a.product!.title : a.bookName!;
+            a.type === "product" ? a.product.title : a.bookName;
           const nameB =
-            b.type === "product" ? b.product!.title : b.bookName!;
+            b.type === "product" ? b.product.title : b.bookName;
           return nameA.localeCompare(nameB);
         });
         break;
