@@ -41,6 +41,18 @@ export const redirects: RedirectEntry[] = [
     platform: "Leadpages",
   },
   {
+    source: "/curriculum/color",
+    destination: "/curriculum/color-theory",
+    permanent: true,
+    notes: "Canonical color theory path",
+  },
+  {
+    source: "/curriculum/clay",
+    destination: "/curriculum/clay-modeling",
+    permanent: true,
+    notes: "Canonical clay modeling path",
+  },
+  {
     source: "/arttraining2020-waitlist",
     destination: "/certification",
     permanent: true,

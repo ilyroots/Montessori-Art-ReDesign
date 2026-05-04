@@ -1,4 +1,5 @@
 import { createMetadata } from "@/lib/seo";
+import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
 
 export const metadata = createMetadata({
   title: "Accessibility",
@@ -7,9 +8,11 @@ export const metadata = createMetadata({
 
 export default function AccessibilityPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24">
-      <h1 className="font-serif text-4xl font-semibold text-ink mb-8">Accessibility</h1>
-      <p className="text-charcoal/70">Accessibility statement coming soon.</p>
-    </div>
+    <PlaceholderPage
+      title="Accessibility"
+      description="Our accessibility statement and compliance details are being finalized. We are committed to making Nature of Art usable for everyone."
+      backHref="/"
+      backLabel="Back to Home"
+    />
   );
 }

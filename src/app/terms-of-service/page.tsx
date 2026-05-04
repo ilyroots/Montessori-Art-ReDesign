@@ -1,4 +1,5 @@
 import { createMetadata } from "@/lib/seo";
+import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
 
 export const metadata = createMetadata({
   title: "Terms of Service",
@@ -7,9 +8,11 @@ export const metadata = createMetadata({
 
 export default function TermsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-24">
-      <h1 className="font-serif text-4xl font-semibold text-ink mb-8">Terms of Service</h1>
-      <p className="text-charcoal/70">Terms of service content coming soon.</p>
-    </div>
+    <PlaceholderPage
+      title="Terms of Service"
+      description="Our terms of service are being reviewed by legal counsel and will be published here shortly."
+      backHref="/"
+      backLabel="Back to Home"
+    />
   );
 }

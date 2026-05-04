@@ -1,4 +1,5 @@
 import { createMetadata } from "@/lib/seo";
+import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
 
 export const metadata = createMetadata({
   title: "Contact",
@@ -7,9 +8,11 @@ export const metadata = createMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 text-center">
-      <h1 className="font-serif text-4xl font-semibold text-ink mb-4">Contact</h1>
-      <p className="text-charcoal/70">Contact form coming soon.</p>
-    </div>
+    <PlaceholderPage
+      title="Contact"
+      description="Our contact form is being polished. In the meantime, reach out through the newsletter or connect with us on social media."
+      backHref="/newsletter"
+      backLabel="Join the Newsletter"
+    />
   );
 }
