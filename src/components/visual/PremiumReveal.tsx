@@ -21,7 +21,7 @@ export function PremiumReveal({
   type = "slide-up",
   duration = 0.7,
 }: PremiumRevealProps) {
-  const ref = useRef<HTMLDivElement | HTMLSpanElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const isInView = useInView(ref, { once, margin: "-60px" });
 
@@ -42,7 +42,7 @@ export function PremiumReveal({
   if (type === "stagger-words" && typeof children === "string") {
     const words = children.split(" ");
     return (
-      <motion.span
+      <motion.div
         ref={ref}
         className={`inline-flex flex-wrap gap-x-[0.25em] ${className}`}
         initial="hidden"
@@ -61,7 +61,7 @@ export function PremiumReveal({
             {word}
           </motion.span>
         ))}
-      </motion.span>
+      </motion.div>
     );
   }
 
