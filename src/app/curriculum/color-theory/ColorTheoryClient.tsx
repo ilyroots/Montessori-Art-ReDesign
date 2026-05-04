@@ -7,7 +7,7 @@ import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import { Droplets, Sparkles } from "lucide-react";
 
 export default function ColorTheoryClient() {
-  const [iframeHeight, setIframeHeight] = useState<number>(2400);
+  const [iframeHeight, setIframeHeight] = useState<number>(3200);
 
   const handleMessage = useCallback((event: MessageEvent) => {
     if (
@@ -76,9 +76,9 @@ export default function ColorTheoryClient() {
                 </div>
               </div>
 
-              {/* Iframe — height grows to fit full content */}
+              {/* Iframe — height grows to fit full content, zero scrolling */}
               <div
-                className="w-full transition-all duration-300 ease-out"
+                className="w-full transition-all duration-300 ease-out overflow-hidden"
                 style={{ height: iframeHeight }}
               >
                 <iframe
@@ -87,6 +87,8 @@ export default function ColorTheoryClient() {
                   className="w-full h-full border-0 block"
                   loading="eager"
                   sandbox="allow-scripts allow-same-origin"
+                  scrolling="no"
+                  style={{ overflow: "hidden" }}
                 />
               </div>
             </div>

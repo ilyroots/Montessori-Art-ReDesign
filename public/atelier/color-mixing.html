@@ -533,9 +533,15 @@
 
     // Report height to parent for seamless iframe embedding
     function reportHeight() {
-      const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+      const height = Math.max(
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.scrollHeight,
+        document.body.offsetHeight
+      );
       if (window.parent !== window) {
-        window.parent.postMessage({ type: 'atelier-resize', height }, '*');
+        // Add 40px buffer so nothing ever clips
+        window.parent.postMessage({ type: 'atelier-resize', height: height + 40 }, '*');
       }
     }
     // Report after render and on resize
