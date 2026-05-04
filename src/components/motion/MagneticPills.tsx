@@ -15,11 +15,8 @@ interface MagneticPillsProps {
 }
 
 /*
- * Full-width scattered text with proximity magnify + smart hover cards.
- *
- * Top-row items: card expands UPWARD (above the text).
- * Bottom-row items: card expands DOWNWARD (below the text).
- * This guarantees hovered cards never block other scattered items.
+ * Full-width scattered text with proximity magnify + hover cards
+ * that expand directly from the word (up for top row, down for bottom row).
  */
 
 interface Position {
@@ -30,7 +27,6 @@ interface Position {
   expandUp: boolean;
 }
 
-// 2 wide rows, reaching near left & right edges
 const POSITIONS: Position[] = [
   { left: 2, top: 30, fontSize: 1.15, opacity: 0.75, expandUp: true },   // Keynotes
   { left: 26, top: 18, fontSize: 1.05, opacity: 0.6, expandUp: true },   // Workshops
@@ -145,8 +141,24 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
             >
-              <div className="relative">
-                {/* Floating text label — always visible */}
+              {/* Single container that morphs into a card on hover */}
+              <div
+                className={`
+                  inline-flex rounded-card transition-all duration-300 ease-out
+                  ${isHovered
+                    ? "bg-paper border border-linen shadow-card-hover"
+                    : "bg-transparent border-transparent"
+                  }
+                `}
+                style={{
+                  borderWidth: "1px",
+                  borderStyle: "solid",
+                  padding: isHovered ? "16px" : "0px",
+                  flexDirection: pos.expandUp ? "column-reverse" : "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                {/* Text + icon — always visible, becomes the card header */}
                 <span
                   className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
                   style={{
@@ -161,46 +173,24 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                   <span>{item.label}</span>
                 </span>
 
-                {/* Info card — direction-aware so it never blocks neighbours */}
+                {/* Description — grows from the word (up or down) */}
                 <div
-                  className={`
-                    absolute left-1/2 -translate-x-1/2 z-30 w-60
-                    rounded-card bg-paper border border-linen shadow-card-hover p-4
-                    text-left
-                    transition-all duration-300 ease-out
-                    ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"}
-                    ${pos.expandUp
-                      ? "bottom-full mb-3 origin-bottom"
-                      : "top-full mt-3 origin-top"
-                    }
-                  `}
+                  className="overflow-hidden transition-all duration-300 ease-out"
+                  style={{
+                    maxHeight: isHovered ? 160 : 0,
+                    opacity: isHovered ? 1 : 0,
+                    marginTop: pos.expandUp ? 0 : isHovered ? 8 : 0,
+                    marginBottom: pos.expandUp ? isHovered ? 8 : 0 : 0,
+                  }}
                 >
-                  {/* Arrow */}
-                  <div
-                    className={`
-                      absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-paper border-linen rotate-45
-                      ${pos.expandUp ? "-bottom-1.5 border-r border-b" : "-top-1.5 border-l border-t"}
-                    `}
-                  />
-
-                  <div className="relative">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      {item.icon && (
-                        <span className="text-honey">{item.icon}</span>
-                      )}
-                      <h4 className="font-serif text-sm font-semibold text-ink leading-tight">
-                        {item.label}
-                      </h4>
-                    </div>
-                    <p className="text-sm text-charcoal/80 leading-relaxed">
-                      {item.description}
-                    </p>
-                    {item.href && (
-                      <span className="inline-block mt-2 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
-                        Learn more →
-                      </span>
-                    )}
-                  </div>
+                  <p className="text-sm text-charcoal/80 leading-relaxed max-w-[220px]">
+                    {item.description}
+                  </p>
+                  {item.href && (
+                    <span className="inline-block mt-2 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
+                      Learn more →
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
