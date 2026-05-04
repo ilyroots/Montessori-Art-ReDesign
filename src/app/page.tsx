@@ -14,6 +14,7 @@ import {
   Palette,
   Brush,
   Shapes,
+  GraduationCap,
 } from "lucide-react";
 import { HeroActionCard } from "@/components/sections/HeroActionCard";
 import { MethodProcessSection } from "@/components/sections/MethodProcessSection";
