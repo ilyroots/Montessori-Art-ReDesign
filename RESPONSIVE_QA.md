@@ -192,6 +192,18 @@ Caption: 12px / 1.4 line-height
 - [ ] Decorative color swatches hidden on mobile (`hidden lg:block`)
 - [ ] Final CTA buttons stack on mobile
 
+### Art Supplies (`/art-supplies`)
+- [ ] Hero headline readable at 320px
+- [ ] Hero image stacks below text on mobile
+- [ ] Store notice banner wraps cleanly on small screens
+- [ ] Category cards stack 1→2→3→4 columns
+- [ ] Featured area cards stack 1→2→3 columns
+- [ ] Support link buttons wrap and remain tappable
+- [ ] Related path cards stack 1→2→4 columns
+- [ ] External link icons visible and clear
+- [ ] Final CTA buttons stack on mobile
+- [ ] Fine print text remains readable
+
 ### Global
 - [ ] Navbar collapses to hamburger on mobile
 - [ ] Footer readable and tappable on mobile
