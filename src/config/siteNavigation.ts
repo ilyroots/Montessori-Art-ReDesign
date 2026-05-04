@@ -2,64 +2,57 @@ export interface NavItem {
   label: string;
   href: string;
   children?: NavItem[];
+  description?: string;
 }
 
 // ------------------------------------------------------------------
-// Main Navigation — Matches current public site structure
+// Main Navigation — Clean grouped structure
 // ------------------------------------------------------------------
 
 export const mainNavigation: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Blog", href: "/blog" },
   {
     label: "Academy",
     href: "/academy",
     children: [
-      { label: "Start Free", href: "/academy/start" },
-      { label: "Memberships", href: "/academy/pricing" },
-      { label: "Dashboard Demo", href: "/academy/dashboard" },
-      { label: "Art Box & Bundles", href: "/academy/bundles" },
-      { label: "Teacher Path", href: "/academy/certification" },
+      { label: "Start Free", href: "/academy/start", description: "Begin your art learning path" },
+      { label: "Memberships", href: "/academy/pricing", description: "Unlock full curriculum access" },
+      { label: "Dashboard Demo", href: "/academy/dashboard", description: "Preview your learning space" },
+      { label: "Art Box & Bundles", href: "/academy/bundles", description: "Curated art supply kits" },
+      { label: "Teacher Path", href: "/academy/certification", description: "Professional certification" },
     ],
   },
   {
-    label: "Art Curriculum",
+    label: "Curriculum",
     href: "/curriculum",
     children: [
-      { label: "Painting", href: "/curriculum/painting" },
-      { label: "Painting Work / Montessori Elementary", href: "/curriculum/painting-work" },
-      { label: "Clay Modeling", href: "/curriculum/clay-modeling" },
-      { label: "Color Theory", href: "/curriculum/color-theory" },
-      { label: "Drawing", href: "/curriculum/drawing" },
+      { label: "Painting", href: "/curriculum/painting", description: "Sequenced painting lessons" },
+      { label: "Drawing", href: "/curriculum/drawing", description: "Developmental drawing path" },
+      { label: "Color Theory", href: "/curriculum/color-theory", description: "Understanding color mixing" },
+      { label: "Clay Modeling", href: "/curriculum/clay-modeling", description: "Sculpture & hand-building" },
+      { label: "Painting Work", href: "/curriculum/painting-work", description: "Montessori elementary focus" },
     ],
   },
   {
-    label: "Video Training",
-    href: "/training",
+    label: "Shop",
+    href: "/art-supplies",
     children: [
-      { label: "FREE – How to Set-Up One Color Prompt", href: "/free-resources/color-mixing-video" },
-      { label: "FREE – Theme Art With Story Books", href: "/free-resources/storybook-art-video" },
-      { label: "BUY – Homeschooling Art Starter", href: "/training/homeschooling-art" },
-      { label: "VIDEO – Infant & Toddler Art Webinar", href: "/training/infant-toddler-art" },
-      { label: "FREE – Phases of Art Development", href: "/free-resources/phases-of-art-development" },
-      { label: "BUY – How To Stage An Art Shelf", href: "/training/art-shelf" },
-      { label: "Process-Based Art Video Training", href: "/training/process-based-art" },
-      { label: "BUY – Positive Art Talk", href: "/training/positive-art-talk" },
-      { label: "BUY – Painting Key Lessons 101", href: "/training/painting-key-lessons" },
-      { label: "BUY – Theme Art & The Natural World", href: "/training/nature-art" },
+      { label: "Art Books", href: "/bookstore", description: "Guides & curriculum books" },
+      { label: "Art Store", href: "/art-supplies", description: "Montessori art materials" },
+      { label: "Bundles", href: "/academy/bundles", description: "Curated supply kits" },
     ],
   },
   {
-    label: "Art Certification",
-    href: "/certification",
+    label: "Resources",
+    href: "/free-resources",
     children: [
-      { label: "Montessori Art Certification", href: "/certification" },
+      { label: "Blog", href: "/blog", description: "Art education insights" },
+      { label: "Free Resources", href: "/free-resources", description: "Downloads & checklists" },
+      { label: "Video Training", href: "/training", description: "On-demand art lessons" },
+      { label: "Newsletter", href: "/newsletter", description: "Weekly art inspiration" },
     ],
   },
-  { label: "Art Books", href: "/bookstore" },
-  { label: "Art Store", href: "/art-supplies" },
-  { label: "Newsletter", href: "/newsletter" },
+  { label: "About", href: "/about" },
 ];
 
 export const navCta = {

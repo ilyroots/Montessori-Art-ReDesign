@@ -13,6 +13,7 @@ interface MethodProcessSectionProps {
   title?: string;
   subtitle?: string;
   className?: string;
+  compact?: boolean;
 }
 
 export function MethodProcessSection({
@@ -20,20 +21,23 @@ export function MethodProcessSection({
   title = "The Nature of Art Method",
   subtitle = "A proven approach to bringing visual arts into the prepared environment.",
   className,
+  compact,
 }: MethodProcessSectionProps) {
   return (
-    <section className={`py-20 sm:py-28 ${className ?? "bg-canvas"}`}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <div className="mb-16 sm:mb-20">
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
-              {title}
-            </h2>
-            <p className="text-charcoal/70 text-base sm:text-lg max-w-2xl">
-              {subtitle}
-            </p>
-          </div>
-        </ScrollReveal>
+    <section className={`${compact ? "" : "py-20 sm:py-28"} ${className ?? "bg-canvas"}`}>
+      <div className={`mx-auto max-w-7xl ${compact ? "" : "px-4 sm:px-6 lg:px-8"}`}>
+        {!compact && (
+          <ScrollReveal>
+            <div className="mb-16 sm:mb-20">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
+                {title}
+              </h2>
+              <p className="text-charcoal/70 text-base sm:text-lg max-w-2xl">
+                {subtitle}
+              </p>
+            </div>
+          </ScrollReveal>
+        )}
 
         <StaggerContainer className="space-y-12 sm:space-y-16">
           {steps.map((step, index) => {

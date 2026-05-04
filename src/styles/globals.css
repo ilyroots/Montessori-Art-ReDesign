@@ -317,6 +317,15 @@ body {
   opacity: 0.4;
 }
 
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Mobile: disable complex effects */
 @media (max-width: 640px) {
   .brushstroke-divider {
