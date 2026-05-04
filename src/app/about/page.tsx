@@ -245,30 +245,25 @@ export default function AboutPage() {
       </section>
 
       {/* Services */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="py-16 sm:py-20 bg-ivory overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
+            <div className="text-center mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-honey font-semibold mb-3">
                 Services
               </p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] leading-tight">
                 How We Support Educators
               </h2>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <MagneticPills items={serviceCategories} className="max-w-3xl mx-auto" />
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <div className="mt-10 text-center">
-              <p className="text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
+              <p className="mt-4 text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
                 From keynotes and workshops to venue sponsorship and corporate creative events,
                 Nature of Art® offers a range of services to bring art education to your community.
               </p>
             </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <MagneticPills items={serviceCategories} />
           </ScrollReveal>
         </div>
       </section>

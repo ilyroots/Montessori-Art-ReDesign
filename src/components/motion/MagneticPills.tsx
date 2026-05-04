@@ -15,12 +15,11 @@ interface MagneticPillsProps {
 }
 
 /*
- * Full-width scattered text with proximity magnify + downward-expanding cards.
+ * Full-width scattered text with proximity magnify + smart hover cards.
  *
- * Desktop: 8 items explicitly positioned across a large canvas.
- * Proximity: mouse distance drives smooth scale + gentle magnetic pull.
- * Hover: the text+icon stays put; a warm rounded card grows downward
- *         with background, border, shadow, and description.
+ * Top-row items: card expands UPWARD (above the text).
+ * Bottom-row items: card expands DOWNWARD (below the text).
+ * This guarantees hovered cards never block other scattered items.
  */
 
 interface Position {
@@ -28,18 +27,19 @@ interface Position {
   top: number; // %
   fontSize: number; // rem
   opacity: number;
+  expandUp: boolean;
 }
 
-// Spread wide horizontally, only 2 loose rows so the section stays thin
+// 2 wide rows, reaching near left & right edges
 const POSITIONS: Position[] = [
-  { left: 4, top: 10, fontSize: 1.15, opacity: 0.75 },   // Keynotes
-  { left: 30, top: 6, fontSize: 1.0, opacity: 0.6 },     // Workshops
-  { left: 55, top: 12, fontSize: 1.05, opacity: 0.7 },   // Venue Sponsorship
-  { left: 78, top: 8, fontSize: 1.3, opacity: 0.9 },     // Corporate Creative Events
-  { left: 12, top: 58, fontSize: 1.1, opacity: 0.65 },   // Teacher Art Training
-  { left: 38, top: 54, fontSize: 0.95, opacity: 0.55 },   // Video Training
-  { left: 62, top: 60, fontSize: 1.0, opacity: 0.6 },     // Art Supplies
-  { left: 84, top: 52, fontSize: 1.2, opacity: 0.8 },     // Art Teaching Blueprint
+  { left: 2, top: 30, fontSize: 1.15, opacity: 0.75, expandUp: true },   // Keynotes
+  { left: 26, top: 18, fontSize: 1.05, opacity: 0.6, expandUp: true },   // Workshops
+  { left: 52, top: 28, fontSize: 1.1, opacity: 0.7, expandUp: true },    // Venue Sponsorship
+  { left: 76, top: 14, fontSize: 1.35, opacity: 0.9, expandUp: true },   // Corporate Creative Events
+  { left: 10, top: 72, fontSize: 1.1, opacity: 0.65, expandUp: false },  // Teacher Art Training
+  { left: 36, top: 62, fontSize: 0.95, opacity: 0.55, expandUp: false }, // Video Training
+  { left: 62, top: 76, fontSize: 1.0, opacity: 0.6, expandUp: false },   // Art Supplies
+  { left: 84, top: 66, fontSize: 1.25, opacity: 0.8, expandUp: false },  // Art Teaching Blueprint
 ];
 
 export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
@@ -90,13 +90,13 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
         const dy = my - py;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        const radius = 300;
-        const maxScale = 1.22;
-        const maxPull = 10;
+        const radius = 320;
+        const maxScale = 1.32;
+        const maxPull = 14;
 
         if (dist < radius) {
           const p = 1 - dist / radius;
-          const eased = p * p * (3 - 2 * p); // smoothstep
+          const eased = p * p * (3 - 2 * p);
           const scale = 1 + (maxScale - 1) * eased;
           const pull = maxPull * eased;
           const tx = (dx / dist) * pull || 0;
@@ -123,10 +123,10 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
     <div
       ref={containerRef}
       className={`relative w-full ${className}`}
-      style={{ minHeight: "280px" }}
+      style={{ minHeight: "200px" }}
     >
       {/* Desktop scattered canvas */}
-      <div className="hidden md:block relative w-full" style={{ height: "240px" }}>
+      <div className="hidden md:block relative w-full" style={{ height: "180px" }}>
         {items.map((item, i) => {
           const pos = POSITIONS[i];
           const isHovered = hoveredIndex === i;
@@ -140,24 +140,13 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                 left: `${pos.left}%`,
                 top: `${pos.top}%`,
                 zIndex: isHovered ? 50 : 10 - i,
-                transformOrigin: "center top",
+                transformOrigin: "center center",
               }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
             >
-              {/* Card shell — grows from the text on hover */}
-              <div
-                className={`
-                  inline-flex flex-col items-start rounded-card
-                  transition-all duration-300 ease-out
-                  ${isHovered
-                    ? "bg-paper border border-linen shadow-card-hover p-4"
-                    : "bg-transparent border-transparent p-0"
-                  }
-                `}
-                style={{ borderWidth: "1px", borderStyle: "solid" }}
-              >
-                {/* Text + icon — always visible */}
+              <div className="relative">
+                {/* Floating text label — always visible */}
                 <span
                   className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
                   style={{
@@ -172,21 +161,46 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                   <span>{item.label}</span>
                 </span>
 
-                {/* Description — expands downward on hover */}
+                {/* Info card — direction-aware so it never blocks neighbours */}
                 <div
                   className={`
-                    overflow-hidden transition-all duration-300 ease-out
-                    ${isHovered ? "max-h-48 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"}
+                    absolute left-1/2 -translate-x-1/2 z-30 w-60
+                    rounded-card bg-paper border border-linen shadow-card-hover p-4
+                    text-left
+                    transition-all duration-300 ease-out
+                    ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"}
+                    ${pos.expandUp
+                      ? "bottom-full mb-3 origin-bottom"
+                      : "top-full mt-3 origin-top"
+                    }
                   `}
                 >
-                  <p className="text-sm text-charcoal/80 leading-relaxed max-w-[220px]">
-                    {item.description}
-                  </p>
-                  {item.href && (
-                    <span className="inline-block mt-2 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
-                      Learn more →
-                    </span>
-                  )}
+                  {/* Arrow */}
+                  <div
+                    className={`
+                      absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-paper border-linen rotate-45
+                      ${pos.expandUp ? "-bottom-1.5 border-r border-b" : "-top-1.5 border-l border-t"}
+                    `}
+                  />
+
+                  <div className="relative">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      {item.icon && (
+                        <span className="text-honey">{item.icon}</span>
+                      )}
+                      <h4 className="font-serif text-sm font-semibold text-ink leading-tight">
+                        {item.label}
+                      </h4>
+                    </div>
+                    <p className="text-sm text-charcoal/80 leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.href && (
+                      <span className="inline-block mt-2 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
+                        Learn more →
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
