@@ -8,12 +8,15 @@ import { EMAIL_CONFIG } from "@/config/integrations";
 interface NewsletterSignupProps {
   variant?: "inline" | "card" | "footer";
   source?: string;
+  showNameField?: boolean;
 }
 
 export function NewsletterSignup({
   variant = "inline",
   source = "newsletter_page",
+  showNameField = false,
 }: NewsletterSignupProps) {
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -25,12 +28,13 @@ export function NewsletterSignup({
     setStatus("submitting");
     trackEvent("newsletter_submit", { email, source });
 
-    const result = await submitToKeap("newsletter", { email });
+    const result = await submitToKeap("newsletter", { email, firstName });
 
     if (result.success) {
       setStatus("success");
       setMessage(EMAIL_CONFIG.newsletter.thankYouMessage);
       setEmail("");
+      setFirstName("");
     } else {
       setStatus("error");
       setMessage(result.message);
@@ -58,22 +62,33 @@ export function NewsletterSignup({
           {message}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="email"
-            required
-            placeholder="Your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 rounded-button border border-linen bg-paper px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
-          />
-          <button
-            type="submit"
-            disabled={status === "submitting"}
-            className="rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark disabled:opacity-60 transition-colors"
-          >
-            {status === "submitting" ? "Subscribing..." : "Subscribe"}
-          </button>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          {showNameField && (
+            <input
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full rounded-button border border-linen bg-paper px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
+            />
+          )}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              required
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1 rounded-button border border-linen bg-paper px-4 py-3 text-sm text-ink placeholder:text-charcoal/40 focus:border-honey focus:outline-none transition-colors"
+            />
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              className="rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-ink-dark disabled:opacity-60 transition-colors"
+            >
+              {status === "submitting" ? "Subscribing..." : "Subscribe"}
+            </button>
+          </div>
         </form>
       )}
 
