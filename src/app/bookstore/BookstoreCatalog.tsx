@@ -37,7 +37,7 @@ const filterTabs: { id: FilterCategory; label: string }[] = [
 ];
 
 const sortOptions: { id: SortOption; label: string }[] = [
-  { id: "default", label: "Featured" },
+  { id: "default", label: "Filtered" },
   { id: "price-low", label: "Price: Low to High" },
   { id: "price-high", label: "Price: High to Low" },
   { id: "name-az", label: "Name: A–Z" },
