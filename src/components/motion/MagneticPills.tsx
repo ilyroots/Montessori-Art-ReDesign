@@ -15,29 +15,32 @@ interface MagneticPillsProps {
 }
 
 /*
- * Full-width scattered text with proximity magnify + hover cards
- * that expand directly from the word (up for top row, down for bottom row).
+ * Full-width scattered text with proximity magnify + hover cards.
  *
- * The text stays anchored in place — only the background & description grow.
+ * - Proximity effect magnifies nearby words as you move the mouse,
+ *   but does NOT open cards.
+ * - Cards only open when you directly hover over a word.
+ * - Top-row cards expand UPWARD without shifting the anchored text.
+ * - Bottom-row cards expand DOWNWARD without shifting the anchored text.
  */
 
 interface Position {
-  left: number; // %
-  top: number; // %
-  fontSize: number; // rem
+  left: number;
+  top: number;
+  fontSize: number;
   opacity: number;
   expandUp: boolean;
 }
 
 const POSITIONS: Position[] = [
-  { left: 2, top: 30, fontSize: 1.15, opacity: 0.75, expandUp: true },   // Keynotes
-  { left: 26, top: 18, fontSize: 1.05, opacity: 0.6, expandUp: true },   // Workshops
-  { left: 52, top: 28, fontSize: 1.1, opacity: 0.7, expandUp: true },    // Venue Sponsorship
-  { left: 76, top: 14, fontSize: 1.35, opacity: 0.9, expandUp: true },   // Corporate Creative Events
-  { left: 10, top: 72, fontSize: 1.1, opacity: 0.65, expandUp: false },  // Teacher Art Training
-  { left: 36, top: 62, fontSize: 0.95, opacity: 0.55, expandUp: false }, // Video Training
-  { left: 62, top: 76, fontSize: 1.0, opacity: 0.6, expandUp: false },   // Art Supplies
-  { left: 84, top: 66, fontSize: 1.25, opacity: 0.8, expandUp: false },  // Art Teaching Blueprint
+  { left: 2, top: 30, fontSize: 1.15, opacity: 0.75, expandUp: true },
+  { left: 26, top: 18, fontSize: 1.05, opacity: 0.6, expandUp: true },
+  { left: 52, top: 28, fontSize: 1.1, opacity: 0.7, expandUp: true },
+  { left: 76, top: 14, fontSize: 1.35, opacity: 0.9, expandUp: true },
+  { left: 10, top: 72, fontSize: 1.1, opacity: 0.65, expandUp: false },
+  { left: 36, top: 62, fontSize: 0.95, opacity: 0.55, expandUp: false },
+  { left: 62, top: 76, fontSize: 1.0, opacity: 0.6, expandUp: false },
+  { left: 84, top: 66, fontSize: 1.25, opacity: 0.8, expandUp: false },
 ];
 
 export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
@@ -59,6 +62,7 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
 
   const handleMouseLeave = useCallback(() => {
     mouseRef.current = { x: -9999, y: -9999 };
+    setHoveredIndex(null);
   }, []);
 
   useEffect(() => {
@@ -99,10 +103,8 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
           const pull = maxPull * eased;
           const tx = (dx / dist) * pull || 0;
           const ty = (dy / dist) * pull || 0;
-          el.style.setProperty("--scale", scale.toFixed(3));
           el.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
         } else {
-          el.style.setProperty("--scale", "1");
           el.style.transform = "translate(0px, 0px) scale(1)";
         }
       });
@@ -125,7 +127,6 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
       className={`relative w-full ${className}`}
       style={{ minHeight: "200px" }}
     >
-      {/* Desktop scattered canvas */}
       <div className="hidden md:block relative w-full" style={{ height: "180px" }}>
         {items.map((item, i) => {
           const pos = POSITIONS[i];
@@ -135,26 +136,22 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
             <div
               key={item.label}
               ref={(el) => { itemRefs.current[i] = el; }}
-              className="absolute will-change-transform"
+              className="absolute will-change-transform pointer-events-none"
               style={{
                 left: `${pos.left}%`,
                 top: `${pos.top}%`,
                 zIndex: isHovered ? 50 : 10 - i,
                 transformOrigin: "center center",
               }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
             >
               {/*
-                Inner wrapper:
-                - padding grows on hover
-                - a counter-translate keeps the text visually anchored
-                  (translate is divided by --scale so it stays exact regardless
-                  of the proximity magnification)
+                Inner wrapper captures pointer events only over the text
+                when collapsed. When expanded it includes the card, so the
+                card stays readable while the mouse is over it.
               */}
               <div
                 className={`
-                  inline-flex rounded-card transition-all duration-300 ease-out
+                  inline-flex rounded-card transition-all duration-300 ease-out pointer-events-auto
                   ${isHovered
                     ? "bg-paper border border-linen shadow-card-hover"
                     : "bg-transparent border-transparent"
@@ -163,17 +160,29 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                 style={{
                   borderWidth: "1px",
                   borderStyle: "solid",
-                  padding: isHovered ? "16px" : "0px",
                   flexDirection: pos.expandUp ? "column-reverse" : "column",
                   alignItems: "flex-start",
-                  transform: isHovered
+                  /*
+                    Asymmetric padding + negative margin keeps the text
+                    visually anchored while the card grows in one direction:
+                    - expandUp:  padding top only,    negative top & left margin
+                    - expandDown: padding bottom only, negative left margin
+                  */
+                  padding: isHovered
                     ? pos.expandUp
-                      ? "translateY(calc(16px / var(--scale, 1)))"
-                      : "translateY(calc(-16px / var(--scale, 1)))"
-                    : "translateY(0px)",
+                      ? "16px 16px 0px 16px"
+                      : "0px 16px 16px 16px"
+                    : "0px",
+                  margin: isHovered
+                    ? pos.expandUp
+                      ? "-16px 0px 0px -16px"
+                      : "0px 0px 0px -16px"
+                    : "0px",
                 }}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
               >
-                {/* Text + icon — anchor point, never shifts visually */}
+                {/* Anchor text — never shifts from its magnified position */}
                 <span
                   className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
                   style={{
@@ -188,7 +197,7 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
                   <span>{item.label}</span>
                 </span>
 
-                {/* Description — grows from the word (up or down) */}
+                {/* Description — grows from the anchored word */}
                 <div
                   className="overflow-hidden transition-all duration-300 ease-out"
                   style={{
@@ -213,7 +222,7 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
         })}
       </div>
 
-      {/* Mobile: clean stacked list */}
+      {/* Mobile */}
       <div className="md:hidden flex flex-wrap justify-center gap-3">
         {items.map((item) => (
           <span
