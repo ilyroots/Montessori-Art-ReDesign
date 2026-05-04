@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export interface PillItem {
   label: string;
   icon?: React.ReactNode;
+  description: string;
   href?: string;
 }
 
@@ -14,154 +16,97 @@ interface MagneticPillsProps {
 }
 
 /**
- * Proximity-based hover effect inspired by Shopify Editions.
- * Pills scale up and gravitate toward the cursor based on distance.
+ * Service cloud inspired by Shopify Editions proximity effect.
+ *
+ * Default: scattered floating text + icon.
+ * Hover:    expands into a warm info card.
+ *
+ * Layout uses flex-wrap with small translate offsets — gaps
+ * guarantee no overlaps.
  */
 export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const pillRefs = useRef<(HTMLAnchorElement | HTMLSpanElement | null)[]>([]);
-  const mouseRef = useRef({ x: -9999, y: -9999 });
-  const rafRef = useRef<number>(0);
-  const isHoveringRef = useRef(false);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    mouseRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
-    isHoveringRef.current = true;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    isHoveringRef.current = false;
-    mouseRef.current = { x: -9999, y: -9999 };
-  }, []);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
-
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
-
-    const animate = () => {
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      pillRefs.current.forEach((pill) => {
-        if (!pill) return;
-        const rect = pill.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-
-        // Pill center relative to container
-        const px = rect.left - containerRect.left + rect.width / 2;
-        const py = rect.top - containerRect.top + rect.height / 2;
-
-        const dx = mx - px;
-        const dy = my - py;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        // Interaction radius (px)
-        const radius = 220;
-        // Max scale multiplier
-        const maxScale = 1.35;
-        // Max magnetic pull (px)
-        const maxPull = 18;
-
-        if (distance < radius && isHoveringRef.current) {
-          const progress = 1 - distance / radius;
-          // Smooth easing
-          const eased = progress * progress * (3 - 2 * progress);
-          const scale = 1 + (maxScale - 1) * eased;
-          const pull = maxPull * eased;
-          const tx = (dx / distance) * pull || 0;
-          const ty = (dy / distance) * pull || 0;
-
-          pill.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-          pill.style.zIndex = "10";
-        } else {
-          pill.style.transform = "translate(0px, 0px) scale(1)";
-          pill.style.zIndex = "1";
-        }
-      });
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [handleMouseMove, handleMouseLeave]);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div
-      ref={containerRef}
-      className={`relative select-none ${className}`}
-      style={{ minHeight: "320px" }}
-    >
-      {items.map((item, i) => {
-        // Scatter pills using a pseudo-random grid with varying sizes
-        const row = Math.floor(i / 4);
-        const col = i % 4;
-        const offsetX = (Math.sin(i * 1.7) * 8) + (col * 24);
-        const offsetY = (Math.cos(i * 2.3) * 10) + (row * 18);
-        const fontSize = 0.9 + Math.sin(i * 3.1) * 0.15; // 0.75rem – 1.05rem range
-        const opacity = 0.65 + Math.cos(i * 1.9) * 0.25;
+    <div className={`relative py-10 px-4 ${className}`}>
+      <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-6 max-w-5xl mx-auto">
+        {items.map((item, i) => {
+          // Scatter offsets kept small so flex gaps still prevent overlaps
+          const offsetX = Math.sin(i * 2.7) * 14;
+          const offsetY = Math.cos(i * 1.9) * 8;
+          const fontSize = 0.85 + Math.sin(i * 3.1) * 0.18; // 0.67 – 1.03 rem
+          const isHovered = hoveredIndex === i;
 
-        const baseClasses =
-          "inline-flex items-center gap-2 bg-paper border border-linen rounded-full px-5 py-2.5 text-charcoal/80 whitespace-nowrap transition-shadow duration-300 hover:shadow-card-hover cursor-default will-change-transform";
-
-        const style: React.CSSProperties = {
-          position: "absolute",
-          left: `${12 + offsetX}%`,
-          top: `${10 + offsetY}%`,
-          fontSize: `${fontSize}rem`,
-          opacity,
-        };
-
-        if (item.href) {
           return (
-            <a
+            <div
               key={item.label}
-              ref={(el) => { pillRefs.current[i] = el; }}
-              href={item.href}
-              className={`${baseClasses} hover:text-honey hover:border-honey/40`}
-              style={style}
+              className="relative flex items-center justify-center"
+              style={{
+                transform: `translate(${offsetX}px, ${offsetY}px)`,
+              }}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
             >
-              {item.icon && (
-                <span className="text-honey shrink-0">{item.icon}</span>
-              )}
-              <span>{item.label}</span>
-            </a>
-          );
-        }
+              {/* Default floating text label */}
+              <AnimatePresence mode="wait">
+                {!isHovered && (
+                  <motion.span
+                    key="text"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.55 + Math.cos(i * 2.4) * 0.3 }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
+                    style={{ fontSize: `${fontSize}rem` }}
+                  >
+                    {item.icon && (
+                      <span className="text-honey opacity-80">{item.icon}</span>
+                    )}
+                    <span>{item.label}</span>
+                  </motion.span>
+                )}
+              </AnimatePresence>
 
-        return (
-          <span
-            key={item.label}
-            ref={(el) => { pillRefs.current[i] = el; }}
-            className={baseClasses}
-            style={style}
-          >
-            {item.icon && (
-              <span className="text-honey shrink-0">{item.icon}</span>
-            )}
-            <span>{item.label}</span>
-          </span>
-        );
-      })}
+              {/* Expanded info card on hover */}
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 28 }}
+                    className="absolute z-30 w-60"
+                  >
+                    <div className="relative rounded-card bg-paper border border-linen shadow-card-hover p-5 text-left">
+                      {/* Arrow pointing down to the original text position */}
+                      <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-4 h-4 bg-paper border-r border-b border-linen rotate-45" />
+
+                      <div className="relative">
+                        <div className="flex items-center gap-2 mb-2">
+                          {item.icon && (
+                            <span className="text-honey">{item.icon}</span>
+                          )}
+                          <h4 className="font-serif text-base font-semibold text-ink leading-tight">
+                            {item.label}
+                          </h4>
+                        </div>
+                        <p className="text-sm text-charcoal/80 leading-relaxed">
+                          {item.description}
+                        </p>
+                        {item.href && (
+                          <span className="inline-block mt-3 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
+                            Learn more →
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

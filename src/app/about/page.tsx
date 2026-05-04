@@ -22,14 +22,54 @@ export const metadata = createMetadata({
 });
 
 const serviceCategories = [
-  { icon: <Users size={20} />, label: "Keynotes" },
-  { icon: <Users size={20} />, label: "Workshops" },
-  { icon: <Award size={20} />, label: "Venue Sponsorship" },
-  { icon: <Palette size={20} />, label: "Corporate Creative Events" },
-  { icon: <GraduationCap size={20} />, label: "Teacher Art Training" },
-  { icon: <Video size={20} />, label: "Video Training" },
-  { icon: <ShoppingBag size={20} />, label: "Art Supplies" },
-  { icon: <Award size={20} />, label: "Art Teaching Blueprint" },
+  {
+    icon: <Users size={20} />,
+    label: "Keynotes",
+    description:
+      "Inspiring talks on Montessori art education for conferences, schools, and educator gatherings.",
+  },
+  {
+    icon: <Users size={20} />,
+    label: "Workshops",
+    description:
+      "Hands-on art workshops for educators, parents, and Montessori classrooms.",
+  },
+  {
+    icon: <Award size={20} />,
+    label: "Venue Sponsorship",
+    description:
+      "Partner with Nature of Art® to bring professional art education experiences to your venue.",
+  },
+  {
+    icon: <Palette size={20} />,
+    label: "Corporate Creative Events",
+    description:
+      "Team-building art experiences designed for organizations and companies.",
+  },
+  {
+    icon: <GraduationCap size={20} />,
+    label: "Teacher Art Training",
+    description:
+      "Professional development training to build confidence in teaching visual arts.",
+  },
+  {
+    icon: <Video size={20} />,
+    label: "Video Training",
+    description:
+      "On-demand video courses for art environment setup and teaching practice.",
+  },
+  {
+    icon: <ShoppingBag size={20} />,
+    label: "Art Supplies",
+    description:
+      "Premium safe non-toxic art materials curated for the Montessori environment.",
+  },
+  {
+    icon: <Award size={20} />,
+    label: "Art Teaching Blueprint",
+    description:
+      "Comprehensive 7-week certification program in Montessori art education.",
+  },
 ];
 
 export default function AboutPage() {
