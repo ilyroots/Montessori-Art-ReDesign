@@ -4,10 +4,7 @@ import { useState } from "react";
 import { products } from "@/config/products";
 import { bookstoreExtract } from "@/config/publicContentExtract";
 import { ProductCard } from "@/components/commerce/ProductCard";
-import {
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/motion/ScrollReveal";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { ExternalLink, BookOpen } from "lucide-react";
 
 // ------------------------------------------------------------------
@@ -173,14 +170,10 @@ export function BookstoreCatalog() {
 
         {/* Product grid */}
         {totalCount > 0 ? (
-          <StaggerContainer
-            key={activeFilter}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            staggerDelay={0.08}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Curriculum products (verified) */}
-            {filteredCurriculum.map((product) => (
-              <StaggerItem key={product.id}>
+            {filteredCurriculum.map((product, i) => (
+              <ScrollReveal key={product.id} delay={i * 0.08}>
                 <ProductCard
                   id={product.id}
                   title={product.title}
@@ -194,16 +187,19 @@ export function BookstoreCatalog() {
                   format={product.format}
                   variant={product.badge === "Most Popular" ? "featured" : "default"}
                 />
-              </StaggerItem>
+              </ScrollReveal>
             ))}
 
             {/* Books (pending verification) */}
-            {filteredBooks.map((book) => (
-              <StaggerItem key={book.id}>
+            {filteredBooks.map((book, i) => (
+              <ScrollReveal
+                key={book.id}
+                delay={(filteredCurriculum.length + i) * 0.08}
+              >
                 <BookCard name={book.name} category={book.category} />
-              </StaggerItem>
+              </ScrollReveal>
             ))}
-          </StaggerContainer>
+          </div>
         ) : (
           <div className="text-center py-20">
             <BookOpen
