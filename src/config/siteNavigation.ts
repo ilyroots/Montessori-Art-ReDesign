@@ -13,6 +13,17 @@ export const mainNavigation: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   {
+    label: "Academy",
+    href: "/academy",
+    children: [
+      { label: "Start Free", href: "/academy/start" },
+      { label: "Memberships", href: "/academy/pricing" },
+      { label: "Dashboard Demo", href: "/academy/dashboard" },
+      { label: "Art Box & Bundles", href: "/academy/bundles" },
+      { label: "Teacher Path", href: "/academy/certification" },
+    ],
+  },
+  {
     label: "Art Curriculum",
     href: "/curriculum",
     children: [
@@ -52,8 +63,8 @@ export const mainNavigation: NavItem[] = [
 ];
 
 export const navCta = {
-  label: "Explore Curriculum",
-  href: "/curriculum",
+  label: "Start Free",
+  href: "/academy/start",
 };
 
 // ------------------------------------------------------------------
@@ -62,6 +73,7 @@ export const navCta = {
 
 export const footerNavigation = {
   offers: [
+    { label: "Academy", href: "/academy" },
     { label: "Curriculum", href: "/curriculum" },
     { label: "Training", href: "/training" },
     { label: "Certification", href: "/certification" },

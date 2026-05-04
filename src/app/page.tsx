@@ -8,6 +8,7 @@ import { FunnelCTASection } from "@/components/sections/FunnelCTASection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { HomepageAcademySection } from "@/components/academy/HomepageAcademySection";
 
 // TODO: Connect newsletter form to Keap newsletter form after Keap inventory is complete.
 // TODO: Replace fallback Leadpages URLs with native checkout or Keap checkout URLs.
@@ -165,6 +166,9 @@ export default function HomePage() {
         annotation="Every child is an artist."
         annotationAuthor="Pablo Picasso"
       />
+
+      {/* Academy Promo */}
+      <HomepageAcademySection />
 
       {/* Choose Your Path — Audience Cards */}
       <CreativeOfferGrid
