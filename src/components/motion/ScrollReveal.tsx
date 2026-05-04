@@ -15,7 +15,7 @@ interface ScrollRevealProps {
   variant?: RevealVariant;
 }
 
-const variantInitials: Record<RevealVariant, object> = {
+const variantInitials: Record<RevealVariant, { opacity: number; y?: number; scale?: number; x?: number }> = {
   fadeUp: { opacity: 0, y: 24 },
   fadeIn: { opacity: 0 },
   scaleUp: { opacity: 0, scale: 0.96 },
@@ -23,7 +23,7 @@ const variantInitials: Record<RevealVariant, object> = {
   slideRight: { opacity: 0, x: 40 },
 };
 
-const variantTargets: Record<RevealVariant, object> = {
+const variantTargets: Record<RevealVariant, { opacity: number; y?: number; scale?: number; x?: number }> = {
   fadeUp: { opacity: 1, y: 0 },
   fadeIn: { opacity: 1 },
   scaleUp: { opacity: 1, scale: 1 },
@@ -43,8 +43,10 @@ export function ScrollReveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
 
-  const initial = variant === "fadeUp" ? { opacity: 0, y } : variantInitials[variant];
-  const target = variant === "fadeUp" ? { opacity: 1, y: 0 } : variantTargets[variant];
+  const initial: { opacity: number; y?: number; x?: number; scale?: number } =
+    variant === "fadeUp" ? { opacity: 0, y } : variantInitials[variant];
+  const target: { opacity: number; y?: number; x?: number; scale?: number } =
+    variant === "fadeUp" ? { opacity: 1, y: 0 } : variantTargets[variant];
 
   return (
     <motion.div

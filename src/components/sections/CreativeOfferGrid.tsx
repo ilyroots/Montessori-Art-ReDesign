@@ -19,6 +19,7 @@ interface CreativeOfferGridProps {
   title?: string;
   subtitle?: string;
   columns?: 2 | 3;
+  className?: string;
 }
 
 export function CreativeOfferGrid({
@@ -26,11 +27,12 @@ export function CreativeOfferGrid({
   title,
   subtitle,
   columns = 3,
+  className,
 }: CreativeOfferGridProps) {
   const gridCols = columns === 2 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section className="py-20 sm:py-28 bg-ivory">
+    <section className={`py-20 sm:py-28 ${className ?? "bg-ivory"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="mb-14 sm:mb-16">
