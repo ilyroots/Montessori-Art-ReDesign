@@ -22,7 +22,7 @@ export const academyBundles: AcademyBundle[] = [
     id: "color-mixing-starter-kit",
     title: "Color Mixing Starter Kit",
     description: "Everything a family needs to begin the Color Mixing Starter path.",
-    image: "/images/color-theory-curriculum.jpg",
+    image: "/images/bundle-color-mixing.jpg",
     items: [
       "Primary watercolor paints",
       "Mixing tray",
@@ -40,7 +40,7 @@ export const academyBundles: AcademyBundle[] = [
     id: "clay-play-kit",
     title: "Clay Play Kit",
     description: "A sensory-rich clay exploration kit for toddlers and young children.",
-    image: "/images/clay-play.jpg",
+    image: "/images/bundle-clay-play.jpg",
     items: [
       "Non-hardening modeling clay",
       "Wooden rolling tool",
@@ -58,7 +58,7 @@ export const academyBundles: AcademyBundle[] = [
     id: "art-shelf-starter-bundle",
     title: "Art Shelf Starter Bundle",
     description: "Curated materials and guides to set up an independent art shelf.",
-    image: "/images/art-shelf-painting.jpg",
+    image: "/images/bundle-art-shelf.jpg",
     items: [
       "Recommended shelf materials",
       "Printable labels set",
@@ -76,7 +76,7 @@ export const academyBundles: AcademyBundle[] = [
     id: "teacher-curriculum-bundle",
     title: "Teacher Curriculum Bundle",
     description: "The complete curriculum set for classroom or homeschool implementation.",
-    image: "/images/painting-curriculum.jpg",
+    image: "/images/bundle-teacher.jpg",
     items: [
       "Painting Curriculum",
       "Drawing Curriculum",
