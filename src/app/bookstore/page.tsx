@@ -68,11 +68,11 @@ export default function BookstorePage() {
           </div>
         </div>
       </section>
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Catalog */}
       <BookstoreCatalog />
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Fallback CTA */}
       <section className="relative overflow-hidden bg-gradient-warm">

@@ -157,7 +157,7 @@ export default function CurriculumIndexPage() {
         </div>
       </section>
 
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Curriculum Areas Grid */}
       <section className="py-20 sm:py-28 bg-ivory">
@@ -214,7 +214,7 @@ export default function CurriculumIndexPage() {
         </div>
       </section>
 
-      <SectionTransition variant="gradient-canvas" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* CTA */}
       <section className="py-20 sm:py-28 bg-canvas">

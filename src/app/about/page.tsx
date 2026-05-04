@@ -80,7 +80,7 @@ export default function AboutPage() {
     <>
       {/* Hero */}
       <LayeredSection
-        variant="gradient-canvas"
+        variant="swatches"
         withWash
         withShapes
         className="py-24 sm:py-32 lg:py-40"
@@ -102,7 +102,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* About the Author */}
       <LayeredSection
@@ -201,7 +201,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* About the Company */}
       <LayeredSection
@@ -279,7 +279,7 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Services */}
       <LayeredSection
@@ -310,11 +310,11 @@ export default function AboutPage() {
         </div>
       </LayeredSection>
 
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Professional Development */}
       <LayeredSection
-        variant="gradient-warm"
+        variant="swatches"
         withWash
         className="py-20 sm:py-28"
       >

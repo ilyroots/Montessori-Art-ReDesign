@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 interface SectionTransitionProps {
-  variant?: "soft" | "gradient-warm" | "gradient-canvas" | "gradient-ink" | "swatches" | "honeycomb" | "overlap";
+  variant?: "swatches" | "honeycomb" | "overlap";
   className?: string;
   height?: "sm" | "md" | "lg" | "xl";
 }
@@ -16,7 +16,7 @@ const heightMap = {
 };
 
 export function SectionTransition({
-  variant = "soft",
+  variant = "swatches",
   className = "",
   height = "md",
 }: SectionTransitionProps) {
@@ -74,23 +74,5 @@ export function SectionTransition({
     );
   }
 
-  const gradientClasses = {
-    soft: "bg-gradient-to-b from-transparent via-ivory to-transparent",
-    "gradient-warm": "bg-gradient-to-b from-ivory to-canvas-warm",
-    "gradient-canvas": "bg-gradient-to-b from-canvas-warm to-canvas",
-    "gradient-ink": "bg-gradient-to-b from-ink to-charcoal",
-  };
-
-  return (
-    <div className={`relative overflow-hidden ${heightMap[height]} ${className}`}>
-      <div className={`absolute inset-0 ${gradientClasses[variant]}`} />
-      <motion.div
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-linen/60 to-transparent"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      />
-    </div>
-  );
+  return null;
 }

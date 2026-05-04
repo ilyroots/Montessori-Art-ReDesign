@@ -60,7 +60,7 @@ export default function AcademyPricingPage() {
           </ScrollReveal>
         </div>
       </section>
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
     </>
   );
 }

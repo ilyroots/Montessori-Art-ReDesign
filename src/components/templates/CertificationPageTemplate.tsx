@@ -87,7 +87,7 @@ export function CertificationPageTemplate({
         dark
       />
       </div>
-      <SectionTransition variant="soft" height="sm" />
+      <SectionTransition variant="swatches" height="sm" />
 
       {/* Trust / Authority Stats */}
       <section className="border-y border-linen bg-paper">
@@ -162,7 +162,7 @@ export function CertificationPageTemplate({
           </div>
         </div>
       </section>
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Outcomes */}
       <section className="py-20 sm:py-28 bg-ivory relative">
@@ -241,7 +241,7 @@ export function CertificationPageTemplate({
           </div>
         </div>
       </section>
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* Licensing */}
       <section className="py-12 sm:py-16 bg-ivory relative">
@@ -261,15 +261,15 @@ export function CertificationPageTemplate({
           </ScrollReveal>
         </div>
       </section>
-      <SectionTransition variant="gradient-canvas" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Testimonials */}
       <Testimonials items={testimonials} title="What certified educators say" />
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       {/* FAQ */}
       <FAQ items={faqItems} />
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Final CTA */}
       <FinalCTA

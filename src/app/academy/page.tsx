@@ -23,25 +23,25 @@ export default function AcademyPage() {
       <SectionTransition variant="swatches" height="md" />
 
       <AcademyHowItWorks />
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       <AcademyAudienceCards />
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       <AcademyFeaturedPaths />
       <SectionTransition variant="honeycomb" height="md" />
 
       <AcademyPricingPreview />
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
 
       <AcademyArtBoxPreview />
-      <SectionTransition variant="gradient-canvas" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       <CertificationUpsell />
       <SectionTransition variant="swatches" height="md" />
 
       <AcademyFAQ />
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       <FinalCTA
         title="Start your family's art journey today"

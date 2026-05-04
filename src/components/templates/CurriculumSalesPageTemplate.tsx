@@ -104,7 +104,7 @@ export function CurriculumSalesPageTemplate({
         imageAlt={product.title}
       />
 
-      <SectionTransition variant="soft" height="md" />
+      <SectionTransition variant="swatches" height="md" />
       {/* Trust Bar */}
       <section className="border-y border-linen bg-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
@@ -146,7 +146,7 @@ export function CurriculumSalesPageTemplate({
         </div>
       </section>
 
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
       {/* Method */}
       <section className="relative py-20 sm:py-28 bg-canvas">
         <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />

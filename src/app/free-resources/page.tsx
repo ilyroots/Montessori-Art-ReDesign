@@ -197,7 +197,7 @@ export default function FreeResourcesPage() {
         </div>
       </section>
 
-      <SectionTransition variant="gradient-warm" height="lg" />
+      <SectionTransition variant="swatches" height="lg" />
 
       {/* Academy CTA */}
       <section className="py-20 sm:py-28 bg-ivory">
