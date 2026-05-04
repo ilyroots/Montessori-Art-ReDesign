@@ -43,7 +43,7 @@ export function ProductCard({
       }`}
     >
       {badge && (
-        <div className="absolute -top-3 left-6">
+        <div className="absolute -top-3 left-6 z-10">
           <span className="inline-block rounded-full bg-ink px-3 py-1 text-xs font-semibold text-paper">
             {badge}
           </span>
