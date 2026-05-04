@@ -78,18 +78,45 @@ function matchesFilter(id: string, filter: FilterCategory): boolean {
 // Book card for pending-price items
 // ------------------------------------------------------------------
 
+const bookImages: Record<string, string> = {
+  "way-children-make-art": "/images/way-children-make-art.jpg",
+  "early-childhood-art": "/images/early-childhood-art.jpg",
+  "defining-visual-arts": "/images/defining-visual-arts.jpg",
+  "for-early-childhood": "/images/early-childhood-art.jpg",
+  "elementary-art-guide": "/images/elementary-art-guide.jpg",
+  "kids-color-theory-book": "/images/color-theory-curriculum.jpg",
+  "nurturing-children-visual-arts": "/images/nurturing-children-visual-arts.jpg",
+  "clay-play": "/images/clay-play.jpg",
+  "art-teaching-curriculum": "/images/painting-curriculum.jpg",
+  "kids-painting-plus-elementary": "/images/painting-curriculum.jpg",
+};
+
 function BookCard({
   name,
   category,
+  id,
 }: {
   name: string;
   category: string;
+  id: string;
 }) {
   const categoryLabel =
     category === "bundle" ? "Bundle" : category === "book" ? "Book" : category;
 
+  const image = bookImages[id];
+
   return (
-    <div className="relative flex flex-col rounded-card border border-linen bg-paper transition-shadow duration-200 hover:shadow-card-hover h-full">
+    <div className="relative flex flex-col rounded-card border border-linen bg-paper transition-shadow duration-200 hover:shadow-card-hover h-full overflow-hidden">
+      {image && (
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-canvas">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      )}
       <div className="p-6 sm:p-8 flex flex-col flex-1">
         <div className="mb-4">
           <span className="inline-block rounded-full bg-canvas px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-charcoal/60 font-medium mb-3">
@@ -186,6 +213,7 @@ export function BookstoreCatalog() {
                   ageRange={product.ageRange}
                   format={product.format}
                   variant={product.badge === "Most Popular" ? "featured" : "default"}
+                  image={product.image}
                 />
               </ScrollReveal>
             ))}
@@ -196,7 +224,7 @@ export function BookstoreCatalog() {
                 key={book.id}
                 delay={(filteredCurriculum.length + i) * 0.08}
               >
-                <BookCard name={book.name} category={book.category} />
+                <BookCard name={book.name} category={book.category} id={book.id} />
               </ScrollReveal>
             ))}
           </div>

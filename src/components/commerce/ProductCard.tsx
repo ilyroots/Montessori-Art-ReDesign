@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { BuyButton } from "./BuyButton";
 import { Check } from "lucide-react";
 
@@ -16,6 +17,7 @@ interface ProductCardProps {
   ageRange?: string;
   format?: string;
   variant?: "default" | "featured";
+  image?: string;
 }
 
 export function ProductCard({
@@ -30,6 +32,7 @@ export function ProductCard({
   ageRange,
   format,
   variant = "default",
+  image,
 }: ProductCardProps) {
   const isFeatured = variant === "featured";
 
@@ -47,6 +50,17 @@ export function ProductCard({
         </div>
       )}
 
+      {image && (
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-canvas">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        </div>
+      )}
       <div className="p-6 sm:p-8 flex flex-col flex-1">
         <div className="mb-4">
           <h3 className="font-serif text-xl sm:text-2xl font-semibold text-ink">

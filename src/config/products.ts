@@ -44,6 +44,7 @@ export const products: Product[] = [
     description:
       "A comprehensive painting curriculum with 57 painting studio experiences organized by increasing brushstroke and material complexity. A Science Art Method™ Painting Studio Application By Nature of Art®.",
     price: "$155.00",
+    image: "/images/painting-curriculum.jpg",
     priceVariants: [
       { format: "Paperback", price: "$155.00", ctaLabel: "Buy Paperback Now $155.00" },
       { format: "Digital PDF", price: "$97.00", ctaLabel: "Buy Digital Now $97.00" },
@@ -71,6 +72,7 @@ export const products: Product[] = [
     description:
       "Companion album to Kids Painting with seven key painting lessons in detail, full-color pictures, paint facts, techniques, and featured artist history. Best for elementary grades.",
     price: "$97.00",
+    image: "/images/painting-work.jpg",
     priceVariants: [
       { format: "Printed", price: "$97.00", ctaLabel: "Buy Printed $97.00" },
       { format: "Digital", price: "$45.00", ctaLabel: "Buy Digital $45.00" },
@@ -98,6 +100,7 @@ export const products: Product[] = [
     description:
       "Structured drawing studio experiences organized by increasing material and skill complexity. Available in Early Childhood (16 studios) and Elementary (47 studios) editions.",
     price: "$155.00",
+    image: "/images/drawing-elementary-curriculum.jpg",
     priceVariants: [
       { format: "Early Childhood Paperback", price: "$135.00", ctaLabel: "Buy Early Childhood Paperback $135.00" },
       { format: "Early Childhood Digital", price: "$72.00", ctaLabel: "Buy Early Childhood Digital $72.00" },
@@ -126,6 +129,7 @@ export const products: Product[] = [
     description:
       "37 sequential color exploration lessons/experiences with scope and sequence. Helps children mix independently and build foundational color theory skills.",
     price: "$155.00",
+    image: "/images/color-theory-curriculum.jpg",
     priceVariants: [
       { format: "Paperback", price: "$155.00", ctaLabel: "Buy Now $155.00" },
       { format: "Digital Download", price: "$97.00", ctaLabel: "Buy Now $97.00" },
@@ -153,6 +157,7 @@ export const products: Product[] = [
     description:
       "Structured curriculum with 29 clay studio experiences organized by increasing material handling and sculptural complexity.",
     price: "$145.00",
+    image: "/images/clay-modeling-curriculum.jpg",
     priceVariants: [
       { format: "Paperback", price: "$145.00", ctaLabel: "Buy Now" },
       { format: "Digital Copy", price: "$97.00", ctaLabel: "Buy Now" },

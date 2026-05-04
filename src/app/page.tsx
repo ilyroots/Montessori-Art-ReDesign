@@ -416,8 +416,8 @@ export default function HomePage() {
             <ScrollReveal>
               <div className="aspect-[4/3] max-w-lg mx-auto relative rounded-card overflow-hidden shadow-card">
                 <Image
-                  src="/images/spramani-elaun.png"
-                  alt="Spramani Elaun, founder of Nature of Art®, surrounded by Montessori art materials and her published books"
+                  src="/images/spramani-portrait.jpg"
+                  alt="Spramani Elaun, founder of Nature of Art®, in her art apron"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
