@@ -15,94 +15,118 @@ interface MagneticPillsProps {
   className?: string;
 }
 
-/**
- * Service cloud inspired by Shopify Editions proximity effect.
- *
- * Default: scattered floating text + icon.
- * Hover:    expands into a warm info card.
- *
- * Layout uses flex-wrap with small translate offsets — gaps
- * guarantee no overlaps.
+/*
+ * Aesthetic scattered layout — structured rows with intentional asymmetry.
+ * No absolute positioning, no random overlap.
+ * Hover expands each label into a warm info card.
  */
 export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  // Split 8 items into rows of 3 + 3 + 2 for an organic shape
+  const rows: PillItem[][] = [
+    items.slice(0, 3),
+    items.slice(3, 6),
+    items.slice(6, 8),
+  ];
+
   return (
-    <div className={`relative py-10 px-4 ${className}`}>
-      <div className="flex flex-wrap justify-center items-start gap-x-8 gap-y-6 max-w-5xl mx-auto">
-        {items.map((item, i) => {
-          // Scatter offsets kept small so flex gaps still prevent overlaps
-          const offsetX = Math.sin(i * 2.7) * 14;
-          const offsetY = Math.cos(i * 1.9) * 8;
-          const fontSize = 0.85 + Math.sin(i * 3.1) * 0.18; // 0.67 – 1.03 rem
-          const isHovered = hoveredIndex === i;
+    <div className={`relative py-12 px-4 ${className}`}>
+      <div className="flex flex-col items-center gap-y-10 max-w-5xl mx-auto">
+        {rows.map((row, rowIdx) => {
+          // Alternate row alignments for visual interest
+          const alignments = [
+            "justify-start md:justify-center",
+            "justify-end md:justify-center",
+            "justify-center",
+          ];
+          const rowAlignment = alignments[rowIdx % alignments.length];
 
           return (
             <div
-              key={item.label}
-              className="relative flex items-center justify-center"
-              style={{
-                transform: `translate(${offsetX}px, ${offsetY}px)`,
-              }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex((prev) => (prev === i ? null : prev))}
+              key={rowIdx}
+              className={`flex flex-wrap ${rowAlignment} gap-x-10 md:gap-x-16 gap-y-8 w-full`}
             >
-              {/* Default floating text label */}
-              <AnimatePresence mode="wait">
-                {!isHovered && (
-                  <motion.span
-                    key="text"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.55 + Math.cos(i * 2.4) * 0.3 }}
-                    exit={{ opacity: 0, scale: 0.85 }}
-                    transition={{ duration: 0.2 }}
-                    className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
-                    style={{ fontSize: `${fontSize}rem` }}
-                  >
-                    {item.icon && (
-                      <span className="text-honey opacity-80">{item.icon}</span>
-                    )}
-                    <span>{item.label}</span>
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              {row.map((item) => {
+                const globalIdx = items.indexOf(item);
+                const isHovered = hoveredIndex === globalIdx;
+                // Vary font size per item for hierarchy
+                const fontSize =
+                  globalIdx === 0 || globalIdx === 4
+                    ? "1.05rem"
+                    : globalIdx === 2 || globalIdx === 6
+                    ? "0.9rem"
+                    : "0.95rem";
 
-              {/* Expanded info card on hover */}
-              <AnimatePresence>
-                {isHovered && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 28 }}
-                    className="absolute z-30 w-60"
+                return (
+                  <div
+                    key={item.label}
+                    className="relative flex items-center justify-center min-w-[140px]"
+                    onMouseEnter={() => setHoveredIndex(globalIdx)}
+                    onMouseLeave={() =>
+                      setHoveredIndex((prev) => (prev === globalIdx ? null : prev))
+                    }
                   >
-                    <div className="relative rounded-card bg-paper border border-linen shadow-card-hover p-5 text-left">
-                      {/* Arrow pointing down to the original text position */}
-                      <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-4 h-4 bg-paper border-r border-b border-linen rotate-45" />
-
-                      <div className="relative">
-                        <div className="flex items-center gap-2 mb-2">
+                    {/* Floating text label */}
+                    <AnimatePresence mode="wait">
+                      {!isHovered && (
+                        <motion.span
+                          key="text"
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 0.6 + (globalIdx % 3) * 0.15, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          transition={{ duration: 0.2 }}
+                          className="inline-flex items-center gap-2 whitespace-nowrap font-serif text-ink cursor-default select-none"
+                          style={{ fontSize }}
+                        >
                           {item.icon && (
-                            <span className="text-honey">{item.icon}</span>
+                            <span className="text-honey opacity-80">{item.icon}</span>
                           )}
-                          <h4 className="font-serif text-base font-semibold text-ink leading-tight">
-                            {item.label}
-                          </h4>
-                        </div>
-                        <p className="text-sm text-charcoal/80 leading-relaxed">
-                          {item.description}
-                        </p>
-                        {item.href && (
-                          <span className="inline-block mt-3 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
-                            Learn more →
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                          <span>{item.label}</span>
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Expanded info card */}
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.65 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.85 }}
+                          transition={{ type: "spring", stiffness: 380, damping: 26 }}
+                          className="absolute z-30 w-64"
+                          style={{ bottom: "calc(100% + 12px)" }}
+                        >
+                          <div className="relative rounded-card bg-paper border border-linen shadow-card-hover p-5 text-left">
+                            {/* Tooltip arrow */}
+                            <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-4 h-4 bg-paper border-r border-b border-linen rotate-45" />
+
+                            <div className="relative">
+                              <div className="flex items-center gap-2 mb-2">
+                                {item.icon && (
+                                  <span className="text-honey">{item.icon}</span>
+                                )}
+                                <h4 className="font-serif text-base font-semibold text-ink leading-tight">
+                                  {item.label}
+                                </h4>
+                              </div>
+                              <p className="text-sm text-charcoal/80 leading-relaxed">
+                                {item.description}
+                              </p>
+                              {item.href && (
+                                <span className="inline-block mt-3 text-xs font-semibold text-honey hover:text-earth-brown transition-colors">
+                                  Learn more →
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </div>
           );
         })}
