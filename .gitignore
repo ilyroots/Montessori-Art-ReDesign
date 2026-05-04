@@ -20,8 +20,12 @@
 # production
 /build
 
-# web artifacts (standalone demos)
-/artifacts/
+# artifact build artifacts (avoid confusing Railpack)
+/artifacts/**/package.json
+/artifacts/**/package-lock.json
+/artifacts/**/node_modules/
+/artifacts/**/dist/
+/artifacts/**/.next/
 /build
 
 # misc
