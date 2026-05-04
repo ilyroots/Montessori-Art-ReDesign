@@ -177,6 +177,21 @@ Caption: 12px / 1.4 line-height
 - [ ] Outcomes section stacks on mobile
 - [ ] Licensing box readable
 
+### Lead Magnet Pages (`/free-resources/*`)
+- [ ] Hero headline readable at 320px (max ~2.25rem on smallest screens)
+- [ ] "Free Video" badge label doesn't wrap awkwardly
+- [ ] Hero image stacks below text on mobile, side-by-side on desktop
+- [ ] CTA button opens fallback URL in new tab (fallback-external mode)
+- [ ] "What You'll Learn" cards stack 1→2→4 columns
+- [ ] "Who It's For" cards stack 1→2→3 columns
+- [ ] Lead magnet form section stacks on mobile, 2-col on desktop
+- [ ] Form inputs are full-width with min-height 48px on mobile
+- [ ] Related resource cards stack 1→2→4 columns
+- [ ] Card images maintain 16:10 aspect ratio
+- [ ] Floating accent card hidden on mobile (`hidden sm:block`)
+- [ ] Decorative color swatches hidden on mobile (`hidden lg:block`)
+- [ ] Final CTA buttons stack on mobile
+
 ### Global
 - [ ] Navbar collapses to hamburger on mobile
 - [ ] Footer readable and tappable on mobile
