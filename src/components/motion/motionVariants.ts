@@ -220,7 +220,7 @@ export const heroAnnotation: Variants = {
     rotate: 2,
     scale: 1,
     y: 0,
-    transition: { duration: 0.6, delay: 0.8, ease: easeSpringBouncy },
+    transition: { ...easeSpringBouncy, delay: 0.8 },
   },
 };
 
