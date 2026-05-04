@@ -77,14 +77,20 @@ function matchesFilter(id: string, filter: FilterCategory): boolean {
 // Unified catalog data — preserves original website order
 // ------------------------------------------------------------------
 
-interface CatalogItem {
-  id: string;
-  type: "product" | "book";
-  product?: Product;
-  bookName?: string;
-  bookCategory?: string;
-  sortPrice: number;
-}
+type CatalogItem =
+  | {
+      id: string;
+      type: "product";
+      product: Product;
+      sortPrice: number;
+    }
+  | {
+      id: string;
+      type: "book";
+      bookName: string;
+      bookCategory: string;
+      sortPrice: number;
+    };
 
 function parsePrice(priceStr: string): number {
   const match = priceStr.replace(/,/g, "").match(/[\d.]+/);
@@ -116,7 +122,7 @@ const bookMap = new Map(
   bookstoreExtract.products.map((b) => [b.id, b])
 );
 
-const allItems: CatalogItem[] = catalogOrder.flatMap((entry) => {
+const allItems: CatalogItem[] = catalogOrder.flatMap((entry): CatalogItem[] => {
   if (entry.type === "product") {
     const product = productMap.get(entry.id);
     if (!product) return [];
