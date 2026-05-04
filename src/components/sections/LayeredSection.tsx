@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 interface LayeredSectionProps {
   children: ReactNode;
   className?: string;
-  variant?: "ivory" | "canvas" | "paper" | "ink" | "gradient-warm" | "gradient-canvas";
+  variant?: "ivory" | "canvas" | "paper" | "ink" | "gradient-warm" | "gradient-canvas" | "swatches";
   withTexture?: boolean;
   withWash?: boolean;
   withShapes?: boolean;
@@ -31,6 +31,8 @@ export function LayeredSection({
     ink: "bg-ink",
     "gradient-warm": "bg-gradient-warm",
     "gradient-canvas": "bg-gradient-canvas",
+    swatches:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(245,191,66,0.20),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(104,190,199,0.16),transparent_28%),radial-gradient(circle_at_70%_78%,rgba(220,92,151,0.12),transparent_30%),linear-gradient(180deg,#fffdf6_0%,#f7efe0_100%)]",
   };
 
   return (
