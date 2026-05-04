@@ -30,15 +30,16 @@ interface Position {
   opacity: number;
 }
 
+// Spread wide horizontally, only 2 loose rows so the section stays thin
 const POSITIONS: Position[] = [
-  { left: 6, top: 8, fontSize: 1.15, opacity: 0.75 },   // Keynotes
-  { left: 72, top: 5, fontSize: 1.0, opacity: 0.6 },    // Workshops
-  { left: 38, top: 22, fontSize: 1.05, opacity: 0.7 },  // Venue Sponsorship
-  { left: 58, top: 34, fontSize: 1.3, opacity: 0.9 },   // Corporate Creative Events
-  { left: 10, top: 48, fontSize: 1.1, opacity: 0.65 },  // Teacher Art Training
-  { left: 48, top: 54, fontSize: 0.95, opacity: 0.55 }, // Video Training
-  { left: 22, top: 74, fontSize: 1.0, opacity: 0.6 },   // Art Supplies
-  { left: 70, top: 70, fontSize: 1.2, opacity: 0.8 },   // Art Teaching Blueprint
+  { left: 4, top: 10, fontSize: 1.15, opacity: 0.75 },   // Keynotes
+  { left: 30, top: 6, fontSize: 1.0, opacity: 0.6 },     // Workshops
+  { left: 55, top: 12, fontSize: 1.05, opacity: 0.7 },   // Venue Sponsorship
+  { left: 78, top: 8, fontSize: 1.3, opacity: 0.9 },     // Corporate Creative Events
+  { left: 12, top: 58, fontSize: 1.1, opacity: 0.65 },   // Teacher Art Training
+  { left: 38, top: 54, fontSize: 0.95, opacity: 0.55 },   // Video Training
+  { left: 62, top: 60, fontSize: 1.0, opacity: 0.6 },     // Art Supplies
+  { left: 84, top: 52, fontSize: 1.2, opacity: 0.8 },     // Art Teaching Blueprint
 ];
 
 export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
@@ -122,10 +123,10 @@ export function MagneticPills({ items, className = "" }: MagneticPillsProps) {
     <div
       ref={containerRef}
       className={`relative w-full ${className}`}
-      style={{ minHeight: "520px" }}
+      style={{ minHeight: "280px" }}
     >
       {/* Desktop scattered canvas */}
-      <div className="hidden md:block relative w-full" style={{ height: "480px" }}>
+      <div className="hidden md:block relative w-full" style={{ height: "240px" }}>
         {items.map((item, i) => {
           const pos = POSITIONS[i];
           const isHovered = hoveredIndex === i;
