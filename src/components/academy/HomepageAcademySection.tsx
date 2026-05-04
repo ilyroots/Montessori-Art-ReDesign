@@ -10,7 +10,7 @@ import { getPathProgress } from "@/lib/academyProgress";
 import { ProgressRing } from "./ProgressRing";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { InteractiveCard } from "@/components/visual/InteractiveCard";
-import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
+import { AnimatedGradientMesh } from "@/components/visual/AnimatedGradientMesh";
 
 export function HomepageAcademySection() {
   const [user, setUser] = useState<MockUser | null>(null);
@@ -23,8 +23,10 @@ export function HomepageAcademySection() {
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28 bg-ivory">
-      <AnimatedColorBlobs intensity="subtle" className="opacity-30" />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Animated gradient mesh for atmosphere */}
+      <AnimatedGradientMesh variant="sunset" intensity="subtle" className="opacity-50" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <ScrollReveal variant="blurIn">
             <div>
@@ -48,7 +50,7 @@ export function HomepageAcademySection() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/academy/start"
-                  className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-charcoal transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-6 py-3 text-sm font-semibold text-paper hover:bg-charcoal transition-colors shadow-lifted hover:shadow-dramatic"
                 >
                   <Play size={14} />
                   Start Free Academy
@@ -73,7 +75,7 @@ export function HomepageAcademySection() {
           <ScrollReveal delay={0.1} variant="scaleUp">
             <InteractiveCard glowColor="yellow" hoverLift={-6} tilt>
               {user ? (
-                <div className="bg-paper border border-linen rounded-card p-6 sm:p-8">
+                <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 shadow-card">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-semibold text-ink">Welcome back, {user.name}</h3>
                     <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-full bg-honey/10 text-honey">
@@ -100,7 +102,7 @@ export function HomepageAcademySection() {
                   </Link>
                 </div>
               ) : (
-                <div className="bg-paper border border-linen rounded-card p-6 sm:p-8">
+                <div className="bg-paper border border-linen rounded-card p-6 sm:p-8 shadow-card">
                   <div className="w-12 h-12 rounded-full bg-bee-yellow/10 flex items-center justify-center mb-4">
                     <Play size={22} className="text-honey" />
                   </div>

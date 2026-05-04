@@ -16,6 +16,7 @@ import { Variants } from "framer-motion";
 export const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 export const easeInOutQuad = [0.45, 0, 0.55, 1] as const;
 export const easeSpring = { type: "spring", stiffness: 300, damping: 30 } as const;
+export const easeSpringBouncy = { type: "spring", stiffness: 400, damping: 25 } as const;
 
 // Fade up (default scroll reveal)
 export const fadeUp: Variants = {
@@ -132,7 +133,134 @@ export const staggerItem: Variants = {
   },
 };
 
-// Hero headline
+// ============================================================
+// ORCHESTRATED PAGE-LOAD VARIANTS
+// High-impact, choreographed entrance sequences
+// ============================================================
+
+// Hero headline — words stagger with blur + y offset
+export const heroWords: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export const heroWord: Variants = {
+  hidden: { opacity: 0, y: 30, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: easeOutExpo },
+  },
+};
+
+// Hero overline — draws in with slight scale
+export const heroOverline: Variants = {
+  hidden: { opacity: 0, y: 10, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: easeOutExpo },
+  },
+};
+
+// Hero subheadline — fades up after headline
+export const heroSubheadline: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: 0.35, ease: easeOutExpo },
+  },
+};
+
+// Hero buttons — pop in with slight spring
+export const heroButtons: Variants = {
+  hidden: { opacity: 0, y: 16, scale: 0.97 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, delay: 0.5, ease: easeOutExpo },
+  },
+};
+
+// Hero trust badges — fade in last
+export const heroTrust: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { duration: 0.5, delay: 0.65, ease: easeOutExpo },
+  },
+};
+
+// Hero image — clip reveal + subtle scale
+export const heroImage: Variants = {
+  hidden: { opacity: 0, clipPath: "inset(8% 8% 8% 8%)", scale: 1.05 },
+  show: {
+    opacity: 1,
+    clipPath: "inset(0% 0% 0% 0%)",
+    scale: 1,
+    transition: { duration: 1, delay: 0.2, ease: easeOutExpo },
+  },
+};
+
+// Hero annotation card — pops in with rotate
+export const heroAnnotation: Variants = {
+  hidden: { opacity: 0, rotate: 6, scale: 0.9, y: 10 },
+  show: {
+    opacity: 1,
+    rotate: 2,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: 0.8, ease: easeSpringBouncy },
+  },
+};
+
+// Hero floating element — subtle float after entrance
+export const heroFloat: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, delay: 0.6, ease: easeOutExpo },
+  },
+};
+
+// Section headline — dramatic blur-in
+export const sectionHeadline: Variants = {
+  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: easeOutExpo },
+  },
+};
+
+// Card entrance — staggered with lift
+export const cardEntrance: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: easeOutExpo },
+  },
+};
+
+// ============================================================
+// LEGACY VARIANTS (kept for backwards compatibility)
+// ============================================================
+
+// Hero headline (legacy single-block)
 export const heroHeadline: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: {
@@ -142,18 +270,8 @@ export const heroHeadline: Variants = {
   },
 };
 
-// Hero subheadline
-export const heroSubheadline: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: 0.15, ease: easeOutExpo },
-  },
-};
-
-// Button group
-export const heroButtons: Variants = {
+// Button group (legacy)
+export const heroButtonsLegacy: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,

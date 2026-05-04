@@ -103,6 +103,31 @@ body {
   box-shadow: var(--shadow-card-hover);
 }
 
+/* Dramatic shadows */
+.shadow-dramatic {
+  box-shadow: var(--shadow-dramatic);
+}
+
+.shadow-lifted {
+  box-shadow: var(--shadow-lifted);
+}
+
+.shadow-glow-yellow {
+  box-shadow: var(--shadow-glow-yellow);
+}
+
+.shadow-glow-pink {
+  box-shadow: var(--shadow-glow-pink);
+}
+
+.shadow-glow-blue {
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.shadow-glow-honey {
+  box-shadow: var(--shadow-glow-honey);
+}
+
 /* Subtle grain overlay */
 .grain-overlay::after {
   content: "";

@@ -22,6 +22,7 @@ import { HomepageAcademySection } from "@/components/academy/HomepageAcademySect
 import { SectionTransition } from "@/components/visual/SectionTransition";
 import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
+import { AnimatedGradientMesh } from "@/components/visual/AnimatedGradientMesh";
 
 // TODO: Connect newsletter form to Keap newsletter form after Keap inventory is complete.
 // TODO: Replace fallback Leadpages URLs with native checkout or Keap checkout URLs.
@@ -162,7 +163,7 @@ const mainOffers = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero Manifesto */}
+      {/* Hero Manifesto — orchestrated load */}
       <ArtDirectedHero
         overline="The Modern Montessori Art Atelier"
         headline={
@@ -183,7 +184,7 @@ export default function HomePage() {
       />
       <SectionTransition variant="gradient-warm" height="lg" />
 
-      {/* Academy Promo */}
+      {/* Academy Promo — with animated gradient mesh */}
       <HomepageAcademySection />
       <SectionTransition variant="swatches" height="md" />
 
@@ -199,7 +200,7 @@ export default function HomePage() {
       </LayeredSection>
       <SectionTransition variant="gradient-canvas" height="lg" />
 
-      {/* Featured Offers — Main Offer Grid */}
+      {/* Featured Offers — Main Offer Grid with offset heights */}
       <LayeredSection variant="canvas" withTexture withWash>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
           <ScrollReveal>
@@ -225,8 +226,9 @@ export default function HomePage() {
       </LayeredSection>
       <SectionTransition variant="soft" height="md" />
 
-      {/* Method */}
+      {/* Method — with gradient mesh atmosphere */}
       <LayeredSection variant="canvas" withTexture withWash>
+        <AnimatedGradientMesh variant="forest" intensity="subtle" className="opacity-40" />
         <MethodProcessSection
           title="The Nature of Art Method"
           subtitle="A proven approach to bringing visual arts into the prepared environment."
@@ -255,14 +257,15 @@ export default function HomePage() {
       </LayeredSection>
       <SectionTransition variant="gradient-ink" height="lg" />
 
-      {/* Certification Feature */}
+      {/* Certification Feature — dramatic dark section with gradient mesh */}
       <LayeredSection variant="ink" withShapes className="py-20 sm:py-28 text-paper">
-        <AnimatedColorBlobs intensity="subtle" className="opacity-30" />
+        <AnimatedGradientMesh variant="forest" intensity="subtle" className="opacity-30" />
+        <AnimatedColorBlobs intensity="subtle" className="opacity-20" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal variant="slideLeft">
               <div className="order-2 lg:order-1">
-                <div className="aspect-[4/3] relative rounded-card overflow-hidden shadow-card border border-paper/10 group">
+                <div className="aspect-[4/3] relative rounded-card overflow-hidden shadow-dramatic border border-paper/10 group">
                   <Image
                     src="/images/elementary-painting-classroom.jpg"
                     alt="Elementary children painting in a Montessori classroom"
@@ -297,7 +300,7 @@ export default function HomePage() {
                     { label: "Self-Paced", desc: "Learn on your schedule", icon: <Clock size={18} /> },
                   ].map((stat) => (
                     <StaggerItem key={stat.label}>
-                      <div className="bg-paper/5 border border-paper/10 rounded-card p-5 backdrop-blur-sm">
+                      <div className="bg-paper/5 border border-paper/10 rounded-card p-5 backdrop-blur-sm hover:bg-paper/10 transition-colors">
                         <div className="text-bee-yellow mb-2">{stat.icon}</div>
                         <p className="font-serif text-lg font-semibold text-paper">
                           {stat.label}
@@ -309,7 +312,7 @@ export default function HomePage() {
                 </StaggerContainer>
                 <Link
                   href="/certification"
-                  className="inline-flex items-center justify-center rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors"
+                  className="inline-flex items-center justify-center rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors shadow-lifted hover:shadow-dramatic"
                 >
                   Explore Certification
                 </Link>
@@ -320,7 +323,7 @@ export default function HomePage() {
       </LayeredSection>
       <SectionTransition variant="soft" height="md" />
 
-      {/* Books & Art Supplies */}
+      {/* Books & Art Supplies — offset stagger cards */}
       <LayeredSection variant="ivory" withWash withShapes className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
@@ -393,7 +396,7 @@ export default function HomePage() {
       </LayeredSection>
       <SectionTransition variant="gradient-canvas" height="lg" />
 
-      {/* Blog Preview */}
+      {/* Blog Preview — asymmetric grid */}
       <LayeredSection variant="canvas" withTexture withWash className="py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-4">
@@ -416,7 +419,8 @@ export default function HomePage() {
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-grid">
+          {/* Asymmetric grid: first card larger */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {[
               {
                 title: "Easy Drawing Ideas for Young Children",
@@ -424,6 +428,7 @@ export default function HomePage() {
                 excerpt:
                   "Simple, developmentally appropriate drawing activities that build confidence and fine motor skills in young children.",
                 image: "/images/early-childhood-art.jpg",
+                span: "md:col-span-7 md:row-span-2",
               },
               {
                 title: "Boost Strength with Clay Play",
@@ -431,6 +436,7 @@ export default function HomePage() {
                 excerpt:
                   "Discover how clay modeling strengthens hand muscles, improves coordination, and supports early creative expression.",
                 image: "/images/clay-play.jpg",
+                span: "md:col-span-5",
               },
               {
                 title: "Clay Modeling Play for Toddlers | Why and How It Supports Early Creativity",
@@ -438,30 +444,36 @@ export default function HomePage() {
                 excerpt:
                   "Why toddlers benefit from clay play and how to introduce it in ways that support sensory development and imagination.",
                 image: "/images/child-hands-clay.jpg",
+                span: "md:col-span-5",
               },
             ].map((post, i) => (
-              <ScrollReveal key={i} delay={i * 0.08} variant="fadeUp">
-                <InteractiveCard glowColor="honey" hoverLift={-4}>
+              <ScrollReveal
+                key={i}
+                delay={i * 0.1}
+                variant={i === 0 ? "clipReveal" : "fadeUp"}
+                className={post.span}
+              >
+                <InteractiveCard glowColor={i === 0 ? "yellow" : "honey"} hoverLift={-4}>
                   <article
-                    className={`card-editorial overflow-hidden ${
-                      i % 2 === 0 ? "img-mask-rounded" : "img-mask-rounded-alt"
+                    className={`card-editorial overflow-hidden h-full ${
+                      i === 0 ? "img-mask-rounded" : "img-mask-rounded-alt"
                     }`}
                   >
-                    <div className="relative aspect-video overflow-hidden">
+                    <div className={`relative overflow-hidden ${i === 0 ? "aspect-[16/10] md:aspect-auto md:h-72" : "aspect-video"}`}>
                       <Image
                         src={post.image}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-700 hover:scale-[1.03]"
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes={i === 0 ? "(max-width: 768px) 100vw, 60vw" : "(max-width: 768px) 100vw, 40vw"}
                       />
                     </div>
                     <div className="p-6">
                       <p className="section-label mb-2">{post.category}</p>
-                      <h3 className="font-serif text-lg font-semibold text-ink mb-2 leading-snug">
+                      <h3 className={`font-serif font-semibold text-ink mb-2 leading-snug ${i === 0 ? "text-xl md:text-2xl" : "text-lg"}`}>
                         {post.title}
                       </h3>
-                      <p className="text-sm text-charcoal/70 line-clamp-3">
+                      <p className={`text-charcoal/70 ${i === 0 ? "line-clamp-3" : "line-clamp-2 text-sm"}`}>
                         {post.excerpt}
                       </p>
                     </div>
@@ -481,7 +493,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <ScrollReveal variant="slideLeft" className="lg:col-span-5">
               <div className="relative paper-shape">
-                <div className="aspect-[4/3] relative rounded-card overflow-hidden shadow-card img-mask-rounded-alt">
+                <div className="aspect-[4/3] relative rounded-card overflow-hidden shadow-dramatic img-mask-rounded-alt">
                   <Image
                     src="/images/spramani-portrait.jpg"
                     alt="Spramani Elaun, founder of Nature of Art®, in her art apron"
@@ -537,7 +549,8 @@ export default function HomePage() {
 
       {/* Newsletter */}
       <LayeredSection variant="canvas" withTexture withWash className="py-20 sm:py-28">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+        <AnimatedGradientMesh variant="cool" intensity="subtle" className="opacity-30" />
+        <div className="relative mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal variant="blurIn">
             <NewsletterSignup variant="card" source="homepage_footer" />
           </ScrollReveal>
