@@ -530,6 +530,22 @@
     document.head.appendChild(style);
 
     render(html`<${App} />`, document.getElementById('root'));
+
+    // Report height to parent for seamless iframe embedding
+    function reportHeight() {
+      const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+      if (window.parent !== window) {
+        window.parent.postMessage({ type: 'atelier-resize', height }, '*');
+      }
+    }
+    // Report after render and on resize
+    setTimeout(reportHeight, 100);
+    setTimeout(reportHeight, 500);
+    setTimeout(reportHeight, 1000);
+    window.addEventListener('resize', reportHeight);
+    // Also observe DOM changes that might affect height
+    const observer = new MutationObserver(reportHeight);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
   </script>
 </body>
 </html>
