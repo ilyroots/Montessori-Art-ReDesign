@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
 import type { StoreCategory } from "@/config/storeCategories";
 
 // Map category IDs to Lucide icons
@@ -160,6 +161,7 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Store Notice Banner ── */}
+      <BrushstrokeDivider variant="wave" />
       <section className="border-y border-linen bg-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-charcoal/70">
@@ -182,7 +184,8 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Category Grid ── */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <section className="relative py-20 sm:py-28 bg-canvas">
+        <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -228,7 +231,9 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Featured Supply Areas ── */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <BrushstrokeDivider variant="curve" flip />
+      <section className="relative py-20 sm:py-28 bg-ivory">
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -281,7 +286,9 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Why These Supplies ── */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <BrushstrokeDivider variant="wave" />
+      <section className="relative py-20 sm:py-28 bg-canvas">
+        <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-6">
@@ -312,7 +319,9 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Store Help / Support ── */}
-      <section className="py-16 sm:py-20 bg-ivory border-t border-linen">
+      <BrushstrokeDivider variant="slant" flip />
+      <section className="relative py-16 sm:py-20 bg-ivory border-t border-linen">
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-10">
@@ -347,7 +356,8 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
       </section>
 
       {/* ── Related Paths ── */}
-      <section className="py-16 sm:py-20 bg-canvas border-t border-linen">
+      <section className="relative py-16 sm:py-20 bg-canvas border-t border-linen">
+        <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-10">

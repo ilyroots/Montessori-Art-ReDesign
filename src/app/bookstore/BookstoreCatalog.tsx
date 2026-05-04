@@ -304,8 +304,10 @@ export function BookstoreCatalog() {
   }, [activeFilter, activeSort]);
 
   return (
-    <section className="py-16 sm:py-20 bg-canvas">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 sm:py-20 bg-canvas">
+      <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 grain-overlay pointer-events-none" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Filter tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-6">
           {filterTabs.map((tab) => (
@@ -314,8 +316,8 @@ export function BookstoreCatalog() {
               onClick={() => setActiveFilter(tab.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 activeFilter === tab.id
-                  ? "bg-ink text-paper"
-                  : "bg-transparent text-charcoal border border-linen hover:border-honey/50"
+                  ? "bg-ink text-paper shadow-soft"
+                  : "bg-paper/80 text-charcoal border border-linen hover:border-honey/50 hover:bg-paper"
               }`}
             >
               {tab.label}
@@ -352,9 +354,9 @@ export function BookstoreCatalog() {
 
         {/* Product grid */}
         {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid">
             {filteredItems.map((item, i) => (
-              <ScrollReveal key={item.id} delay={i * 0.08}>
+              <ScrollReveal key={item.id} delay={i * 0.06} variant="scaleUp">
                 {renderCatalogItem(item)}
               </ScrollReveal>
             ))}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Check, X, GraduationCap, Mail } from "lucide-react";
 import { ArtDirectedHero } from "@/components/sections/ArtDirectedHero";
+import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
 import { FAQ, FAQItem } from "@/components/sections/FAQ";
 import { Testimonials, TestimonialItem } from "@/components/sections/Testimonials";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -99,8 +100,11 @@ export function CurriculumSalesPageTemplate({
         ].filter(Boolean) as string[]}
         annotation="Every child is an artist."
         annotationAuthor="Pablo Picasso"
+        image={product.image}
+        imageAlt={product.title}
       />
 
+      <BrushstrokeDivider variant="wave" />
       {/* Trust Bar */}
       <section className="border-y border-linen bg-paper">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
@@ -122,7 +126,8 @@ export function CurriculumSalesPageTemplate({
       </section>
 
       {/* Problem */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="relative py-20 sm:py-28 bg-gradient-warm">
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-8">
@@ -141,8 +146,10 @@ export function CurriculumSalesPageTemplate({
         </div>
       </section>
 
+      <BrushstrokeDivider variant="curve" flip />
       {/* Method */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <section className="relative py-20 sm:py-28 bg-canvas">
+        <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="mb-14">
@@ -180,7 +187,8 @@ export function CurriculumSalesPageTemplate({
       </section>
 
       {/* What's Included */}
-      <section id="whats-included" className="py-20 sm:py-28 bg-ivory">
+      <section id="whats-included" className="relative py-20 sm:py-28 bg-ivory">
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -254,8 +262,10 @@ export function CurriculumSalesPageTemplate({
         </section>
       )}
 
+      <BrushstrokeDivider variant="slant" />
       {/* Who It's For */}
-      <section className="py-20 sm:py-28 bg-ivory">
+      <section className="relative py-20 sm:py-28 bg-gradient-warm">
+        <div className="absolute inset-0 grain-overlay pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             <ScrollReveal>
@@ -294,7 +304,8 @@ export function CurriculumSalesPageTemplate({
       </section>
 
       {/* About Instructor */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <section className="relative py-20 sm:py-28 bg-canvas">
+        <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>

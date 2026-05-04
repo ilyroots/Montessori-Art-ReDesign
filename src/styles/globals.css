@@ -128,3 +128,176 @@ body {
   padding-left: max(1rem, env(safe-area-inset-left));
   padding-right: max(1rem, env(safe-area-inset-right));
 }
+
+/* ============================================================
+   Visual Design System — Texture, Depth, Editorial Effects
+   ============================================================ */
+
+/* Soft gradient backgrounds */
+.bg-gradient-warm {
+  background: linear-gradient(180deg, var(--color-ivory) 0%, var(--color-canvas-warm) 100%);
+}
+
+.bg-gradient-canvas {
+  background: linear-gradient(135deg, var(--color-canvas) 0%, var(--color-ivory) 50%, var(--color-canvas-warm) 100%);
+}
+
+.bg-gradient-ink {
+  background: linear-gradient(180deg, #2A2824 0%, var(--color-ink) 100%);
+}
+
+/* Organic paper shape overlay */
+.paper-shape::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 20% 40%, rgba(244, 238, 220, 0.6) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 80% at 80% 60%, rgba(250, 247, 239, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Brushstroke divider (CSS-based organic wave) */
+.brushstroke-divider {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+}
+.brushstroke-divider::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  right: -5%;
+  height: 120%;
+  background: var(--color-canvas);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.brushstroke-divider-reverse::before {
+  top: 0;
+  bottom: auto;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Watercolor wash background */
+.watercolor-wash {
+  position: relative;
+}
+.watercolor-wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 15% 30%, rgba(216, 154, 39, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 85% 70%, rgba(68, 201, 212, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 35% at 50% 50%, rgba(233, 30, 143, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Image mask treatments */
+.img-mask-brush {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M10,50 Q50,5 100,30 T190,50 Q200,100 180,150 T100,190 Q50,200 20,150 T10,50Z' fill='black'/%3E%3C/svg%3E");
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.img-mask-rounded {
+  border-radius: 24px 24px 24px 4px;
+}
+
+.img-mask-rounded-alt {
+  border-radius: 4px 24px 24px 24px;
+}
+
+/* Floating accent dots */
+.floating-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Editorial card with layered shadow */
+.card-editorial {
+  background: var(--color-paper);
+  border: 1px solid var(--color-linen);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.card-editorial:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Section label pill */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-honey);
+}
+.section-label::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--color-honey);
+  opacity: 0.5;
+}
+
+/* Textured border */
+.border-textured {
+  border: 1px solid var(--color-linen);
+  position: relative;
+}
+.border-textured::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(216, 154, 39, 0.15) 0%, transparent 50%, rgba(68, 201, 212, 0.1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Staggered grid offset */
+@media (min-width: 1024px) {
+  .stagger-grid > *:nth-child(even) {
+    transform: translateY(24px);
+  }
+}
+
+/* Paint drip accent */
+.paint-drip {
+  position: relative;
+}
+.paint-drip::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 20%;
+  width: 3px;
+  height: 24px;
+  background: linear-gradient(180deg, var(--color-honey) 0%, transparent 100%);
+  border-radius: 0 0 50% 50%;
+  opacity: 0.4;
+}
+
+/* Mobile: disable complex effects */
+@media (max-width: 640px) {
+  .brushstroke-divider {
+    height: 32px;
+  }
+  .stagger-grid > *:nth-child(even) {
+    transform: none;
+  }
+}

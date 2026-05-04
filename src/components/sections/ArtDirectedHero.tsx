@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { FloatingLayer } from "@/components/motion/FloatingLayer";
+import { FloatingAccentShapes } from "@/components/motion/FloatingAccentShapes";
 
 interface ArtDirectedHeroProps {
   overline?: string;
@@ -16,6 +18,8 @@ interface ArtDirectedHeroProps {
   annotation?: string;
   annotationAuthor?: string;
   dark?: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
 export function ArtDirectedHero({
@@ -28,6 +32,8 @@ export function ArtDirectedHero({
   annotation,
   annotationAuthor,
   dark = false,
+  image,
+  imageAlt,
 }: ArtDirectedHeroProps) {
   const bgClass = dark ? "bg-ink" : "bg-ivory";
   const textClass = dark ? "text-paper" : "text-ink";
@@ -40,10 +46,26 @@ export function ArtDirectedHero({
   return (
     <section className={`relative overflow-hidden ${bgClass}`}>
       {/* Subtle honeycomb texture layer */}
-      <div className="absolute inset-0 honeycomb-accent opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 honeycomb-accent opacity-40 pointer-events-none" />
 
       {/* Soft grain overlay */}
       <div className="absolute inset-0 grain-overlay pointer-events-none" />
+
+      {/* Watercolor wash */}
+      {!dark && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 50% 40% at 15% 30%, rgba(216, 154, 39, 0.05) 0%, transparent 70%), radial-gradient(ellipse 40% 50% at 85% 70%, rgba(68, 201, 212, 0.04) 0%, transparent 70%)",
+            }}
+          />
+        </div>
+      )}
+
+      {/* Floating accent shapes */}
+      <FloatingAccentShapes />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
@@ -116,18 +138,30 @@ export function ArtDirectedHero({
             <ScrollReveal delay={0.1} y={40}>
               <div className="relative">
                 {/* Main image frame */}
-                <div className="relative aspect-[4/5] rounded-card bg-canvas border border-linen overflow-hidden shadow-card">
-                  <div className="absolute inset-0 flex items-center justify-center text-charcoal/25">
-                    <div className="text-center px-6">
-                      <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-bee-yellow-soft flex items-center justify-center">
-                        <svg className="w-8 h-8 text-honey/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
+                <div className="relative aspect-[4/5] rounded-card bg-canvas border border-linen overflow-hidden shadow-card group">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={imageAlt || "Hero image"}
+                      fill
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      priority
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-charcoal/25">
+                      <div className="text-center px-6">
+                        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-bee-yellow-soft flex items-center justify-center">
+                          <svg className="w-8 h-8 text-honey/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <p className="text-sm font-medium">Hero Image</p>
+                        <p className="text-xs mt-1 opacity-70">Children&apos;s hands painting</p>
                       </div>
-                      <p className="text-sm font-medium">Hero Image</p>
-                      <p className="text-xs mt-1 opacity-70">Children&apos;s hands painting</p>
                     </div>
-                  </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Secondary floating frame */}

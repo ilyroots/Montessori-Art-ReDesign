@@ -41,7 +41,7 @@ export function ProductCard({
 
   return (
     <div
-      className={`relative flex flex-col rounded-card border bg-paper transition-shadow duration-200 hover:shadow-card-hover ${
+      className={`relative flex flex-col rounded-card border bg-paper transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 ${
         isFeatured ? "border-honey/30 shadow-card" : "border-linen"
       }`}
     >
@@ -54,14 +54,15 @@ export function ProductCard({
       )}
 
       {image && (
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-canvas">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-canvas group">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       )}
       <div className="p-6 sm:p-8 flex flex-col flex-1">

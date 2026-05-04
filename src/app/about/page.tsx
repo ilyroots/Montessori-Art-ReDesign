@@ -3,6 +3,9 @@ import Link from "next/link";
 import { createMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MagneticPills } from "@/components/motion/MagneticPills";
+import { LayeredSection } from "@/components/sections/LayeredSection";
+import { BrushstrokeDivider } from "@/components/sections/BrushstrokeDivider";
+import { FloatingAccentShapes } from "@/components/motion/FloatingAccentShapes";
 import {
   BookOpen,
   GraduationCap,
@@ -76,49 +79,75 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-20 sm:py-28 bg-ivory">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal>
-            <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-4">
+      <LayeredSection
+        variant="gradient-canvas"
+        withWash
+        withShapes
+        className="py-24 sm:py-32 lg:py-40"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative">
+          <ScrollReveal variant="fadeUp">
+            <span className="section-label mb-6 justify-center">
               Welcome to Nature of Art®
-            </p>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink tracking-[-0.02em] mb-6">
+            </span>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-semibold text-ink tracking-[-0.02em] mb-6">
               About Nature of Art®
             </h1>
-            <p className="text-lg text-charcoal/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-charcoal/80 max-w-2xl mx-auto leading-relaxed">
               Montessori provides the learning environment.
               <br />
               <span className="text-honey font-semibold">Nature of Art® provides the art pedagogy.</span>
             </p>
           </ScrollReveal>
         </div>
-      </section>
+      </LayeredSection>
+
+      <BrushstrokeDivider variant="wave" />
 
       {/* About the Author */}
-      <section className="py-20 sm:py-28 bg-paper">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal>
-              <div className="aspect-[4/3] max-w-lg mx-auto relative rounded-card overflow-hidden shadow-card">
-                <Image
-                  src="/images/spramani-elaun.png"
-                  alt="Spramani Elaun, founder of Nature of Art®, surrounded by Montessori art materials and her published books"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+      <LayeredSection
+        variant="paper"
+        withTexture
+        withWash
+        className="py-20 sm:py-28"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+          <FloatingAccentShapes />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <ScrollReveal variant="slideLeft" className="lg:col-span-5">
+              <div className="relative">
+                <div className="aspect-[4/5] relative img-mask-rounded shadow-editorial overflow-hidden">
+                  <Image
+                    src="/images/spramani-elaun.png"
+                    alt="Spramani Elaun, founder of Nature of Art®, surrounded by Montessori art materials and her published books"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/10 to-transparent pointer-events-none" />
+                </div>
+                {/* Decorative secondary image */}
+                <div className="absolute -bottom-6 -right-6 w-32 h-40 sm:w-40 sm:h-48 img-mask-rounded-alt shadow-editorial border-4 border-paper overflow-hidden hidden lg:block">
+                  <Image
+                    src="/images/spramani-with-book.jpg"
+                    alt="Spramani Elaun with her art teaching book"
+                    fill
+                    className="object-cover"
+                    sizes="160px"
+                  />
+                </div>
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.1}>
-              <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
+            <ScrollReveal variant="slideRight" delay={0.15} className="lg:col-span-7">
+              <div className="lg:pl-4">
+                <span className="section-label mb-4">
                   About the Founder
-                </p>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-5">
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-6">
                   Meet Spramani Elaun
                 </h2>
-                <div className="space-y-4 text-charcoal/80 leading-relaxed">
+                <div className="space-y-4 text-charcoal/80 leading-relaxed text-base sm:text-lg">
                   <p>
                     Spramani Elaun is an author and art curriculum developer from San Diego.
                     She is a homeschooling mom, an art teacher, and the founder of Nature of Art®
@@ -170,23 +199,29 @@ export default function AboutPage() {
             </ScrollReveal>
           </div>
         </div>
-      </section>
+      </LayeredSection>
+
+      <BrushstrokeDivider variant="curve" flip />
 
       {/* About the Company */}
-      <section className="py-20 sm:py-28 bg-canvas">
+      <LayeredSection
+        variant="ivory"
+        withWash
+        className="py-20 sm:py-28"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+          <ScrollReveal variant="fadeUp">
             <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
+              <span className="section-label justify-center mb-4">
                 What We Do
-              </p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em]">
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
                 About Nature of Art®
               </h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid">
             {[
               {
                 icon: <BookOpen size={22} />,
@@ -225,33 +260,40 @@ export default function AboutPage() {
                 href: "/newsletter",
               },
             ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 0.06}>
+              <ScrollReveal key={item.title} delay={i * 0.06} variant="scaleUp">
                 <Link
                   href={item.href}
-                  className="group block bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-all duration-300 h-full"
+                  className="group block card-editorial p-6 h-full"
                 >
-                  <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center mb-4 text-honey">
+                  <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center mb-4 text-honey group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                   <h3 className="font-serif text-xl font-semibold text-ink mb-2 group-hover:text-honey transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-charcoal/70">{item.desc}</p>
+                  <p className="text-sm text-charcoal/70 leading-relaxed">{item.desc}</p>
                 </Link>
               </ScrollReveal>
             ))}
           </div>
         </div>
-      </section>
+      </LayeredSection>
+
+      <BrushstrokeDivider variant="wave" />
 
       {/* Services */}
-      <section className="py-16 sm:py-20 bg-ivory overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
+      <LayeredSection
+        variant="canvas"
+        withTexture
+        withShapes
+        className="py-16 sm:py-20 overflow-hidden"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+          <ScrollReveal variant="fadeUp">
             <div className="text-center mb-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-honey font-semibold mb-3">
+              <span className="section-label justify-center mb-4">
                 Services
-              </p>
+              </span>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] leading-tight">
                 How We Support Educators
               </h2>
@@ -262,25 +304,31 @@ export default function AboutPage() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal>
+          <ScrollReveal variant="fadeIn">
             <MagneticPills items={serviceCategories} />
           </ScrollReveal>
         </div>
-      </section>
+      </LayeredSection>
+
+      <BrushstrokeDivider variant="curve" flip />
 
       {/* Professional Development */}
-      <section className="py-20 sm:py-28 bg-paper">
+      <LayeredSection
+        variant="gradient-warm"
+        withWash
+        className="py-20 sm:py-28"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <ScrollReveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <ScrollReveal variant="slideLeft" className="lg:col-span-7">
               <div>
-                <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
+                <span className="section-label mb-4">
                   Professional Development
-                </p>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-5">
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-6">
                   Grow Your Art Teaching Practice
                 </h2>
-                <div className="space-y-4 text-charcoal/80 leading-relaxed">
+                <div className="space-y-4 text-charcoal/80 leading-relaxed text-base sm:text-lg">
                   <p>
                     Nature of Art® provides video training and professional development for
                     Montessori guides, homeschool parents, and art educators.
@@ -308,54 +356,74 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal delay={0.1}>
-              <div className="bg-canvas rounded-card p-8 border border-linen">
-                <h3 className="font-serif text-xl font-semibold text-ink mb-4">
-                  The Art Teaching Blueprint™
-                </h3>
-                <p className="text-charcoal/80 leading-relaxed mb-4">
-                  Our comprehensive certification program for educators who want to teach
-                  visual arts with confidence, sequence, and developmental understanding.
-                </p>
-                <ul className="space-y-2 text-sm text-charcoal/70">
-                  <li className="flex items-start gap-2">
-                    <span className="text-honey mt-0.5">✓</span>
-                    7-week online professional training
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-honey mt-0.5">✓</span>
-                    60+ professional training videos
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-honey mt-0.5">✓</span>
-                    Digital PDF workbook
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-honey mt-0.5">✓</span>
-                    50 CPD hours
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-honey mt-0.5">✓</span>
-                    Printed certificate
-                  </li>
-                </ul>
+            <ScrollReveal variant="slideRight" delay={0.15} className="lg:col-span-5">
+              <div className="relative">
+                <div className="aspect-[4/3] relative img-mask-rounded-alt shadow-editorial overflow-hidden">
+                  <Image
+                    src="/images/children-painting-classroom.jpg"
+                    alt="Children engaged in painting in a Montessori classroom"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-honey/5 to-transparent pointer-events-none" />
+                </div>
+                {/* Certification card overlay */}
+                <div className="absolute -bottom-6 -left-4 sm:-left-6 max-w-[260px] card-editorial p-5 hidden sm:block">
+                  <h3 className="font-serif text-lg font-semibold text-ink mb-2">
+                    The Art Teaching Blueprint™
+                  </h3>
+                  <p className="text-sm text-charcoal/70 leading-relaxed mb-3">
+                    Our comprehensive certification program for educators who want to teach
+                    visual arts with confidence, sequence, and developmental understanding.
+                  </p>
+                  <ul className="space-y-1.5 text-sm text-charcoal/70">
+                    <li className="flex items-start gap-2">
+                      <span className="text-honey mt-0.5">✓</span>
+                      7-week online professional training
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-honey mt-0.5">✓</span>
+                      60+ professional training videos
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-honey mt-0.5">✓</span>
+                      Digital PDF workbook
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-honey mt-0.5">✓</span>
+                      50 CPD hours
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-honey mt-0.5">✓</span>
+                      Printed certificate
+                    </li>
+                  </ul>
+                </div>
               </div>
             </ScrollReveal>
           </div>
         </div>
-      </section>
+      </LayeredSection>
+
+      <BrushstrokeDivider variant="slant" />
 
       {/* Connect */}
-      <section className="py-20 sm:py-28 bg-ink text-paper">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal>
-            <p className="text-xs uppercase tracking-[0.15em] text-bee-yellow font-semibold mb-3">
+      <LayeredSection
+        variant="ink"
+        withShapes
+        className="py-20 sm:py-28 bg-gradient-ink"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative">
+          <FloatingAccentShapes className="opacity-40" />
+          <ScrollReveal variant="fadeUp">
+            <span className="section-label justify-center mb-4 text-bee-yellow">
               Get in Touch
-            </p>
-            <h2 className="font-serif text-3xl sm:text-4xl font-semibold mb-5">
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-5 text-paper">
               Connect With Nature of Art®
             </h2>
-            <p className="text-canvas/80 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-canvas/80 max-w-2xl mx-auto leading-relaxed mb-8 text-base sm:text-lg">
               Have questions about curriculum, training, or certification? We would love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -378,7 +446,7 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
         </div>
-      </section>
+      </LayeredSection>
     </>
   );
 }
