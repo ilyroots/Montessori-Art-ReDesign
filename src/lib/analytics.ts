@@ -25,6 +25,7 @@ import { ANALYTICS_CONFIG } from "@/config/integrations";
 export type AnalyticsEvent =
   | "newsletter_submit"
   | "lead_magnet_submit"
+  | "lead_magnet_fallback_click"
   | "buy_button_click"
   | "checkout_started"
   | "certification_interest"
