@@ -116,30 +116,32 @@ const bookMap = new Map(
   bookstoreExtract.products.map((b) => [b.id, b])
 );
 
-const allItems: CatalogItem[] = catalogOrder
-  .map((entry) => {
-    if (entry.type === "product") {
-      const product = productMap.get(entry.id);
-      if (!product) return null;
-      return {
+const allItems: CatalogItem[] = catalogOrder.flatMap((entry) => {
+  if (entry.type === "product") {
+    const product = productMap.get(entry.id);
+    if (!product) return [];
+    return [
+      {
         id: entry.id,
         type: "product" as const,
         product,
         sortPrice: parsePrice(product.price),
-      };
-    } else {
-      const book = bookMap.get(entry.id);
-      if (!book) return null;
-      return {
+      },
+    ];
+  } else {
+    const book = bookMap.get(entry.id);
+    if (!book) return [];
+    return [
+      {
         id: entry.id,
         type: "book" as const,
         bookName: book.name,
         bookCategory: book.category,
         sortPrice: book.price ? parsePrice(book.price) : Infinity,
-      };
-    }
-  })
-  .filter((item): item is CatalogItem => item !== null);
+      },
+    ];
+  }
+});
 
 // ------------------------------------------------------------------
 // Book card for pending-price items
