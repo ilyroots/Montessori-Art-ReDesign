@@ -252,6 +252,6 @@ export const priceEmphasis: Variants = {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.4, ease: easeSpring },
+    transition: easeSpring,
   },
 };
