@@ -13,6 +13,7 @@ interface FunnelCTASectionProps {
   secondaryCta?: { label: string; href: string };
   trustText?: string;
   variant?: "light" | "dark";
+  className?: string;
 }
 
 export function FunnelCTASection({
@@ -24,11 +25,12 @@ export function FunnelCTASection({
   secondaryCta,
   trustText,
   variant = "light",
+  className,
 }: FunnelCTASectionProps) {
   const isDark = variant === "dark";
 
   return (
-    <section className={`py-20 sm:py-28 ${isDark ? "bg-ink" : "bg-ivory"}`}>
+    <section className={`py-20 sm:py-28 ${className ?? (isDark ? "bg-ink" : "bg-ivory")}`}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal>
           {overline && (

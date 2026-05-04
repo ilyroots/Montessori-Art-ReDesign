@@ -8,6 +8,7 @@ interface FinalCTAProps {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   variant?: "default" | "dark";
+  className?: string;
 }
 
 export function FinalCTA({
@@ -16,11 +17,12 @@ export function FinalCTA({
   primaryCta,
   secondaryCta,
   variant = "default",
+  className,
 }: FinalCTAProps) {
   const isDark = variant === "dark";
 
   return (
-    <section className={isDark ? "bg-ink py-16 sm:py-24" : "bg-canvas py-16 sm:py-24"}>
+    <section className={`py-16 sm:py-24 ${className ?? (isDark ? "bg-ink" : "bg-canvas")}`}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <h2
           className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold mb-6 ${

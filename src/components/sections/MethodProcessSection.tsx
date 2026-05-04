@@ -12,15 +12,17 @@ interface MethodProcessSectionProps {
   steps: ProcessStep[];
   title?: string;
   subtitle?: string;
+  className?: string;
 }
 
 export function MethodProcessSection({
   steps,
   title = "The Nature of Art Method",
   subtitle = "A proven approach to bringing visual arts into the prepared environment.",
+  className,
 }: MethodProcessSectionProps) {
   return (
-    <section className="py-20 sm:py-28 bg-canvas">
+    <section className={`py-20 sm:py-28 ${className ?? "bg-canvas"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="mb-16 sm:mb-20">
