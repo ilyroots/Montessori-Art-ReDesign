@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { products } from "@/config/products";
+import { useState, useMemo } from "react";
+import { products, type Product } from "@/config/products";
 import { bookstoreExtract } from "@/config/publicContentExtract";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { ExternalLink, BookOpen } from "lucide-react";
+import { ExternalLink, BookOpen, ArrowUpDown } from "lucide-react";
 
 // ------------------------------------------------------------------
 // Filter configuration
@@ -22,6 +22,8 @@ type FilterCategory =
   | "drawing"
   | "clay";
 
+type SortOption = "default" | "price-low" | "price-high" | "name-az";
+
 const filterTabs: { id: FilterCategory; label: string }[] = [
   { id: "all", label: "All" },
   { id: "books", label: "Books" },
@@ -34,15 +36,12 @@ const filterTabs: { id: FilterCategory; label: string }[] = [
   { id: "clay", label: "Clay" },
 ];
 
-// ------------------------------------------------------------------
-// Data sources
-// ------------------------------------------------------------------
-
-const curriculumProducts = products.filter((p) => p.category === "curriculum");
-
-const bookProducts = bookstoreExtract.products.filter(
-  (p) => p.category === "book" || p.category === "bundle"
-);
+const sortOptions: { id: SortOption; label: string }[] = [
+  { id: "default", label: "Featured" },
+  { id: "price-low", label: "Price: Low to High" },
+  { id: "price-high", label: "Price: High to Low" },
+  { id: "name-az", label: "Name: A–Z" },
+];
 
 // ------------------------------------------------------------------
 // Tag mappings for filtering
@@ -75,6 +74,74 @@ function matchesFilter(id: string, filter: FilterCategory): boolean {
 }
 
 // ------------------------------------------------------------------
+// Unified catalog data — preserves original website order
+// ------------------------------------------------------------------
+
+interface CatalogItem {
+  id: string;
+  type: "product" | "book";
+  product?: Product;
+  bookName?: string;
+  bookCategory?: string;
+  sortPrice: number;
+}
+
+function parsePrice(priceStr: string): number {
+  const match = priceStr.replace(/,/g, "").match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : Infinity;
+}
+
+const productMap = new Map(products.map((p) => [p.id, p]));
+
+// Original website order from Leadpages "all-my-books"
+const catalogOrder: { id: string; type: "product" | "book" }[] = [
+  { id: "way-children-make-art", type: "book" },
+  { id: "early-childhood-art", type: "book" },
+  { id: "defining-visual-arts", type: "book" },
+  { id: "for-early-childhood", type: "book" },
+  { id: "elementary-art-guide", type: "book" },
+  { id: "kids-color-theory-book", type: "book" },
+  { id: "nurturing-children-visual-arts", type: "book" },
+  { id: "painting-curriculum", type: "product" },
+  { id: "clay-play", type: "book" },
+  { id: "art-teaching-curriculum", type: "book" },
+  { id: "drawing-curriculum", type: "product" },
+  { id: "kids-painting-plus-elementary", type: "book" },
+  { id: "color-theory-curriculum", type: "product" },
+  { id: "clay-modeling-curriculum", type: "product" },
+  { id: "painting-work", type: "product" },
+];
+
+const bookMap = new Map(
+  bookstoreExtract.products.map((b) => [b.id, b])
+);
+
+const allItems: CatalogItem[] = catalogOrder
+  .map((entry) => {
+    if (entry.type === "product") {
+      const product = productMap.get(entry.id);
+      if (!product) return null;
+      return {
+        id: entry.id,
+        type: "product" as const,
+        product,
+        sortPrice: parsePrice(product.price),
+      };
+    } else {
+      const book = bookMap.get(entry.id);
+      if (!book) return null;
+      return {
+        id: entry.id,
+        type: "book" as const,
+        bookName: book.name,
+        bookCategory: book.category,
+        sortPrice: book.price ? parsePrice(book.price) : Infinity,
+      };
+    }
+  })
+  .filter((item): item is CatalogItem => item !== null);
+
+// ------------------------------------------------------------------
 // Book card for pending-price items
 // ------------------------------------------------------------------
 
@@ -102,7 +169,6 @@ function BookCard({
 }) {
   const categoryLabel =
     category === "bundle" ? "Bundle" : category === "book" ? "Book" : category;
-
   const image = bookImages[id];
 
   return (
@@ -159,22 +225,42 @@ function BookCard({
 
 export function BookstoreCatalog() {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
+  const [activeSort, setActiveSort] = useState<SortOption>("default");
 
-  const filteredCurriculum = curriculumProducts.filter((p) =>
-    matchesFilter(p.id, activeFilter)
-  );
+  const filteredItems = useMemo(() => {
+    let items = allItems.filter((item) =>
+      matchesFilter(item.id, activeFilter)
+    );
 
-  const filteredBooks = bookProducts.filter((p) =>
-    matchesFilter(p.id, activeFilter)
-  );
+    switch (activeSort) {
+      case "price-low":
+        items = [...items].sort((a, b) => a.sortPrice - b.sortPrice);
+        break;
+      case "price-high":
+        items = [...items].sort((a, b) => b.sortPrice - a.sortPrice);
+        break;
+      case "name-az":
+        items = [...items].sort((a, b) => {
+          const nameA =
+            a.type === "product" ? a.product!.title : a.bookName!;
+          const nameB =
+            b.type === "product" ? b.product!.title : b.bookName!;
+          return nameA.localeCompare(nameB);
+        });
+        break;
+      default:
+        // Preserve original website order
+        break;
+    }
 
-  const totalCount = filteredCurriculum.length + filteredBooks.length;
+    return items;
+  }, [activeFilter, activeSort]);
 
   return (
     <section className="py-16 sm:py-20 bg-canvas">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Filter tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
           {filterTabs.map((tab) => (
             <button
               key={tab.id}
@@ -190,55 +276,78 @@ export function BookstoreCatalog() {
           ))}
         </div>
 
-        {/* Results count */}
-        <p className="text-center text-xs uppercase tracking-wider text-charcoal/50 mb-10">
-          {totalCount} {totalCount === 1 ? "item" : "items"}
-        </p>
+        {/* Sort + Results count row */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
+          <p className="text-xs uppercase tracking-wider text-charcoal/50">
+            {filteredItems.length} {filteredItems.length === 1 ? "item" : "items"}
+          </p>
+
+          <div className="flex items-center gap-2">
+            <ArrowUpDown size={14} className="text-charcoal/40" />
+            <select
+              value={activeSort}
+              onChange={(e) => setActiveSort(e.target.value as SortOption)}
+              className="bg-transparent text-sm text-charcoal border border-linen rounded-button px-3 py-2 pr-8 hover:border-honey/50 transition-colors cursor-pointer appearance-none"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+              }}
+            >
+              {sortOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         {/* Product grid */}
-        {totalCount > 0 ? (
+        {filteredItems.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Curriculum products (verified) */}
-            {filteredCurriculum.map((product, i) => (
-              <ScrollReveal key={product.id} delay={i * 0.08}>
-                <ProductCard
-                  id={product.id}
-                  title={product.title}
-                  description={product.description}
-                  price={product.price}
-                  originalPrice={product.originalPrice}
-                  href={product.href}
-                  badge={product.badge}
-                  features={product.features}
-                  ageRange={product.ageRange}
-                  format={product.format}
-                  variant={product.badge === "Most Popular" ? "featured" : "default"}
-                  image={product.image}
-                />
-              </ScrollReveal>
-            ))}
-
-            {/* Books (pending verification) */}
-            {filteredBooks.map((book, i) => (
-              <ScrollReveal
-                key={book.id}
-                delay={(filteredCurriculum.length + i) * 0.08}
-              >
-                <BookCard name={book.name} category={book.category} id={book.id} />
+            {filteredItems.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i * 0.08}>
+                {item.type === "product" && item.product ? (
+                  <ProductCard
+                    id={item.product.id}
+                    title={item.product.title}
+                    description={item.product.description}
+                    price={item.product.price}
+                    originalPrice={item.product.originalPrice}
+                    href={item.product.href}
+                    badge={item.product.badge}
+                    features={item.product.features}
+                    ageRange={item.product.ageRange}
+                    format={item.product.format}
+                    variant={
+                      item.product.badge === "Most Popular"
+                        ? "featured"
+                        : "default"
+                    }
+                    image={item.product.image}
+                  />
+                ) : (
+                  <BookCard
+                    name={item.bookName!}
+                    category={item.bookCategory!}
+                    id={item.id}
+                  />
+                )}
               </ScrollReveal>
             ))}
           </div>
         ) : (
           <div className="text-center py-20">
-            <BookOpen
-              size={40}
-              className="mx-auto mb-4 text-charcoal/25"
-            />
+            <BookOpen size={40} className="mx-auto mb-4 text-charcoal/25" />
             <p className="text-charcoal/60 font-medium">
               No items match this filter.
             </p>
             <button
-              onClick={() => setActiveFilter("all")}
+              onClick={() => {
+                setActiveFilter("all");
+                setActiveSort("default");
+              }}
               className="mt-3 text-sm text-honey hover:text-honey-dark font-medium transition-colors"
             >
               View all items
