@@ -41,12 +41,14 @@ interface CertificationPageTemplateProps {
   whoItsNotFor: string[];
   /** Licensing text */
   licensingText: string;
-  /** Testimonials */
-  testimonials: TestimonialItem[];
+  /** Testimonials — omit or pass empty array to hide section */
+  testimonials?: TestimonialItem[];
   /** FAQ items */
   faqItems: FAQItem[];
   /** Site map entry */
   siteMapEntry?: ExistingPageEntry;
+  /** Trust badges below hero — defaults to generic set */
+  trustBadges?: string[];
 }
 
 export function CertificationPageTemplate({
@@ -64,6 +66,7 @@ export function CertificationPageTemplate({
   testimonials,
   faqItems,
   siteMapEntry,
+  trustBadges = ["7-week program", "6 core modules", "Certificate on completion"],
 }: CertificationPageTemplateProps) {
   return (
     <>
@@ -83,7 +86,7 @@ export function CertificationPageTemplate({
         subheadline={heroSubheadline}
         primaryCta={{ label: primaryCtaLabel, href: siteMapEntry?.fallbackExternalUrl || primaryCtaHref }}
         secondaryCta={{ label: "Explore the Program", href: "#program-overview" }}
-        trustBadges={["8–12 weeks", "6 core modules", "Certificate on completion"]}
+        trustBadges={trustBadges}
         dark
       />
       </div>
@@ -263,9 +266,13 @@ export function CertificationPageTemplate({
       </section>
       <SectionTransition variant="swatches" height="lg" />
 
-      {/* Testimonials */}
-      <Testimonials items={testimonials} title="What certified educators say" />
-      <SectionTransition variant="swatches" height="md" />
+      {/* Testimonials — only render if provided */}
+      {testimonials && testimonials.length > 0 && (
+        <>
+          <Testimonials items={testimonials} title="What certified educators say" />
+          <SectionTransition variant="swatches" height="md" />
+        </>
+      )}
 
       {/* FAQ */}
       <FAQ items={faqItems} />
@@ -274,9 +281,8 @@ export function CertificationPageTemplate({
       {/* Final CTA */}
       <FinalCTA
         title="Become a certified art educator"
-        description="Join a global community of educators who teach children visual arts with confidence, structure, and wonder."
+        description="Join educators around the world who teach children visual arts with confidence, structure, and wonder."
         primaryCta={{ label: primaryCtaLabel, href: siteMapEntry?.fallbackExternalUrl || primaryCtaHref }}
-        secondaryCta={{ label: "Download Program Guide", href: "#" }}
         variant="dark"
       />
     </>

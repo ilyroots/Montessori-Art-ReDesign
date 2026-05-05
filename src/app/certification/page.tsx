@@ -8,9 +8,7 @@ export const metadata = createMetadata({
     "Professional certification for educators who want to teach children visual arts with confidence, sequence, and developmental understanding.",
 });
 
-// TODO: Connect this page to Keap checkout URL after Keap inventory is complete.
-//       The fallbackExternalUrl preserves the legacy Leadpages sales path
-//       until native checkout is mapped in integrations.ts.
+// Fallback to legacy Leadpages until native checkout is verified.
 const siteMapEntry = getPageByNewPath("/certification");
 
 export default function CertificationPage() {
@@ -24,9 +22,9 @@ export default function CertificationPage() {
           developmental understanding.
         </>
       }
-      heroSubheadline="The Art Teaching Blueprint is a comprehensive certification for educators ready to lead meaningful, structured, and joyful art experiences in the Montessori environment."
-      primaryCtaLabel="Enroll Now — $497"
-      primaryCtaHref="#"
+      heroSubheadline="The Art Teaching Blueprint™ is a professional development certification for educators ready to lead meaningful, structured, and joyful art experiences in the Montessori environment."
+      primaryCtaLabel="Request Program Details"
+      primaryCtaHref={siteMapEntry?.fallbackExternalUrl || "/contact"}
       stats={[
         { label: "Modules", value: "6" },
         { label: "Years of Experience", value: "20+" },
@@ -36,7 +34,7 @@ export default function CertificationPage() {
       problemParagraphs={[
         "You may have a teaching credential, a Montessori diploma, or years of classroom experience — but when it comes to visual arts, you are often left to figure it out alone.",
         "Without a clear sequence, art becomes either too structured (adult-directed crafts) or too loose (messy free-for-all). Neither serves the child.",
-        "The Art Teaching Blueprint fills this gap with a complete certification that gives you the confidence, curriculum knowledge, and practical skills to lead exceptional art experiences.",
+        "The Art Teaching Blueprint™ fills this gap with a complete certification that gives you the confidence, curriculum knowledge, and practical skills to lead exceptional art experiences.",
       ]}
       modules={[
         {
@@ -98,28 +96,13 @@ export default function CertificationPage() {
         "Educators unwilling to engage with child-led practices",
         "Anyone seeking craft templates rather than pedagogy",
       ]}
-      licensingText="The Art Teaching Blueprint Certification is a professional development credential in visual arts education. It is not a state teaching license, nor does it replace AMI/AMS Montessori credentials. It certifies your expertise in art pedagogy within Montessori and progressive education contexts."
+      licensingText="The Art Teaching Blueprint™ Certification is a professional development credential in visual arts education. Certified facilitators may teach visual arts directly to children. They may not train, certify, or credential other educators, nor reproduce or rebrand the Science Art Method™. It does not replace an AMI or AMS Montessori credential, but complements any early childhood or elementary teaching background."
       testimonials={[
         {
           quote:
-            "This certification gave me the language and structure I needed to advocate for art in my school. My director immediately noticed the difference.",
-          author: "Sandra K.",
-          role: "Lower Elementary Guide",
-          location: "Denver, CO",
-        },
-        {
-          quote:
-            "I have a fine arts degree but no teaching background. This program bridged the gap beautifully. I now run the art program at our Montessori school.",
-          author: "Thomas M.",
-          role: "Art Specialist",
-          location: "Toronto, Canada",
-        },
-        {
-          quote:
-            "The community access alone is worth the investment. Connecting with other educators who care this deeply about children's art has been transformative.",
-          author: "Aisha B.",
-          role: "Homeschool Educator",
-          location: "London, UK",
+            "The Art Teaching Blueprint changed how I approach art in my classroom. I finally feel confident.",
+          author: "Dawn Mc Gregor",
+          role: "Montessori Guide",
         },
       ]}
       faqItems={[
@@ -131,7 +114,7 @@ export default function CertificationPage() {
         {
           question: "How long does the program take?",
           answer:
-            "Most participants complete the program in 8–12 weeks, studying at their own pace. You have lifetime access to all materials.",
+            "The program is designed as a 7-week online training. Most participants complete it at their own pace. You have three years of access to all materials.",
         },
         {
           question: "Is this a Montessori certification?",
@@ -139,9 +122,9 @@ export default function CertificationPage() {
             "This is an art education certification grounded in Montessori principles. It does not replace an AMI or AMS Montessori credential, but it complements any early childhood or elementary teaching background.",
         },
         {
-          question: "Do I receive a physical certificate?",
+          question: "Do I receive a certificate?",
           answer:
-            "Yes. Upon successful completion, you receive a digital certificate for immediate use and a physical certificate mailed to your address.",
+            "Yes. Upon successful completion, you receive a certificate recognizing your professional development in Montessori art education.",
         },
         {
           question: "Can I use this certification to get a job?",
@@ -149,9 +132,9 @@ export default function CertificationPage() {
             "Many schools specifically seek teachers with art specialization. This certification demonstrates your commitment and expertise in visual arts education.",
         },
         {
-          question: "What if I am not satisfied?",
+          question: "What can certified facilitators do?",
           answer:
-            "We offer a 30-day satisfaction guarantee. If the program is not right for you, contact us for a full refund.",
+            "Certified facilitators may teach visual arts directly to children. They may not train, certify, or credential other educators, nor reproduce or rebrand the Science Art Method™.",
         },
       ]}
     />

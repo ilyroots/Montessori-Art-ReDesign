@@ -432,46 +432,51 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
 // ── Data ─────────────────────────────────────────────────────
 
+// NOTE: Individual Volusion category URLs are pending verification.
+// All featured area links route to the root storefront until exact category
+// slug URLs are confirmed on the live Volusion store.
+const storefrontRoot = "https://atosb-raxtf.volusion.store/";
+
 const featuredAreas = [
   {
     title: "Paints",
     description: "Watercolor, tempera, and acrylic paints selected for child-safe creative exploration.",
-    href: "https://atosb-raxtf.volusion.store/paints",
+    href: storefrontRoot,
     image: "/images/child-watercolor-painting.jpg",
     icon: <Palette size={28} className="text-charcoal/20" />,
   },
   {
     title: "Drawing Materials",
     description: "Pencils, charcoal, pastels, and quality paper for mark-making and observation.",
-    href: "https://atosb-raxtf.volusion.store/drawing",
+    href: storefrontRoot,
     image: undefined,
     icon: <Pencil size={28} className="text-charcoal/20" />,
   },
   {
     title: "Clay",
     description: "Modeling clay and sculpting tools for sensory-rich three-dimensional exploration.",
-    href: "https://atosb-raxtf.volusion.store/clay",
+    href: storefrontRoot,
     image: undefined,
     icon: <Shapes size={28} className="text-charcoal/20" />,
   },
   {
     title: "Paper",
     description: "Watercolor paper, drawing paper, and specialty papers for every medium.",
-    href: "https://atosb-raxtf.volusion.store/paper",
+    href: storefrontRoot,
     image: undefined,
     icon: <FileText size={28} className="text-charcoal/20" />,
   },
   {
     title: "Art Teaching Books",
     description: "Guides and resources for educators building art programs in Montessori and homeschool settings.",
-    href: "https://atosb-raxtf.volusion.store/art-teaching-books",
+    href: storefrontRoot,
     image: undefined,
     icon: <GraduationCap size={28} className="text-charcoal/20" />,
   },
   {
     title: "Art Curriculum",
     description: "Complete curriculum materials for painting, drawing, clay, and color theory instruction.",
-    href: "https://atosb-raxtf.volusion.store/art-curriculum",
+    href: storefrontRoot,
     image: "/images/painting-curriculum.jpg",
     icon: <BookOpen size={28} className="text-charcoal/20" />,
   },
