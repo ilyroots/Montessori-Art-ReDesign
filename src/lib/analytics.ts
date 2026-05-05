@@ -44,6 +44,7 @@ export type AnalyticsEvent =
   | "curriculum_explore_click"
   | "curriculum_area_click"
   | "curriculum_purchase_click"
+  | "curriculum_cta_click"
   | "training_view"
   | "page_view";
 
