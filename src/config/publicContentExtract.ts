@@ -846,7 +846,7 @@ export const certificationOverviewExtract: CertificationExtract = {
       role: "Montessori Guide",
     },
   ],
-  ctaLabel: "Enroll Now",
+  ctaLabel: "Request Program Details",
   disclaimers: [
     GLOBAL_CURRICULUM_DISCLAIMERS.scienceArtMethod,
     "Certified facilitators may teach visual arts directly to children but may not train, certify, or credential other educators.",
@@ -920,7 +920,7 @@ export const certificationBlueprintExtract: CertificationExtract = {
       role: "Montessori Guide",
     },
   ],
-  ctaLabel: "Enroll Now",
+  ctaLabel: "Request Program Details",
   disclaimers: [
     GLOBAL_CURRICULUM_DISCLAIMERS.scienceArtMethod,
     "Certified facilitators may teach visual arts directly to children but may not train, certify, or credential other educators.",

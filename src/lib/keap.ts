@@ -54,12 +54,12 @@ export async function submitToKeap(
 
     return result as KeapSubmitResult;
   } catch (error) {
-    // If the API route is unreachable (e.g. during static build),
-    // return a graceful placeholder response.
+    // If the API route is unreachable, return an honest error.
+    // Never fake success — the user's data was NOT submitted.
     return {
-      success: true,
+      success: false,
       message:
-        "Thank you! Your submission has been received. (Keap integration pending)",
+        "We couldn't send your message right now. Please email Info@Spramani.com directly and we'll take care of you.",
       placeholder: true,
     };
   }

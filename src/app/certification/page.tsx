@@ -127,11 +127,6 @@ export default function CertificationPage() {
             "Yes. Upon successful completion, you receive a certificate recognizing your professional development in Montessori art education.",
         },
         {
-          question: "Can I use this certification to get a job?",
-          answer:
-            "Many schools specifically seek teachers with art specialization. This certification demonstrates your commitment and expertise in visual arts education.",
-        },
-        {
           question: "What can certified facilitators do?",
           answer:
             "Certified facilitators may teach visual arts directly to children. They may not train, certify, or credential other educators, nor reproduce or rebrand the Science Art Method™.",
