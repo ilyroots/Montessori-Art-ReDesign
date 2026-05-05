@@ -2,20 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { mainNavigation, navCta } from "@/config/siteNavigation";
+import { mainNavigation } from "@/config/siteNavigation";
 import { Logo } from "./Logo";
-import { Menu, X, User, ChevronDown } from "lucide-react";
-import { getMockUser } from "@/lib/mockAuth";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [hasUser, setHasUser] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    setHasUser(!!getMockUser());
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -90,30 +87,8 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* CTA + Login + Mobile Toggle */}
+          {/* Mobile Toggle */}
           <div className="flex items-center gap-2">
-            {hasUser ? (
-              <Link
-                href="/academy/dashboard"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-charcoal hover:text-honey transition-colors rounded-md hover:bg-canvas/50"
-              >
-                <User size={15} />
-                Dashboard
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="hidden sm:inline-flex items-center px-3 py-2 text-sm font-medium text-charcoal hover:text-honey transition-colors rounded-md hover:bg-canvas/50"
-              >
-                Log in
-              </Link>
-            )}
-            <Link
-              href={navCta.href}
-              className="hidden sm:inline-flex items-center justify-center rounded-full bg-ink px-5 py-2 text-sm font-semibold text-paper hover:bg-charcoal transition-colors duration-200"
-            >
-              {navCta.label}
-            </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 text-ink rounded-md hover:bg-canvas transition-colors"
@@ -161,33 +136,6 @@ export function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="pt-3 border-t border-linen mt-3 space-y-2">
-                {hasUser ? (
-                  <Link
-                    href="/academy/dashboard"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2 py-2 text-sm font-medium text-charcoal hover:text-honey"
-                  >
-                    <User size={16} />
-                    Dashboard
-                  </Link>
-                ) : (
-                  <Link
-                    href="/login"
-                    onClick={() => setMobileOpen(false)}
-                    className="block py-2 text-sm font-medium text-charcoal hover:text-honey"
-                  >
-                    Log in
-                  </Link>
-                )}
-                <Link
-                  href={navCta.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block w-full text-center rounded-full bg-ink px-5 py-3 text-sm font-semibold text-paper"
-                >
-                  {navCta.label}
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}

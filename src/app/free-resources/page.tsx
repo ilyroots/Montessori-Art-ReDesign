@@ -199,7 +199,7 @@ export default function FreeResourcesPage() {
 
       <SectionTransition variant="swatches" height="lg" />
 
-      {/* Academy CTA */}
+      {/* CTA */}
       <section className="py-20 sm:py-28 bg-ivory">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal variant="blurIn">
@@ -209,24 +209,24 @@ export default function FreeResourcesPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.08} variant="fadeUp">
             <p className="text-lg text-charcoal/80 leading-relaxed mb-8">
-              The Nature of Art Academy includes all curriculum areas, progress tracking,
-              printables, and teacher training — with a free starter tier.
+              Explore the complete curriculum collection, art books, and certification
+              program for professional educators.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.15} variant="fadeUp">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/academy/start"
+                href="/curriculum"
                 className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-8 py-4 text-base font-semibold text-paper hover:bg-charcoal transition-colors"
               >
-                Start Free Academy
+                Explore Curriculum
                 <ArrowRight size={18} />
               </Link>
               <Link
-                href="/academy/pricing"
+                href="/bookstore"
                 className="inline-flex items-center justify-center rounded-button border border-ink text-ink px-8 py-4 text-base font-semibold hover:bg-ink hover:text-paper transition-colors"
               >
-                View Memberships
+                View Art Books
               </Link>
             </div>
           </ScrollReveal>

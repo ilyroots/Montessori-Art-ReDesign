@@ -11,8 +11,8 @@ export default function TrainingIndexPage() {
     <PlaceholderPage
       title="Training"
       description="Video trainings for Montessori art education are coming soon. Check back for on-demand courses, webinars, and professional development resources."
-      backHref="/academy"
-      backLabel="Explore the Academy"
+      backHref="/"
+      backLabel="Back to Home"
     />
   );
 }

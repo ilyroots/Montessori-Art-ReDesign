@@ -22,7 +22,7 @@ const curriculumAreas = [
     color: "bg-kids-blue/10 text-kids-blue",
     glow: "blue" as const,
     href: "/curriculum/painting",
-    lessons: 12,
+    lessons: "57 studios",
     image: "/images/child-watercolor-painting.jpg",
   },
   {
@@ -33,7 +33,7 @@ const curriculumAreas = [
     color: "bg-honey/10 text-honey",
     glow: "honey" as const,
     href: "/curriculum/drawing",
-    lessons: 10,
+    lessons: "16–47 studios",
     image: "/images/early-childhood-art.jpg",
   },
   {
@@ -44,7 +44,7 @@ const curriculumAreas = [
     color: "bg-earth-brown/10 text-earth-brown",
     glow: "honey" as const,
     href: "/curriculum/clay-modeling",
-    lessons: 8,
+    lessons: "29 studios",
     image: "/images/clay-play.jpg",
   },
   {
@@ -55,7 +55,7 @@ const curriculumAreas = [
     color: "bg-creative-pink/10 text-creative-pink",
     glow: "pink" as const,
     href: "/curriculum/color-theory",
-    lessons: 6,
+    lessons: "37 studios",
     image: "/images/art-shelf-painting.jpg",
   },
 ];
@@ -98,18 +98,18 @@ export default function CurriculumIndexPage() {
               <ScrollReveal delay={0.15} variant="fadeUp">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link
-                    href="/academy/start"
+                    href="/curriculum/painting"
                     className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-7 py-3.5 text-sm font-semibold text-paper hover:bg-charcoal transition-colors"
                   >
-                    Start Free Lessons
+                    Explore Painting
                     <ArrowRight size={16} />
                   </Link>
                   <Link
-                    href="/certification"
+                    href="/bookstore"
                     className="inline-flex items-center justify-center rounded-button border border-ink text-ink px-7 py-3.5 text-sm font-semibold hover:bg-ink hover:text-paper transition-colors"
                   >
-                    <GraduationCap size={16} className="mr-1.5" />
-                    Get Certified
+                    <BookOpen size={16} className="mr-1.5" />
+                    View Art Books
                   </Link>
                 </div>
               </ScrollReveal>
@@ -127,7 +127,7 @@ export default function CurriculumIndexPage() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-paper border border-linen rounded-card p-3 shadow-card-hover rotate-[-2deg]">
-                  <p className="font-hand text-sm text-creative-pink">36+ sequenced lessons</p>
+                  <p className="font-hand text-sm text-creative-pink">Sequenced studio experiences</p>
                 </div>
               </ScrollReveal>
             </div>
@@ -191,7 +191,7 @@ export default function CurriculumIndexPage() {
                       <div className="absolute bottom-4 left-4">
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-paper/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-ink">
                           <BookOpen size={12} />
-                          {area.lessons} lessons
+                          {area.lessons}
                         </span>
                       </div>
                     </div>
@@ -227,24 +227,24 @@ export default function CurriculumIndexPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.08} variant="fadeUp">
             <p className="text-lg text-charcoal/80 leading-relaxed mb-8">
-              Start with free lessons in the Academy, or explore the full certification program
-              for professional educators.
+              Explore the full curriculum collection, browse art books, or get in touch
+              with questions about bringing visual arts into your classroom or home.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={0.15} variant="fadeUp">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/academy/start"
+                href="/bookstore"
                 className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-8 py-4 text-base font-semibold text-paper hover:bg-charcoal transition-colors"
               >
-                Start Free Academy
+                View Art Books
                 <ArrowRight size={18} />
               </Link>
               <Link
-                href="/certification"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-button border border-ink text-ink px-8 py-4 text-base font-semibold hover:bg-ink hover:text-paper transition-colors"
               >
-                Explore Certification
+                Contact Nature of Art
               </Link>
             </div>
           </ScrollReveal>

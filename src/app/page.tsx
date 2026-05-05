@@ -58,28 +58,28 @@ const methodSteps = [
   },
 ];
 
-const academyPaths = [
+const explorePaths = [
   {
-    title: "Color Mixing Starter",
-    description: "Free 5-lesson path for beginners",
+    title: "Painting Curriculum",
+    description: "57 sequenced painting studio experiences",
     icon: <Palette size={20} />,
-    href: "/academy/start",
+    href: "/curriculum/painting",
     image: "/images/child-watercolor-painting.jpg",
-    tag: "Free",
-    tagColor: "bg-sage/20 text-earth-brown",
-  },
-  {
-    title: "Homeschool Art Path",
-    description: "Complete curriculum for home learning",
-    icon: <BookOpen size={20} />,
-    href: "/curriculum",
-    image: "/images/art-shelf-painting.jpg",
     tag: "Curriculum",
     tagColor: "bg-kids-blue/10 text-kids-blue",
   },
   {
-    title: "Classroom Guide Path",
-    description: "For Montessori teachers & schools",
+    title: "Art Books",
+    description: "Guides and curriculum for your shelf",
+    icon: <BookOpen size={20} />,
+    href: "/bookstore",
+    image: "/images/art-shelf-painting.jpg",
+    tag: "Books",
+    tagColor: "bg-sage/20 text-earth-brown",
+  },
+  {
+    title: "Art Certification",
+    description: "Professional certification for educators",
     icon: <GraduationCap size={20} />,
     href: "/certification",
     image: "/images/children-painting-classroom.jpg",
@@ -87,12 +87,12 @@ const academyPaths = [
     tagColor: "bg-bee-yellow/15 text-honey",
   },
   {
-    title: "Art Shelf Setup",
-    description: "Organize your prepared environment",
-    icon: <Shapes size={20} />,
-    href: "/training/art-shelf",
+    title: "Art Supplies",
+    description: "Materials for the prepared environment",
+    icon: <ShoppingBag size={20} />,
+    href: "/art-supplies",
     image: "/images/early-childhood-art.jpg",
-    tag: "Training",
+    tag: "Store",
     tagColor: "bg-creative-pink/10 text-creative-pink",
   },
 ];
@@ -100,7 +100,7 @@ const academyPaths = [
 const curriculumAreas = [
   {
     title: "Painting",
-    lessons: "24 lessons",
+    lessons: "57 studios",
     description: "Watercolor, tempera, and acrylic sequences",
     image: "/images/child-watercolor-painting.jpg",
     href: "/curriculum/painting",
@@ -108,7 +108,7 @@ const curriculumAreas = [
   },
   {
     title: "Drawing",
-    lessons: "18 lessons",
+    lessons: "16–47 studios",
     description: "Developmental drawing from scribble to form",
     image: "/images/early-childhood-art.jpg",
     href: "/curriculum/drawing",
@@ -116,7 +116,7 @@ const curriculumAreas = [
   },
   {
     title: "Color Theory",
-    lessons: "12 lessons",
+    lessons: "37 studios",
     description: "Primary, secondary, and complementary exploration",
     image: "/images/clay-play.jpg",
     href: "/curriculum/color-theory",
@@ -124,7 +124,7 @@ const curriculumAreas = [
   },
   {
     title: "Clay Modeling",
-    lessons: "15 lessons",
+    lessons: "29 studios",
     description: "Hand-building, sculpture, and clay play",
     image: "/images/clay-forms-display.jpg",
     href: "/curriculum/clay-modeling",
@@ -196,30 +196,30 @@ export default function HomePage() {
       <HomeHero />
 
       {/* ═══════════════════════════════════════════════════════════════
-          ACADEMY — Horizontal showcase of learning paths
+          EXPLORE — Horizontal showcase of public offerings
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-paper overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
               <div>
-                <p className="section-label mb-2">Nature of Art Academy</p>
+                <p className="section-label mb-2">Explore Nature of Art®</p>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
-                  Choose Your <span className="text-honey">Learning Path</span>
+                  Discover What We <span className="text-honey">Offer</span>
                 </h2>
               </div>
               <Link
-                href="/academy"
+                href="/curriculum"
                 className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
-                Explore all paths
+                View all curriculum
                 <ArrowRight size={16} />
               </Link>
             </div>
           </ScrollReveal>
 
           <HorizontalShowcase gap={20} cardWidth="300px">
-            {academyPaths.map((path) => (
+            {explorePaths.map((path) => (
               <ShowcaseCard key={path.title} width="300px">
                 <InteractiveCard glowColor="yellow" hoverLift={-6}>
                   <Link href={path.href} className="group block overflow-hidden rounded-card">

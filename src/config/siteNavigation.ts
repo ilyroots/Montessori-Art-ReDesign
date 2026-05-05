@@ -6,22 +6,15 @@ export interface NavItem {
 }
 
 // ------------------------------------------------------------------
-// Main Navigation — Clean grouped structure
+// Main Navigation — Public migration site only
+// ------------------------------------------------------------------
+// Academy / subscription / membership / dashboard items are removed
+// from public nav. Academy exists at /academy for future work but is
+// not promoted in the public launch.
 // ------------------------------------------------------------------
 
 export const mainNavigation: NavItem[] = [
   { label: "Home", href: "/" },
-  {
-    label: "Academy",
-    href: "/academy",
-    children: [
-      { label: "Start Free", href: "/academy/start", description: "Begin your art learning path" },
-      { label: "Memberships", href: "/academy/pricing", description: "Unlock full curriculum access" },
-      { label: "Dashboard Demo", href: "/academy/dashboard", description: "Preview your learning space" },
-      { label: "Art Box & Bundles", href: "/academy/bundles", description: "Curated art supply kits" },
-      { label: "Teacher Path", href: "/academy/certification", description: "Professional certification" },
-    ],
-  },
   {
     label: "Curriculum",
     href: "/curriculum",
@@ -39,7 +32,6 @@ export const mainNavigation: NavItem[] = [
     children: [
       { label: "Art Books", href: "/bookstore", description: "Guides & curriculum books" },
       { label: "Art Store", href: "/art-supplies", description: "Montessori art materials" },
-      { label: "Bundles", href: "/academy/bundles", description: "Curated supply kits" },
     ],
   },
   {
@@ -55,9 +47,12 @@ export const mainNavigation: NavItem[] = [
   { label: "About", href: "/about" },
 ];
 
+// ------------------------------------------------------------------
+// Nav CTA — Removed Academy CTA. No public CTA in nav for now.
+// ------------------------------------------------------------------
 export const navCta = {
-  label: "Start Free",
-  href: "/academy/start",
+  label: "",
+  href: "",
 };
 
 // ------------------------------------------------------------------
@@ -66,7 +61,6 @@ export const navCta = {
 
 export const footerNavigation = {
   offers: [
-    { label: "Academy", href: "/academy" },
     { label: "Curriculum", href: "/curriculum" },
     { label: "Training", href: "/training" },
     { label: "Certification", href: "/certification" },
