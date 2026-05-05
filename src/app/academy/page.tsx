@@ -19,16 +19,6 @@ export const metadata = createMetadata({
 export default function AcademyPage() {
   return (
     <>
-      {/* Work-in-progress notice */}
-      <div className="bg-bee-yellow/15 border-b border-bee-yellow/20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
-          <p className="text-sm text-charcoal/80 text-center">
-            <strong>Work in progress:</strong> This page is an internal preview for the future Academy concept
-            and is not part of the current public launch.
-          </p>
-        </div>
-      </div>
-
       <AcademyHero />
       <SectionTransition variant="swatches" height="md" />
 
