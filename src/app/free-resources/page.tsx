@@ -15,7 +15,7 @@ import { SectionTransition } from "@/components/visual/SectionTransition";
 import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
-import { trackEvent } from "@/lib/analytics";
+import { TrackedLink } from "@/components/navigation/TrackedLink";
 
 export const metadata = createMetadata({
   title: "Resource Library — Free Montessori Art Education",
@@ -176,9 +176,10 @@ export default function FreeResourcesPage() {
             {verifiedResources.map((resource) => (
               <StaggerItem key={resource.title} variant="scaleUp">
                 <InteractiveCard glowColor={resource.glow} hoverLift={-6} tilt>
-                  <Link
+                  <TrackedLink
                     href={resource.href}
-                    onClick={() => trackEvent("resource_card_click", { label: resource.title, location: "resource_library_grid" })}
+                    eventName="resource_card_click"
+                    eventPayload={{ label: resource.title, location: "resource_library_grid" }}
                     className="group block bg-paper border border-linen rounded-card overflow-hidden"
                   >
                     <div className="relative aspect-[16/9] overflow-hidden">
@@ -212,7 +213,7 @@ export default function FreeResourcesPage() {
                         <ArrowRight size={14} />
                       </span>
                     </div>
-                  </Link>
+                  </TrackedLink>
                 </InteractiveCard>
               </StaggerItem>
             ))}
@@ -243,9 +244,10 @@ export default function FreeResourcesPage() {
             {contentChannels.map((channel) => (
               <StaggerItem key={channel.title} variant="scaleUp">
                 <InteractiveCard glowColor="honey" hoverLift={-4} tilt>
-                  <Link
+                  <TrackedLink
                     href={channel.href}
-                    onClick={() => trackEvent("newsletter_cta_click", { label: channel.title, location: "resource_library_channels" })}
+                    eventName="newsletter_cta_click"
+                    eventPayload={{ label: channel.title, location: "resource_library_channels" }}
                     className="group block bg-paper border border-linen rounded-card overflow-hidden"
                   >
                     <div className="relative aspect-[16/9] overflow-hidden">
@@ -278,7 +280,7 @@ export default function FreeResourcesPage() {
                         <ArrowRight size={14} />
                       </span>
                     </div>
-                  </Link>
+                  </TrackedLink>
                 </InteractiveCard>
               </StaggerItem>
             ))}
@@ -328,21 +330,23 @@ export default function FreeResourcesPage() {
           </ScrollReveal>
           <ScrollReveal delay={0.15} variant="fadeUp">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
+              <TrackedLink
                 href="/curriculum"
-                onClick={() => trackEvent("curriculum_cta_click", { location: "resource_library_final_cta" })}
+                eventName="curriculum_cta_click"
+                eventPayload={{ location: "resource_library_final_cta" }}
                 className="inline-flex items-center justify-center gap-2 rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors"
               >
                 Explore Curriculum
                 <ArrowRight size={18} />
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/bookstore"
-                onClick={() => trackEvent("bookstore_click", { location: "resource_library_final_cta" })}
+                eventName="bookstore_click"
+                eventPayload={{ location: "resource_library_final_cta" }}
                 className="inline-flex items-center justify-center rounded-button border border-paper/30 text-paper px-8 py-4 text-base font-semibold hover:bg-paper/10 transition-colors"
               >
                 View Art Books
-              </Link>
+              </TrackedLink>
             </div>
           </ScrollReveal>
         </div>

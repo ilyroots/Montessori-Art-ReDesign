@@ -23,7 +23,7 @@ import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import { AnimatedGradientMesh } from "@/components/visual/AnimatedGradientMesh";
 import { HorizontalShowcase, ShowcaseCard } from "@/components/visual/HorizontalShowcase";
-import { trackEvent } from "@/lib/analytics";
+import { TrackedLink } from "@/components/navigation/TrackedLink";
 
 const methodSteps = [
   {
@@ -212,14 +212,15 @@ export default function HomePage() {
                   Discover What We <span className="text-honey">Offer</span>
                 </h2>
               </div>
-              <Link
+              <TrackedLink
                 href="/curriculum"
-                onClick={() => trackEvent("curriculum_explore_click", { location: "homepage_explore_section" })}
+                eventName="curriculum_explore_click"
+                eventPayload={{ location: "homepage_explore_section" }}
                 className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
                 View all curriculum
                 <ArrowRight size={16} />
-              </Link>
+              </TrackedLink>
             </div>
           </ScrollReveal>
 
@@ -227,9 +228,10 @@ export default function HomePage() {
             {explorePaths.map((path) => (
               <ShowcaseCard key={path.title} width="300px">
                 <InteractiveCard glowColor="yellow" hoverLift={-6} tilt>
-                  <Link
+                  <TrackedLink
                     href={path.href}
-                    onClick={() => trackEvent("curriculum_area_click", { label: path.title, location: "homepage_explore" })}
+                    eventName="curriculum_area_click"
+                    eventPayload={{ label: path.title, location: "homepage_explore" }}
                     className="group block overflow-hidden rounded-card"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -254,7 +256,7 @@ export default function HomePage() {
                       </div>
                       <p className="text-sm text-charcoal/70">{path.description}</p>
                     </div>
-                  </Link>
+                  </TrackedLink>
                 </InteractiveCard>
               </ShowcaseCard>
             ))}
@@ -288,9 +290,10 @@ export default function HomePage() {
           <HorizontalShowcase gap={24} cardWidth="280px">
             {curriculumAreas.map((area) => (
               <ShowcaseCard key={area.title} width="280px">
-                <Link
+                <TrackedLink
                   href={area.href}
-                  onClick={() => trackEvent("curriculum_area_click", { label: area.title, location: "homepage_atelier" })}
+                  eventName="curriculum_area_click"
+                  eventPayload={{ label: area.title, location: "homepage_atelier" }}
                   className="group block"
                 >
                   <div className="relative rounded-card overflow-hidden bg-paper border border-linen shadow-card hover:shadow-card-hover transition-shadow">
@@ -314,7 +317,7 @@ export default function HomePage() {
                       <p className="text-sm text-charcoal/70">{area.description}</p>
                     </div>
                   </div>
-                </Link>
+                </TrackedLink>
               </ShowcaseCard>
             ))}
           </HorizontalShowcase>
@@ -349,14 +352,15 @@ export default function HomePage() {
                   Start With <span className="text-honey">Free</span>
                 </h2>
               </div>
-              <Link
+              <TrackedLink
                 href="/free-resources"
-                onClick={() => trackEvent("resource_card_click", { label: "view_all", location: "homepage_free_resources" })}
+                eventName="resource_card_click"
+                eventPayload={{ label: "view_all", location: "homepage_free_resources" }}
                 className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
                 Explore the Resource Library
                 <ArrowRight size={16} />
-              </Link>
+              </TrackedLink>
             </div>
           </ScrollReveal>
 
@@ -364,9 +368,10 @@ export default function HomePage() {
             {verifiedFreeResources.map((resource) => (
               <ShowcaseCard key={resource.title} width="280px">
                 <InteractiveCard glowColor="honey" hoverLift={-4} tilt>
-                  <Link
+                  <TrackedLink
                     href={resource.href}
-                    onClick={() => trackEvent("resource_card_click", { label: resource.title, location: "homepage_free_resources" })}
+                    eventName="resource_card_click"
+                    eventPayload={{ label: resource.title, location: "homepage_free_resources" }}
                     className="group block overflow-hidden rounded-card"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -392,7 +397,7 @@ export default function HomePage() {
                       </h3>
                       <p className="text-sm text-charcoal/70">{resource.description}</p>
                     </div>
-                  </Link>
+                  </TrackedLink>
                 </InteractiveCard>
               </ShowcaseCard>
             ))}
@@ -452,13 +457,14 @@ export default function HomePage() {
                     </StaggerItem>
                   ))}
                 </StaggerContainer>
-                <Link
+                <TrackedLink
                   href="/certification"
-                  onClick={() => trackEvent("certification_cta_click", { location: "homepage_certification" })}
+                  eventName="certification_cta_click"
+                  eventPayload={{ location: "homepage_certification" }}
                   className="inline-flex items-center justify-center rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors shadow-lifted hover:shadow-dramatic"
                 >
                   Explore Certification
-                </Link>
+                </TrackedLink>
               </div>
             </ScrollReveal>
           </div>
@@ -486,9 +492,10 @@ export default function HomePage() {
             {productCards.map((item) => (
               <ShowcaseCard key={item.title} width="340px">
                 <InteractiveCard glowColor="honey" hoverLift={-6} tilt>
-                  <Link
+                  <TrackedLink
                     href={item.href}
-                    onClick={() => trackEvent("store_category_click", { label: item.title, location: "homepage_products" })}
+                    eventName="store_category_click"
+                    eventPayload={{ label: item.title, location: "homepage_products" }}
                     className="group block card-editorial overflow-hidden"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -509,7 +516,7 @@ export default function HomePage() {
                       </h3>
                       <p className="text-sm text-charcoal/70">{item.description}</p>
                     </div>
-                  </Link>
+                  </TrackedLink>
                 </InteractiveCard>
               </ShowcaseCard>
             ))}
@@ -604,21 +611,23 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
+              <TrackedLink
                 href="/curriculum"
-                onClick={() => trackEvent("curriculum_cta_click", { location: "homepage_final_cta" })}
+                eventName="curriculum_cta_click"
+                eventPayload={{ location: "homepage_final_cta" }}
                 className="inline-flex items-center justify-center gap-2 rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors shadow-lifted"
               >
                 Explore Curriculum
                 <ArrowRight size={18} />
-              </Link>
-              <Link
+              </TrackedLink>
+              <TrackedLink
                 href="/free-resources"
-                onClick={() => trackEvent("resource_card_click", { label: "final_cta", location: "homepage_final_cta" })}
+                eventName="resource_card_click"
+                eventPayload={{ label: "final_cta", location: "homepage_final_cta" }}
                 className="inline-flex items-center justify-center rounded-button border border-paper/30 text-paper px-8 py-4 text-base font-semibold hover:bg-paper/10 transition-colors"
               >
                 Get Free Resources
-              </Link>
+              </TrackedLink>
             </div>
           </ScrollReveal>
         </div>
