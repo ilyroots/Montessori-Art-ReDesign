@@ -8,20 +8,20 @@ import { easeOutExpo } from "@/components/motion/motionVariants";
 const actions = [
   {
     icon: <Play size={16} />,
-    label: "Start Your Free Art Path",
-    description: "Color Mixing Starter",
-    href: "/academy/start",
+    label: "Start With a Free Art Lesson",
+    description: "Color Mixing Video",
+    href: "/free-resources/color-mixing-video",
     color: "bg-bee-yellow/15 text-honey border-bee-yellow/20",
   },
   {
-    icon: <GraduationCap size={16} />,
-    label: "Explore the Academy",
-    description: "Guided learning paths",
-    href: "/academy",
+    icon: <Palette size={16} />,
+    label: "Explore Art Teaching Resources",
+    description: "Free guides & videos",
+    href: "/free-resources",
     color: "bg-kids-blue/10 text-kids-blue border-kids-blue/20",
   },
   {
-    icon: <Palette size={16} />,
+    icon: <GraduationCap size={16} />,
     label: "Find Curriculum",
     description: "Home, homeschool, or classroom",
     href: "/curriculum",

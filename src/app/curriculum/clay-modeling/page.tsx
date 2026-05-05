@@ -10,7 +10,7 @@ export default function ClayModelingCurriculumPage() {
   return (
     <PlaceholderPage
       title="Clay Modeling Curriculum"
-      description="The full clay modeling curriculum page is coming soon. In the meantime, explore the Painting Curriculum or start free lessons in the Academy."
+      description="The full clay modeling curriculum page is coming soon. In the meantime, explore the Painting Curriculum or browse free art teaching resources."
       backHref="/curriculum"
       backLabel="Back to Curriculum"
     />

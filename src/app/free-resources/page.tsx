@@ -1,17 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Video, FileText, ClipboardCheck, BookOpen, Play, Download, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Video,
+  FileText,
+  ClipboardCheck,
+  BookOpen,
+  Play,
+  Download,
+  Sparkles,
+  BookMarked,
+  Newspaper,
+  Mail,
+} from "lucide-react";
 import { createMetadata } from "@/lib/seo";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { SectionTransition } from "@/components/visual/SectionTransition";
 import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
+import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
 
 export const metadata = createMetadata({
-  title: "Free Resources — Montessori Art Education",
-  description: "Free video lessons, checklists, and guides for Montessori art education. Start your art journey today.",
+  title: "Resource Library — Free Montessori Art Education",
+  description:
+    "Free video lessons, downloadable checklists, and guides for Montessori art education. Start your art journey today with no payment required.",
 });
 
+/* ── Core free resources (native or planned pages) ── */
 const freeResources = [
   {
     title: "Color Mixing Video",
@@ -21,7 +36,7 @@ const freeResources = [
     glow: "pink" as const,
     href: "/free-resources/color-mixing-video",
     tag: "Video",
-    image: "/images/art-shelf-painting.jpg",
+    image: "/images/child-watercolor-painting.jpg",
   },
   {
     title: "Painting Checklist",
@@ -31,7 +46,7 @@ const freeResources = [
     glow: "honey" as const,
     href: "/free-resources/painting-checklist",
     tag: "PDF",
-    image: "/images/child-watercolor-painting.jpg",
+    image: "/images/art-shelf-painting.jpg",
   },
   {
     title: "Art Shelf Setup Guide",
@@ -55,6 +70,56 @@ const freeResources = [
   },
 ];
 
+/* ── Video trainings with external fallback (Leadpages) ── */
+const videoTrainings = [
+  {
+    title: "Storybook Art Video",
+    description:
+      "Learn easy ways to teach art lessons and secrets to theming art with storytime books. 1-hour free training.",
+    icon: <Play size={22} />,
+    color: "bg-kids-blue/10 text-kids-blue",
+    glow: "blue" as const,
+    href: "https://spramani.lpages.co/how-to-talk-3-6-children-about-art-early-childhood",
+    tag: "Video",
+    image: "/images/children-painting-classroom.jpg",
+    external: true,
+  },
+  {
+    title: "Phases of Art Development",
+    description:
+      "Register to watch 3 free videos covering art development from toddler through elementary years.",
+    icon: <Play size={22} />,
+    color: "bg-creative-pink/10 text-creative-pink",
+    glow: "pink" as const,
+    href: "https://spramani.lpages.co/phases-of-development-art-project-video-course",
+    tag: "Video Course",
+    image: "/images/elementary-painting-classroom.jpg",
+    external: true,
+  },
+];
+
+/* ── Content channels (blog, newsletter) ── */
+const contentChannels = [
+  {
+    title: "Art Education Blog",
+    description: "Articles on drawing, clay, painting, and Montessori art practice.",
+    icon: <BookMarked size={22} />,
+    color: "bg-sage/10 text-sage",
+    href: "/blog",
+    tag: "Blog",
+    image: "/images/child-hands-clay.jpg",
+  },
+  {
+    title: "Weekly Newsletter",
+    description: "Art inspiration, curriculum updates, and free resource announcements.",
+    icon: <Mail size={22} />,
+    color: "bg-honey/10 text-honey",
+    href: "/newsletter",
+    tag: "Email",
+    image: "/images/art-shelf-painting.jpg",
+  },
+];
+
 const benefits = [
   "Instant access — no payment required",
   "Montessori-aligned content",
@@ -65,7 +130,9 @@ const benefits = [
 export default function FreeResourcesPage() {
   return (
     <>
-      {/* Hero */}
+      {/* ═══════════════════════════════════════════════════════════════
+          HERO — Resource Library positioning
+          ═══════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden py-20 sm:py-28 bg-ivory">
         <AnimatedColorBlobs intensity="medium" className="opacity-25" />
         <div className="absolute inset-0 honeycomb-accent opacity-25 pointer-events-none" />
@@ -82,7 +149,7 @@ export default function FreeResourcesPage() {
               </ScrollReveal>
               <ScrollReveal delay={0.05} variant="blurIn">
                 <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold text-ink tracking-[-0.02em] mb-6 leading-snug">
-                  Free Resources to{" "}
+                  Resource Library —{" "}
                   <span className="text-honey">Start Your Art Journey</span>
                 </h1>
               </ScrollReveal>
@@ -128,7 +195,9 @@ export default function FreeResourcesPage() {
 
       <SectionTransition variant="swatches" height="md" />
 
-      {/* Resources Grid */}
+      {/* ═══════════════════════════════════════════════════════════════
+          FREE RESOURCES GRID — Core downloadable / video content
+          ═══════════════════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28 bg-canvas">
         <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -199,16 +268,168 @@ export default function FreeResourcesPage() {
 
       <SectionTransition variant="swatches" height="lg" />
 
-      {/* CTA */}
+      {/* ═══════════════════════════════════════════════════════════════
+          VIDEO TRAININGS — Free external Leadpages videos
+          ═══════════════════════════════════════════════════════════════ */}
       <section className="py-20 sm:py-28 bg-ivory">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="section-label justify-center mb-3">Free Video Trainings</p>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
+                Watch & <span className="text-honey">Learn</span>
+              </h2>
+              <p className="text-charcoal/70 max-w-2xl mx-auto">
+                In-depth video sessions hosted by Spramani Elaun. Register for instant access.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6" staggerDelay={0.1}>
+            {videoTrainings.map((resource) => (
+              <StaggerItem key={resource.title} variant="scaleUp">
+                <InteractiveCard glowColor={resource.glow} hoverLift={-6} tilt>
+                  <a
+                    href={resource.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block bg-paper border border-linen rounded-card overflow-hidden"
+                  >
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      <Image
+                        src={resource.image}
+                        alt={resource.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-paper/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink">
+                          {resource.tag}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-3 right-3">
+                        <div className={`w-10 h-10 rounded-full ${resource.color} flex items-center justify-center backdrop-blur-sm`}>
+                          {resource.icon}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-serif text-xl font-semibold text-ink mb-2 group-hover:text-honey transition-colors">
+                        {resource.title}
+                      </h3>
+                      <p className="text-sm text-charcoal/70 mb-4">{resource.description}</p>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-honey group-hover:text-honey-dark transition-colors">
+                        <Play size={14} />
+                        Watch Free Video
+                        <ArrowRight size={14} />
+                      </span>
+                    </div>
+                  </a>
+                </InteractiveCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          CONTENT CHANNELS — Blog & Newsletter
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-28 bg-canvas">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="section-label justify-center mb-3">Stay Inspired</p>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-4">
+                More to <span className="text-honey">Explore</span>
+              </h2>
+              <p className="text-charcoal/70 max-w-2xl mx-auto">
+                Fresh ideas delivered regularly — no account required.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6" staggerDelay={0.1}>
+            {contentChannels.map((channel) => (
+              <StaggerItem key={channel.title} variant="scaleUp">
+                <InteractiveCard glowColor="honey" hoverLift={-4} tilt>
+                  <Link href={channel.href} className="group block bg-paper border border-linen rounded-card overflow-hidden">
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      <Image
+                        src={channel.image}
+                        alt={channel.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-paper/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink">
+                          {channel.tag}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className={`w-10 h-10 rounded-full ${channel.color} flex items-center justify-center`}>
+                          {channel.icon}
+                        </div>
+                        <h3 className="font-serif text-xl font-semibold text-ink group-hover:text-honey transition-colors">
+                          {channel.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-charcoal/70 mb-4">{channel.description}</p>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-honey group-hover:text-honey-dark transition-colors">
+                        Explore
+                        <ArrowRight size={14} />
+                      </span>
+                    </div>
+                  </Link>
+                </InteractiveCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      <SectionTransition variant="swatches" height="md" />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          NEWSLETTER — Inline capture
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-28 bg-ivory">
+        <div className="relative mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal variant="blurIn">
+            <div className="text-center mb-8">
+              <p className="section-label justify-center mb-3">Get Notified</p>
+              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-4">
+                New Resources in Your Inbox
+              </h2>
+              <p className="text-charcoal/70">
+                Be the first to know when we publish new free guides, videos, and lesson plans.
+              </p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1} variant="fadeUp">
+            <NewsletterSignup variant="card" source="resource_library_page" showNameField />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          FINAL CTA
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-28 bg-ink text-paper">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <ScrollReveal variant="blurIn">
-            <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-5">
+            <h2 className="font-serif text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mb-5">
               Want the Full Curriculum?
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.08} variant="fadeUp">
-            <p className="text-lg text-charcoal/80 leading-relaxed mb-8">
+            <p className="text-lg text-canvas/80 leading-relaxed mb-8">
               Explore the complete curriculum collection, art books, and certification
               program for professional educators.
             </p>
@@ -217,14 +438,14 @@ export default function FreeResourcesPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/curriculum"
-                className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-8 py-4 text-base font-semibold text-paper hover:bg-charcoal transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors"
               >
                 Explore Curriculum
                 <ArrowRight size={18} />
               </Link>
               <Link
                 href="/bookstore"
-                className="inline-flex items-center justify-center rounded-button border border-ink text-ink px-8 py-4 text-base font-semibold hover:bg-ink hover:text-paper transition-colors"
+                className="inline-flex items-center justify-center rounded-button border border-paper/30 text-paper px-8 py-4 text-base font-semibold hover:bg-paper/10 transition-colors"
               >
                 View Art Books
               </Link>

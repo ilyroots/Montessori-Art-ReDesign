@@ -10,7 +10,7 @@ export default function DrawingCurriculumPage() {
   return (
     <PlaceholderPage
       title="Drawing Curriculum"
-      description="The full drawing curriculum page is coming soon. In the meantime, explore the Painting Curriculum or start free lessons in the Academy."
+      description="The full drawing curriculum page is coming soon. In the meantime, explore the Painting Curriculum or browse free art teaching resources."
       backHref="/curriculum"
       backLabel="Back to Curriculum"
     />
