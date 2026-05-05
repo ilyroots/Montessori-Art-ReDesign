@@ -9,14 +9,13 @@ import {
   Users,
   Clock,
   Play,
-  ListChecks,
   Palette,
-  Brush,
-  Shapes,
   GraduationCap,
 } from "lucide-react";
 import { HomeHero } from "@/components/home/HomeHero";
-import { MethodProcessSection } from "@/components/sections/MethodProcessSection";
+import { ScienceArtMethodSection } from "@/components/sections/ScienceArtMethodSection";
+import { ScrollStepProgress } from "@/components/sections/ScrollStepProgress";
+import { GlobalReachSection } from "@/components/sections/GlobalReachSection";
 import { NewsletterSignup } from "@/components/forms/NewsletterSignup";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
 import { FloatingAccentShapes } from "@/components/motion/FloatingAccentShapes";
@@ -24,6 +23,7 @@ import { InteractiveCard } from "@/components/visual/InteractiveCard";
 import { AnimatedColorBlobs } from "@/components/visual/AnimatedColorBlobs";
 import { AnimatedGradientMesh } from "@/components/visual/AnimatedGradientMesh";
 import { HorizontalShowcase, ShowcaseCard } from "@/components/visual/HorizontalShowcase";
+import { trackEvent } from "@/lib/analytics";
 
 const methodSteps = [
   {
@@ -73,7 +73,7 @@ const explorePaths = [
     description: "Guides and curriculum for your shelf",
     icon: <BookOpen size={20} />,
     href: "/bookstore",
-    image: "/images/art-shelf-painting.jpg",
+    image: "/images/kids-painting-book.jpg",
     tag: "Books",
     tagColor: "bg-sage/20 text-earth-brown",
   },
@@ -91,7 +91,7 @@ const explorePaths = [
     description: "Materials for the prepared environment",
     icon: <ShoppingBag size={20} />,
     href: "/art-supplies",
-    image: "/images/early-childhood-art.jpg",
+    image: "/images/art-shelf-painting.jpg",
     tag: "Store",
     tagColor: "bg-creative-pink/10 text-creative-pink",
   },
@@ -110,7 +110,7 @@ const curriculumAreas = [
     title: "Drawing",
     lessons: "16–47 studios",
     description: "Developmental drawing from scribble to form",
-    image: "/images/early-childhood-art.jpg",
+    image: "/images/drawing-early-childhood-curriculum.jpg",
     href: "/curriculum/drawing",
     color: "from-kids-blue/15 to-sage/10",
   },
@@ -118,7 +118,7 @@ const curriculumAreas = [
     title: "Color Theory",
     lessons: "37 studios",
     description: "Primary, secondary, and complementary exploration",
-    image: "/images/clay-play.jpg",
+    image: "/images/color-theory-curriculum.jpg",
     href: "/curriculum/color-theory",
     color: "from-creative-pink/15 to-bee-yellow/10",
   },
@@ -132,34 +132,38 @@ const curriculumAreas = [
   },
 ];
 
-const freeResources = [
-  {
-    title: "Painting Checklist",
-    description: "Set up your art shelf with confidence",
-    icon: <ListChecks size={20} />,
-    href: "/free-resources/painting-checklist",
-    image: "/images/art-shelf-painting.jpg",
-  },
+const verifiedFreeResources = [
   {
     title: "Color Mixing Video",
-    description: "Free lesson on primary colors",
+    description: "Free guided lesson on setting up one color prompt",
     icon: <Play size={20} />,
     href: "/free-resources/color-mixing-video",
     image: "/images/child-watercolor-painting.jpg",
+    tag: "Video",
   },
   {
-    title: "Art Shelf Guide",
-    description: "Montessori art environment setup",
-    icon: <Shapes size={20} />,
-    href: "/free-resources/art-shelf-guide",
-    image: "/images/early-childhood-art.jpg",
+    title: "Storybook Art Video",
+    description: "How to theme art activities with storytime books",
+    icon: <Play size={20} />,
+    href: "/free-resources/storybook-art-video",
+    image: "/images/children-painting-classroom.jpg",
+    tag: "Video",
   },
   {
-    title: "Drawing Lessons",
-    description: "Developmentally appropriate activities",
-    icon: <Brush size={20} />,
-    href: "/free-resources/drawing-lessons",
-    image: "/images/clay-play.jpg",
+    title: "Phases of Art Development",
+    description: "Three free videos on developmental art stages",
+    icon: <Video size={20} />,
+    href: "/free-resources/phases-of-art-development",
+    image: "/images/elementary-painting-classroom.jpg",
+    tag: "Video Course",
+  },
+  {
+    title: "Art Education Blog",
+    description: "Articles on Montessori art practice",
+    icon: <BookOpen size={20} />,
+    href: "/blog",
+    image: "/images/child-hands-clay.jpg",
+    tag: "Blog",
   },
 ];
 
@@ -169,21 +173,21 @@ const productCards = [
     description: "Guides on Montessori art education",
     icon: <BookOpen size={20} />,
     href: "/bookstore",
-    image: "/images/art-shelf-painting.jpg",
+    image: "/images/kids-painting-book.jpg",
   },
   {
     title: "Video Training",
     description: "On-demand lessons for educators",
     icon: <Video size={20} />,
     href: "/training",
-    image: "/images/child-watercolor-painting.jpg",
+    image: "/images/painting-outdoors.jpg",
   },
   {
     title: "Art Supplies",
     description: "Materials for the prepared environment",
     icon: <ShoppingBag size={20} />,
     href: "/art-supplies",
-    image: "/images/clay-forms-display.jpg",
+    image: "/images/clay-play.jpg",
   },
 ];
 
@@ -191,12 +195,12 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════════
-          HERO — Massive headline, central action card, floating visuals
+          HERO
           ═══════════════════════════════════════════════════════════════ */}
       <HomeHero />
 
       {/* ═══════════════════════════════════════════════════════════════
-          EXPLORE — Horizontal showcase of public offerings
+          EXPLORE — What We Offer
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-paper overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -210,6 +214,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/curriculum"
+                onClick={() => trackEvent("curriculum_explore_click", { location: "homepage_explore_section" })}
                 className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
                 View all curriculum
@@ -221,8 +226,12 @@ export default function HomePage() {
           <HorizontalShowcase gap={20} cardWidth="300px">
             {explorePaths.map((path) => (
               <ShowcaseCard key={path.title} width="300px">
-                <InteractiveCard glowColor="yellow" hoverLift={-6}>
-                  <Link href={path.href} className="group block overflow-hidden rounded-card">
+                <InteractiveCard glowColor="yellow" hoverLift={-6} tilt>
+                  <Link
+                    href={path.href}
+                    onClick={() => trackEvent("curriculum_area_click", { label: path.title, location: "homepage_explore" })}
+                    className="group block overflow-hidden rounded-card"
+                  >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={path.image}
@@ -254,7 +263,12 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          CURRICULUM — Horizontal showcase of curriculum areas
+          SCIENCE ART METHOD™ — Authority Framework
+          ═══════════════════════════════════════════════════════════════ */}
+      <ScienceArtMethodSection />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          CURRICULUM — Atelier Areas
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-ivory overflow-hidden">
         <AnimatedGradientMesh variant="sunset" intensity="subtle" className="opacity-40" />
@@ -274,7 +288,11 @@ export default function HomePage() {
           <HorizontalShowcase gap={24} cardWidth="280px">
             {curriculumAreas.map((area) => (
               <ShowcaseCard key={area.title} width="280px">
-                <Link href={area.href} className="group block">
+                <Link
+                  href={area.href}
+                  onClick={() => trackEvent("curriculum_area_click", { label: area.title, location: "homepage_atelier" })}
+                  className="group block"
+                >
                   <div className="relative rounded-card overflow-hidden bg-paper border border-linen shadow-card hover:shadow-card-hover transition-shadow">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
@@ -304,57 +322,21 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          METHOD — Clean section with floating stats
+          METHOD — Scroll-driven step progress
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative py-20 sm:py-28 bg-paper overflow-hidden">
-        <FloatingAccentShapes />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <ScrollReveal variant="slideLeft">
-              <div>
-                <p className="section-label mb-3">The Method</p>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em] mb-6">
-                  Six Steps to Art in the Prepared Environment
-                </h2>
-                <p className="text-charcoal/80 leading-relaxed mb-8">
-                  The Nature of Art Method guides educators through a proven approach 
-                  to bringing visual arts into Montessori classrooms and homeschool spaces.
-                </p>
-
-                <StaggerContainer className="grid grid-cols-2 gap-4" staggerDelay={0.08}>
-                  {[
-                    { num: "6", label: "Core Modules", desc: "Step-by-step method" },
-                    { num: "20+", label: "Years Experience", desc: "Montessori art education" },
-                    { num: "6", label: "Continents", desc: "Classrooms worldwide" },
-                    { num: "1000s", label: "Educators Trained", desc: "Through certification" },
-                  ].map((stat) => (
-                    <StaggerItem key={stat.label}>
-                      <div className="bg-ivory border border-linen rounded-card p-4">
-                        <p className="font-serif text-2xl font-bold text-honey">{stat.num}</p>
-                        <p className="text-sm font-medium text-ink">{stat.label}</p>
-                        <p className="text-xs text-charcoal/50">{stat.desc}</p>
-                      </div>
-                    </StaggerItem>
-                  ))}
-                </StaggerContainer>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal variant="slideRight" delay={0.1}>
-              <MethodProcessSection
-                title=""
-                subtitle=""
-                steps={methodSteps}
-                className="bg-transparent"
-                compact
-              />
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      <ScrollStepProgress
+        steps={methodSteps}
+        title="Six Steps to Art in the Prepared Environment"
+        subtitle="The Nature of Art Method guides educators through a proven approach to bringing visual arts into Montessori classrooms and homeschool spaces."
+      />
 
       {/* ═══════════════════════════════════════════════════════════════
-          FREE RESOURCES — Horizontal carousel
+          GLOBAL REACH — Authority / reputation
+          ═══════════════════════════════════════════════════════════════ */}
+      <GlobalReachSection />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          FREE RESOURCES — Verified only
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-ivory overflow-hidden">
         <AnimatedColorBlobs intensity="subtle" className="opacity-20" />
@@ -362,26 +344,31 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
               <div>
-                <p className="section-label mb-2">Free Resources</p>
+                <p className="section-label mb-2">Resource Library</p>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
                   Start With <span className="text-honey">Free</span>
                 </h2>
               </div>
               <Link
                 href="/free-resources"
+                onClick={() => trackEvent("resource_card_click", { label: "view_all", location: "homepage_free_resources" })}
                 className="inline-flex items-center gap-1 text-sm font-medium text-honey hover:text-earth-brown transition-colors"
               >
-                View all free resources
+                Explore the Resource Library
                 <ArrowRight size={16} />
               </Link>
             </div>
           </ScrollReveal>
 
           <HorizontalShowcase gap={20} cardWidth="280px">
-            {freeResources.map((resource) => (
+            {verifiedFreeResources.map((resource) => (
               <ShowcaseCard key={resource.title} width="280px">
-                <InteractiveCard glowColor="honey" hoverLift={-4}>
-                  <Link href={resource.href} className="group block overflow-hidden rounded-card">
+                <InteractiveCard glowColor="honey" hoverLift={-4} tilt>
+                  <Link
+                    href={resource.href}
+                    onClick={() => trackEvent("resource_card_click", { label: resource.title, location: "homepage_free_resources" })}
+                    className="group block overflow-hidden rounded-card"
+                  >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={resource.image}
@@ -390,6 +377,11 @@ export default function HomePage() {
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                         sizes="280px"
                       />
+                      <div className="absolute top-3 left-3">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-paper/90 backdrop-blur-sm px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink">
+                          {resource.tag}
+                        </span>
+                      </div>
                     </div>
                     <div className="p-5 text-center">
                       <div className="w-10 h-10 mx-auto rounded-full bg-canvas flex items-center justify-center mb-3 text-honey border border-linen">
@@ -462,6 +454,7 @@ export default function HomePage() {
                 </StaggerContainer>
                 <Link
                   href="/certification"
+                  onClick={() => trackEvent("certification_cta_click", { location: "homepage_certification" })}
                   className="inline-flex items-center justify-center rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors shadow-lifted hover:shadow-dramatic"
                 >
                   Explore Certification
@@ -473,7 +466,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          BOOKS & SUPPLIES — Horizontal carousel
+          BOOKS & SUPPLIES
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-ivory overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -492,8 +485,12 @@ export default function HomePage() {
           <HorizontalShowcase gap={24} cardWidth="340px">
             {productCards.map((item) => (
               <ShowcaseCard key={item.title} width="340px">
-                <InteractiveCard glowColor="honey" hoverLift={-6}>
-                  <Link href={item.href} className="group block card-editorial overflow-hidden">
+                <InteractiveCard glowColor="honey" hoverLift={-6} tilt>
+                  <Link
+                    href={item.href}
+                    onClick={() => trackEvent("store_category_click", { label: item.title, location: "homepage_products" })}
+                    className="group block card-editorial overflow-hidden"
+                  >
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={item.image}
@@ -521,7 +518,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FOUNDER — Clean authority section
+          FOUNDER
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-paper overflow-hidden">
         <FloatingAccentShapes />
@@ -558,7 +555,7 @@ export default function HomePage() {
                   <p>
                     Her approach combines deep respect for the Montessori method with
                     a passion for process-based art. The result is a pedagogy that
-                    honors both structure and creative freedom.
+                    honors both structure and creative freedom — the Science Art Method™.
                   </p>
                 </div>
                 <div className="mt-8">
@@ -577,7 +574,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          NEWSLETTER — Subtle card section
+          NEWSLETTER
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-ivory overflow-hidden">
         <AnimatedGradientMesh variant="cool" intensity="subtle" className="opacity-30" />
@@ -589,7 +586,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          FINAL CTA — Dark section with floating elements
+          FINAL CTA
           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative py-20 sm:py-28 bg-ink overflow-hidden">
         <AnimatedGradientMesh variant="forest" intensity="subtle" className="opacity-25" />
@@ -609,6 +606,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/curriculum"
+                onClick={() => trackEvent("curriculum_cta_click", { location: "homepage_final_cta" })}
                 className="inline-flex items-center justify-center gap-2 rounded-button bg-bee-yellow px-8 py-4 text-base font-semibold text-ink hover:bg-bee-yellow/90 transition-colors shadow-lifted"
               >
                 Explore Curriculum
@@ -616,6 +614,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/free-resources"
+                onClick={() => trackEvent("resource_card_click", { label: "final_cta", location: "homepage_final_cta" })}
                 className="inline-flex items-center justify-center rounded-button border border-paper/30 text-paper px-8 py-4 text-base font-semibold hover:bg-paper/10 transition-colors"
               >
                 Get Free Resources

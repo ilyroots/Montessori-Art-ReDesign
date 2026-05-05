@@ -24,16 +24,26 @@ import { ANALYTICS_CONFIG } from "@/config/integrations";
 
 export type AnalyticsEvent =
   | "newsletter_submit"
+  | "newsletter_cta_click"
   | "lead_magnet_submit"
   | "lead_magnet_fallback_click"
+  | "free_video_cta_click"
   | "buy_button_click"
   | "checkout_started"
   | "certification_interest"
+  | "certification_cta_click"
   | "bookstore_click"
   | "art_supply_click"
+  | "store_category_click"
+  | "store_product_click"
   | "contact_submit"
   | "free_resource_view"
+  | "resource_card_click"
+  | "resource_download_click"
   | "curriculum_view"
+  | "curriculum_explore_click"
+  | "curriculum_area_click"
+  | "curriculum_purchase_click"
   | "training_view"
   | "page_view";
 

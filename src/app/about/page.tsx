@@ -4,6 +4,7 @@ import { createMetadata } from "@/lib/seo";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { MagneticPills } from "@/components/motion/MagneticPills";
 import { LayeredSection } from "@/components/sections/LayeredSection";
+import { GlobalReachSection } from "@/components/sections/GlobalReachSection";
 import { SectionTransition } from "@/components/visual/SectionTransition";
 import { FloatingAccentShapes } from "@/components/motion/FloatingAccentShapes";
 import {
@@ -21,7 +22,7 @@ import {
 export const metadata = createMetadata({
   title: "About — Nature of Art®",
   description:
-    "Learn about Spramani Elaun, founder of Nature of Art®, and our mission to bring meaningful visual arts into the Montessori environment.",
+    "Learn about Spramani Elaun, founder of Nature of Art®, and our mission to bring meaningful visual arts into the Montessori environment through the Science Art Method™.",
 });
 
 const serviceCategories = [
@@ -154,9 +155,15 @@ export default function AboutPage() {
                     Art School & Art Supply company.
                   </p>
                   <p>
-                    Her method is based on long-term observation and practice around how children
-                    process art. She has helped teachers and parents around the world bring
-                    meaningful visual arts into the lives of children.
+                    Her method — the <strong className="text-ink">Science Art Method™</strong> — is based on
+                    long-term observation and practice around how children process art. She has
+                    helped teachers and parents around the world bring meaningful visual arts
+                    into the lives of children.
+                  </p>
+                  <p>
+                    For over two decades, her work has reached educators, schools, and families
+                    across multiple continents through curriculum, training, books, and a
+                    distinctive visual arts approach.
                   </p>
                 </div>
 
@@ -202,6 +209,11 @@ export default function AboutPage() {
       </LayeredSection>
 
       <SectionTransition variant="swatches" height="lg" />
+
+      {/* Global Reach */}
+      <GlobalReachSection />
+
+      <SectionTransition variant="swatches" height="md" />
 
       {/* About the Company */}
       <LayeredSection

@@ -103,6 +103,8 @@ export const analyticsEvents = {
   resourceCardClick: "resource_card_click",
   resourceVideoPlay: "resource_video_play",
   resourceDownloadClick: "resource_download_click",
+  freeVideoCtaClick: "free_video_cta_click",
+  freeResourceView: "free_resource_view",
 
   // Newsletter
   newsletterCtaClick: "newsletter_cta_click",
@@ -113,6 +115,8 @@ export const analyticsEvents = {
   curriculumExploreClick: "curriculum_explore_click",
   curriculumAreaClick: "curriculum_area_click",
   curriculumPurchaseClick: "curriculum_purchase_click",
+  curriculumCtaClick: "curriculum_cta_click",
+  curriculumView: "curriculum_view",
 
   // Store
   storeCategoryClick: "store_category_click",
@@ -120,10 +124,23 @@ export const analyticsEvents = {
 
   // Certification
   certificationCtaClick: "certification_cta_click",
+  certificationInterest: "certification_interest",
 
   // Contact
   contactFormSubmit: "contact_form_submit",
   contactFormSuccess: "contact_form_success",
+
+  // Lead Magnet
+  leadMagnetSubmit: "lead_magnet_submit",
+  leadMagnetFallbackClick: "lead_magnet_fallback_click",
+
+  // Generic
+  pageView: "page_view",
+  buyButtonClick: "buy_button_click",
+  checkoutStarted: "checkout_started",
+  bookstoreClick: "bookstore_click",
+  artSupplyClick: "art_supply_click",
+  trainingView: "training_view",
 } as const;
 
 // ------------------------------------------------------------------
