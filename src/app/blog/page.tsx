@@ -35,6 +35,16 @@ const categoryStyles: Record<string, string> = {
   Painting: "bg-creative-pink/10 text-creative-pink",
   "Art Shelf": "bg-sage/10 text-sage",
   Homeschool: "bg-bee-yellow/15 text-honey",
+  "Art Activities": "bg-creative-pink/10 text-creative-pink",
+  "Art Supplies": "bg-kids-blue/10 text-kids-blue",
+  "Field Trips": "bg-earth-brown/10 text-earth-brown",
+  Seasonal: "bg-bee-yellow/15 text-honey",
+  "Art Language": "bg-sage/10 text-sage",
+  Journaling: "bg-honey/10 text-honey",
+  Pedagogy: "bg-creative-pink/10 text-creative-pink",
+  Methodology: "bg-kids-blue/10 text-kids-blue",
+  Development: "bg-sage/10 text-sage",
+  "Color Theory": "bg-bee-yellow/15 text-honey",
 };
 
 export default function BlogPage() {
