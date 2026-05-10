@@ -1,7 +1,7 @@
 # Responsive QA — Montessori Art Website Redesign
 
 > **Purpose:** Document responsive behavior, mobile constraints, and QA checklist for all breakpoints.  
-> **Last updated:** 2026-05-02  
+> **Last updated:** 2026-05-10  
 > **Test breakpoints:** 320px, 375px, 414px, 768px, 1024px, 1280px, 1440px
 
 ---
@@ -173,9 +173,69 @@ Caption: 12px / 1.4 line-height
 ### Certification (`/certification`)
 - [ ] Dark hero readable on all screens
 - [ ] Stats bar 2x2 on mobile, 4-col on desktop
+- [ ] Stats show verified data only (50+ CPD Hours, 60+ Videos, 3 Years Access, Certificate)
+- [ ] No unverified testimonials visible
 - [ ] Module cards 1→2→3 columns
 - [ ] Outcomes section stacks on mobile
 - [ ] Licensing box readable
+- [ ] "Request Program Details" CTA visible, no hard pricing
+- [ ] FAQ accordion works on mobile tap
+- [ ] Science Art Method™ governance restrictions preserved
+
+### Bookstore (`/bookstore`)
+- [ ] Hero headline readable at 320px
+- [ ] Filter tabs wrap cleanly on mobile
+- [ ] Sort dropdown accessible on mobile
+- [ ] Product grid 1→2→3 columns
+- [ ] Book cards show "Price pending verification" for unverified items
+- [ ] Curriculum product cards link to native pages
+- [ ] Legacy catalog CTA visible and tappable
+- [ ] No broken checkout links
+
+### Art Supplies (`/art-supplies`)
+- [ ] Hero headline readable at 320px
+- [ ] Hero image stacks below text on mobile
+- [ ] Store notice banner wraps cleanly on small screens
+- [ ] Category cards stack 1→2→3→4 columns
+- [ ] Featured area cards stack 1→2→3 columns
+- [ ] Support link buttons wrap and remain tappable
+- [ ] Related path cards stack 1→2→4 columns
+- [ ] External link icons visible and clear
+- [ ] Final CTA buttons stack on mobile
+- [ ] Fine print text remains readable
+
+### Free Resources (`/free-resources`)
+- [ ] Hero headline readable at 320px
+- [ ] Resource cards stack 1→2→3 columns
+- [ ] Content channel cards stack 1→2 columns
+- [ ] Newsletter signup form stacks on mobile
+- [ ] "No credit card required" note visible
+- [ ] Final CTA buttons stack on mobile
+
+### Contact (`/contact`)
+- [ ] Hero headline readable at 320px
+- [ ] Contact option cards stack 1→2→5 columns
+- [ ] Form inputs stack on mobile
+- [ ] Contact info (email, address) tappable
+- [ ] Info@Spramani.com mailto link works
+- [ ] Facebook and LinkedIn external links open correctly
+- [ ] Form submit button full-width on mobile
+
+### Newsletter (`/newsletter`)
+- [ ] Hero headline readable at 320px
+- [ ] Benefits grid stacks on mobile
+- [ ] NewsletterSignup form stacks on mobile
+- [ ] Privacy note visible
+- [ ] Related links wrap cleanly
+
+### Blog (`/blog`)
+- [ ] Hero headline readable at 320px
+- [ ] Featured post cards stack 1→2 columns
+- [ ] Cards link to original WordPress URLs
+- [ ] "Image pending migration" placeholder visible
+- [ ] Migration note banner readable
+- [ ] Category tags wrap cleanly
+- [ ] No invented author names or dates visible
 
 ### Lead Magnet Pages (`/free-resources/*`)
 - [ ] Hero headline readable at 320px (max ~2.25rem on smallest screens)
@@ -230,3 +290,8 @@ Caption: 12px / 1.4 line-height
 - [ ] Add mobile-specific image sizes
 - [ ] Test form submission flow on actual mobile devices
 - [ ] Verify tap targets on smallest screen (320px iPhone SE)
+- [ ] Certification: module count needs backend verification (currently 6 modules shown, product says 7-week program)
+- [ ] Certification: pricing hidden behind "Request Program Details" — needs Keap/Leadpages integration test
+- [ ] Blog: full post content and images pending WordPress export
+- [ ] Bookstore: unverified book prices marked pending — need catalog audit
+- [ ] Forms: Keap integration not yet enabled in production (KEAP_ENABLED=false)

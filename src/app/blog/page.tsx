@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { LayeredSection } from "@/components/sections/LayeredSection";
 import { SectionTransition } from "@/components/visual/SectionTransition";
 import { InteractiveCard } from "@/components/visual/InteractiveCard";
-import { homepageExtract } from "@/config/publicContentExtract";
+import { blogPostExtracts } from "@/config/publicContentExtract";
 import { blogCategories } from "@/config/blogCategories";
 import { ArrowRight, Newspaper } from "lucide-react";
 
@@ -14,11 +14,14 @@ export const metadata = createMetadata({
     "Articles and ideas for teaching children visual arts through prepared environments, materials, observation, and process. By Spramani Elaun and Nature of Art®.",
 });
 
-// Featured posts from verified homepage extraction
-const featuredPosts = homepageExtract.featuredBlogPosts.map((post) => ({
-  ...post,
-  // Fallback to original WordPress URL until content is migrated
-  fallbackUrl: `https://montessori-art.com/${post.slug}/`,
+// Featured posts from public blog extraction
+// Only publicly visible data is used — no invented authors, dates, or full content.
+const featuredPosts = blogPostExtracts.map((post) => ({
+  title: post.title,
+  slug: post.slug,
+  category: post.category,
+  // Link to original WordPress post until full export is available
+  fallbackUrl: post.sourceUrl,
   excerpt: "Full article content pending WordPress export.",
   image: undefined,
 }));

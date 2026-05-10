@@ -26,9 +26,9 @@ export default function CertificationPage() {
       primaryCtaLabel="Request Program Details"
       primaryCtaHref={siteMapEntry?.fallbackExternalUrl || "/contact"}
       stats={[
-        { label: "Modules", value: "6" },
-        { label: "Years of Experience", value: "20+" },
-        { label: "Self-Paced", value: "Yes" },
+        { label: "CPD Hours", value: "50+" },
+        { label: "Training Videos", value: "60+" },
+        { label: "Access Period", value: "3 Years" },
         { label: "Certificate", value: "Included" },
       ]}
       problemParagraphs={[
@@ -97,13 +97,11 @@ export default function CertificationPage() {
         "Anyone seeking craft templates rather than pedagogy",
       ]}
       licensingText="The Art Teaching Blueprint™ Certification is a professional development credential in visual arts education. Certified facilitators may teach visual arts directly to children. They may not train, certify, or credential other educators, nor reproduce or rebrand the Science Art Method™. It does not replace an AMI or AMS Montessori credential, but complements any early childhood or elementary teaching background."
-      testimonials={[
-        {
-          quote:
-            "The Art Teaching Blueprint changed how I approach art in my classroom. I finally feel confident.",
-          author: "Dawn Mc Gregor",
-          role: "Montessori Guide",
-        },
+      testimonials={[]}
+      trustBadges={[
+        "7-week professional program",
+        "Self-paced online training",
+        "Certificate on completion",
       ]}
       faqItems={[
         {
