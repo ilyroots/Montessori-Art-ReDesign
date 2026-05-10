@@ -49,7 +49,7 @@ export function NewsletterSignup({
       {!isFooter && (
         <div className="mb-4">
           <h3 className="font-serif text-lg font-semibold text-ink">
-            Get art inspiration in your inbox
+            Get art inspiration weekly in your inbox
           </h3>
           <p className="mt-1 text-sm text-charcoal/70">
             Free lessons, setup tips, and Montessori art guidance.

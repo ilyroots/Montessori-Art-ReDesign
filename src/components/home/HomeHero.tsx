@@ -22,7 +22,7 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          The Modern Montessori Art Atelier
+          The Science Art Method®
         </motion.p>
 
         <motion.h1
@@ -31,9 +31,9 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          Teach Children Visual Arts With{" "}
-          <span className="text-honey">Structure, Freedom,</span>{" "}
-          and <span className="italic">Wonder.</span>
+          Teach Children Visual Arts with{" "}
+          <span className="text-honey">Structure, Art Literacy,</span>{" "}
+          and <span className="italic">Sensory Learning.</span>
         </motion.h1>
 
         <motion.p
@@ -42,9 +42,8 @@ export function HomeHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          Nature of Art® helps Montessori guides, homeschool families, and educators
-          bring painting, drawing, clay, color theory, and process-based art into the
-          prepared environment.
+          Montessori provides the learning environment. Nature of Art® provides the art
+          pedagogy, helping Montessori guides, homeschool families, and educators.
         </motion.p>
 
         <motion.div
