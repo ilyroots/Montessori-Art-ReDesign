@@ -129,7 +129,7 @@ export function DrawingClient({ siteMapEntry }: DrawingClientProps) {
           "Ages 3–12 years",
           product.format,
           "Two Editions Available",
-        ]}
+        ].filter(Boolean) as string[]}
         annotation="Every artist was first an amateur."
         annotationAuthor="Ralph Waldo Emerson"
         image={"/images/drawing/original-11.jpg"}
