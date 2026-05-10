@@ -20,9 +20,10 @@ const featuredPosts = blogPostExtracts.map((post) => ({
   title: post.title,
   slug: post.slug,
   category: post.category,
+  date: post.date,
   // Link to original WordPress post until full export is available
   fallbackUrl: post.sourceUrl,
-  excerpt: "Full article content pending WordPress export.",
+  excerpt: post.excerpt || "Full article content pending WordPress export.",
   image: undefined,
 }));
 
@@ -111,6 +112,15 @@ export default function BlogPage() {
                       <h3 className="font-serif text-lg font-semibold text-ink group-hover:text-honey transition-colors leading-snug mb-2">
                         {post.title}
                       </h3>
+                      {post.date && (
+                        <p className="text-xs text-charcoal/40 mb-2">
+                          {new Date(post.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                      )}
                       <p className="text-sm text-charcoal/60 line-clamp-2 mb-4">
                         {post.excerpt}
                       </p>
