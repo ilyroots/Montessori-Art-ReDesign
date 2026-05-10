@@ -140,9 +140,10 @@ export const curriculumPages: ExistingPageEntry[] = [
     platform: "Keap",
     action: "redirect",
     category: "curriculum",
-    integrationStatus: "mapped",
+    integrationStatus: "native-page-built",
+    fallbackExternalUrl: "https://keap.page/hj952/painting-work-art-album.html",
     keapUrl: "https://keap.page/hj952/painting-work-art-album.html",
-    notes: "Companion to Kids Painting. 7 key lessons. NOT the same product. Pricing: $97 printed / $45 digital.",
+    notes: "Companion to Kids Painting. 7 key lessons. NOT the same product. Pricing: $97 printed / $45 digital. Native sales page built with gallery and content area scope.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/drawing-curriculum/",
