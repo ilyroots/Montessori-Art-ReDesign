@@ -1,18 +1,14 @@
 import { createMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
+import { getPageByNewPath } from "@/config/existingSiteMap";
+import { DrawingClient } from "./DrawingClient";
 
 export const metadata = createMetadata({
-  title: "Drawing — Montessori Art Curriculum",
-  description: "From early mark-making to representational drawing — a developmental sequence for every stage.",
+  title: "Drawing Curriculum — Montessori Art Education",
+  description:
+    "A structured drawing curriculum with Early Childhood (16 studios) and Elementary (47 studios) editions. Science Art Method™ by Nature of Art®.",
 });
 
 export default function DrawingCurriculumPage() {
-  return (
-    <PlaceholderPage
-      title="Drawing Curriculum"
-      description="The full drawing curriculum page is coming soon. In the meantime, explore the Painting Curriculum or browse free art teaching resources."
-      backHref="/curriculum"
-      backLabel="Back to Curriculum"
-    />
-  );
+  const siteMapEntry = getPageByNewPath("/curriculum/drawing");
+  return <DrawingClient siteMapEntry={siteMapEntry} />;
 }

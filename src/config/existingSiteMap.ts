@@ -151,10 +151,10 @@ export const curriculumPages: ExistingPageEntry[] = [
     platform: "Leadpages",
     action: "redirect",
     category: "curriculum",
-    integrationStatus: "mapped",
+    integrationStatus: "native-page-built",
     fallbackExternalUrl: "https://spramani.lpages.co/drawing-curriculum/",
     leadpagesUrl: "https://spramani.lpages.co/drawing-curriculum/",
-    notes: "Two editions: Early Childhood (16 studios, $135/$72) and Elementary (47 studios, $155/$97).",
+    notes: "Two editions: Early Childhood (16 studios, $135/$72) and Elementary (47 studios, $155/$97). Native sales page with dual-edition gallery and scope sections.",
   },
   {
     legacyUrl: "https://spramani.lpages.co/color-theory-curriculum-sales-page/",
