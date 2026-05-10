@@ -175,10 +175,10 @@ export const curriculumPages: ExistingPageEntry[] = [
     platform: "Leadpages",
     action: "redirect",
     category: "curriculum",
-    integrationStatus: "mapped",
+    integrationStatus: "native-page-built",
     fallbackExternalUrl: "https://spramani.lpages.co/clay-modeling-curriculum/",
     leadpagesUrl: "https://spramani.lpages.co/clay-modeling-curriculum/",
-    notes: "29 clay studio experiences. CONFLICT: bookstore says 27 lessons. Pricing: $145 paperback / $97 digital.",
+    notes: "29 clay studio experiences. Native sales page built with gallery, 29-studio scope, and instructor portrait. Pricing: $145 paperback / $97 digital.",
   },
 ];
 

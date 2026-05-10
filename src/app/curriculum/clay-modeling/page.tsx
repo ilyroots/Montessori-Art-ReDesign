@@ -1,18 +1,14 @@
 import { createMetadata } from "@/lib/seo";
-import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
+import { getPageByNewPath } from "@/config/existingSiteMap";
+import { ClayModelingClient } from "./ClayModelingClient";
 
 export const metadata = createMetadata({
-  title: "Clay Modeling — Montessori Art Curriculum",
-  description: "Sensory-rich clay exploration that strengthens fine motor skills and three-dimensional thinking.",
+  title: "Kids Clay Modeling — Montessori Art Curriculum",
+  description:
+    "A structured clay modeling curriculum with 29 studio experiences organized by increasing material handling and sculptural complexity. Science Art Method™ by Nature of Art®.",
 });
 
 export default function ClayModelingCurriculumPage() {
-  return (
-    <PlaceholderPage
-      title="Clay Modeling Curriculum"
-      description="The full clay modeling curriculum page is coming soon. In the meantime, explore the Painting Curriculum or browse free art teaching resources."
-      backHref="/curriculum"
-      backLabel="Back to Curriculum"
-    />
-  );
+  const siteMapEntry = getPageByNewPath("/curriculum/clay-modeling");
+  return <ClayModelingClient siteMapEntry={siteMapEntry} />;
 }
