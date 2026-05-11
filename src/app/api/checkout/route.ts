@@ -1,15 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * Stripe Checkout API Route
- * 
- * Creates a Stripe Checkout session for the items in the cart.
- * Returns 503 STRIPE_NOT_CONFIGURED if Stripe credentials are not set.
- * 
- * Environment variables required:
- * - STRIPE_SECRET_KEY
- * - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
- * - STRIPE_WEBHOOK_SECRET
+ * Stripe Checkout API Route — STUB
+ *
+ * This route is prepared for Stripe integration but currently returns
+ * 503 STRIPE_NOT_CONFIGURED because the stripe package is not installed
+ * and no price IDs have been configured.
+ *
+ * To activate:
+ * 1. npm install stripe
+ * 2. Add STRIPE_SECRET_KEY and NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY env vars
+ * 3. Add stripePriceId to products in src/config/storeProducts.ts
+ * 4. Replace this stub with the full implementation below
+ *
+ * Full implementation (save for later):
+ *   const Stripe = require("stripe");
+ *   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-12-18.acacia" });
+ *   const session = await stripe.checkout.sessions.create({...});
  */
 
 interface CheckoutItem {
@@ -30,6 +37,7 @@ export async function POST(request: NextRequest) {
     stripeSecretKey.startsWith("sk_") &&
     !!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 
+  // Always return 503 until stripe is installed and configured
   if (!isConfigured) {
     return NextResponse.json(
       {
@@ -43,6 +51,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // If we reach here, keys are set but stripe package isn't installed.
+  // This is a safety net — shouldn't happen in production.
   try {
     const body: CheckoutBody = await request.json();
 
@@ -53,66 +63,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Dynamically import Stripe to avoid build-time dependency
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const stripeModule: any = await import("stripe");
-    const StripeConstructor = stripeModule.default || stripeModule;
-    const stripe = new StripeConstructor(stripeSecretKey, {
-      apiVersion: "2024-12-18.acacia",
-    });
-
-    // Build line items from cart
-    // NOTE: This requires stripePriceId to be set on products.
-    // For now, we return an error since no products have stripePriceId configured.
-    const lineItems = body.items
-      .map(() => {
-        // In a full implementation, look up the product by ID
-        // and use its stripePriceId here.
-        // const product = getProductById(item.productId);
-        // if (!product?.stripePriceId) return null;
-        // return { price: product.stripePriceId, quantity: item.quantity };
-        return null;
-      })
-      .filter(Boolean);
-
-    if (lineItems.length === 0) {
-      return NextResponse.json(
-        {
-          success: false,
-          errorCode: "NO_STRIPE_PRICES",
-          message:
-            "No products in your cart have Stripe price IDs configured yet. Please use the Volusion store.",
-          fallbackUrl: "https://atosb-raxtf.volusion.store/shoppingcart.asp",
-        },
-        { status: 503 }
-      );
-    }
-
-    const origin = request.headers.get("origin") || "https://montessori-art.com";
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: lineItems as { price: string; quantity: number }[],
-      success_url: body.successUrl || `${origin}/cart?success=true`,
-      cancel_url: body.cancelUrl || `${origin}/cart?canceled=true`,
-      shipping_address_collection: {
-        allowed_countries: ["US", "CA"],
+    return NextResponse.json(
+      {
+        success: false,
+        errorCode: "STRIPE_LIBRARY_MISSING",
+        message:
+          "Stripe library is not installed. Run 'npm install stripe' and redeploy to activate checkout.",
+        fallbackUrl: "https://atosb-raxtf.volusion.store/shoppingcart.asp",
       },
-      automatic_tax: { enabled: false },
-    });
-
-    return NextResponse.json({
-      success: true,
-      sessionId: session.id,
-      url: session.url,
-    });
-  } catch (error) {
-    console.error("Checkout error:", error);
+      { status: 503 }
+    );
+  } catch {
     return NextResponse.json(
       {
         success: false,
         errorCode: "CHECKOUT_ERROR",
-        message: "Unable to create checkout session. Please try again or use the Volusion store.",
+        message: "Unable to process checkout. Please use the Volusion store.",
         fallbackUrl: "https://atosb-raxtf.volusion.store/shoppingcart.asp",
       },
       { status: 500 }
