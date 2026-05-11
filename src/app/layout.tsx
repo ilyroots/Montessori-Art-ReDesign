@@ -3,6 +3,8 @@ import { Playfair_Display, Outfit, Caveat } from "next/font/google";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { CartProvider } from "@/lib/store/useCart";
+import { CartDrawer } from "@/components/store/CartDrawer";
 import { defaultMetadata } from "@/lib/seo";
 
 const playfair = Playfair_Display({
@@ -36,9 +38,12 @@ export default function RootLayout({
       className={`${playfair.variable} ${outfit.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory text-ink">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <CartDrawer />
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

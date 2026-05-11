@@ -13,80 +13,41 @@ import {
   Scissors,
   GraduationCap,
   Library,
-  Newspaper,
-  ExternalLink,
   ArrowRight,
-  Truck,
   ShieldCheck,
-  MapPin,
-  HelpCircle,
-  User,
-  ShoppingCart,
-  Mail,
-  Tag,
+  ShoppingBag,
+  ExternalLink,
 } from "lucide-react";
-import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/motion/ScrollReveal";
-import { FinalCTA } from "@/components/sections/FinalCTA";
-import { SectionTransition } from "@/components/visual/SectionTransition";
-import { InteractiveCard } from "@/components/visual/InteractiveCard";
-import type { StoreCategory } from "@/config/storeCategories";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { storeCategories, storeProducts, getTopLevelCategories, getProductsByCategory } from "@/config/storeProducts";
+import { ProductCard } from "@/components/store/ProductCard";
 
-// Map category IDs to Lucide icons
 const categoryIcons: Record<string, React.ReactNode> = {
-  paints: <Palette size={24} />,
-  "art-curriculum": <BookOpen size={24} />,
-  "painting-materials": <Paintbrush size={24} />,
-  drawing: <Pencil size={24} />,
-  clay: <Shapes size={24} />,
-  crayons: <PenTool size={24} />,
-  paper: <FileText size={24} />,
-  crafts: <Scissors size={24} />,
-  "art-teaching-books": <GraduationCap size={24} />,
-  "art-books": <Library size={24} />,
-  "art-blog-articles": <Newspaper size={24} />,
+  paints: <Palette size={22} />,
+  drawing: <Pencil size={22} />,
+  clay: <Shapes size={22} />,
+  crayons: <PenTool size={22} />,
+  paper: <FileText size={22} />,
+  crafts: <Scissors size={22} />,
+  "art-books": <Library size={22} />,
+  "art-curriculum-top": <GraduationCap size={22} />,
 };
 
-// Map support link IDs to icons
-const supportIcons: Record<string, React.ReactNode> = {
-  "about-us": <User size={16} />,
-  returns: <Tag size={16} />,
-  shipping: <Truck size={16} />,
-  "site-help": <HelpCircle size={16} />,
-  "my-cart": <ShoppingCart size={16} />,
-  "my-account": <User size={16} />,
-  contact: <Mail size={16} />,
-  newsletter: <Mail size={16} />,
-};
-
-interface ArtSuppliesClientProps {
-  categories: StoreCategory[];
-  supportLinks: StoreCategory[];
-  notice: {
-    headline: string;
-    shipping: string;
-    tagline: string;
-    storefrontUrl: string;
-  };
-}
-
-export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppliesClientProps) {
-  const isExternal = (href: string) => href.startsWith("http");
+export function ArtSuppliesClient() {
+  const topCategories = getTopLevelCategories();
+  const featuredProducts = storeProducts
+    .filter((p) => p.priceVerified && p.price > 0)
+    .slice(0, 8);
 
   return (
-    <>
+    <div className="min-h-screen bg-ivory">
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-ivory">
         <div className="absolute inset-0 honeycomb-accent opacity-30 pointer-events-none" />
         <div className="absolute inset-0 grain-overlay pointer-events-none" />
 
-        {/* Decorative swatches */}
-        <div className="hidden lg:block absolute top-24 right-[12%] w-8 h-8 rounded-full bg-bee-yellow/70 border-2 border-paper shadow-sm" />
-        <div className="hidden lg:block absolute top-44 right-[8%] w-5 h-5 rounded-full bg-kids-blue/50 border-2 border-paper shadow-sm" />
-        <div className="hidden lg:block absolute bottom-40 right-[18%] w-6 h-6 rounded-full bg-creative-pink/60 border-2 border-paper shadow-sm" />
-
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Text */}
             <div className="lg:col-span-7">
               <ScrollReveal variant="blurIn">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-bee-yellow/15 border border-bee-yellow/20 px-3 py-1 text-xs font-semibold text-honey uppercase tracking-wider mb-5">
@@ -97,432 +58,203 @@ export function ArtSuppliesClient({ categories, supportLinks, notice }: ArtSuppl
 
               <ScrollReveal delay={0.05} variant="blurIn">
                 <h1 className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-semibold text-ink leading-[1.05] tracking-[-0.02em] mb-6">
-                  Art Supplies for Prepared Creative Environments
+                  Art Supplies for{" "}
+                  <span className="text-honey">Prepared</span> Creative Environments
                 </h1>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.1} variant="fadeUp">
-                <p className="text-lg sm:text-xl text-charcoal/80 leading-relaxed max-w-xl mb-8">
-                  Premium safe non-toxic art supplies, curriculum materials, and teaching resources for Montessori and children&apos;s art environments.
+              <ScrollReveal delay={0.1} variant="blurIn">
+                <p className="text-lg text-charcoal/70 leading-relaxed max-w-xl mb-8">
+                  Curated by art teacher and mom Spramani Elaun. Every product is
+                  child-safe, non-toxic, and chosen to support Montessori, Waldorf,
+                  and homeschool art programs.
                 </p>
               </ScrollReveal>
 
-              <ScrollReveal delay={0.15} variant="fadeUp">
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <ScrollReveal delay={0.15} variant="blurIn">
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="#categories"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-honey text-white font-medium rounded-xl hover:bg-honey/90 transition-colors shadow-lg shadow-honey/20"
+                  >
+                    <ShoppingBag size={18} />
+                    Browse Categories
+                  </Link>
                   <a
-                    href={notice.storefrontUrl}
+                    href="https://atosb-raxtf.volusion.store/default.asp"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-button bg-ink px-7 py-3.5 text-sm font-semibold text-paper hover:bg-charcoal transition-colors duration-200"
+                    className="inline-flex items-center gap-2 px-6 py-3 border border-linen text-charcoal font-medium rounded-xl hover:border-honey/30 hover:text-honey transition-colors"
                   >
-                    Visit Current Store
-                    <ExternalLink size={16} />
+                    <ExternalLink size={18} />
+                    Original Store
                   </a>
-                  <Link
-                    href="/bookstore"
-                    className="inline-flex items-center justify-center rounded-button border border-ink text-ink px-7 py-3.5 text-sm font-semibold hover:bg-ink hover:text-paper transition-colors duration-200"
-                  >
-                    Explore Art Books
-                  </Link>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.2} variant="fadeUp">
-                <div className="flex flex-wrap gap-x-5 gap-y-2">
-                  <span className="text-xs text-charcoal/50">11 supply categories</span>
-                  <span className="text-xs text-charcoal/50">USPS shipping</span>
-                  <span className="text-xs text-charcoal/50">U.S. only</span>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* Image */}
-            <div className="lg:col-span-5 relative">
-              <ScrollReveal delay={0.1} variant="scaleUp">
-                <div className="relative aspect-[4/3] rounded-card bg-canvas border border-linen overflow-hidden shadow-card">
-                  <Image
-                    src="/images/art-shelf-painting.jpg"
-                    alt="Art supplies arranged on a shelf for children's creative environment"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    priority
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-paper border border-linen rounded-card p-4 shadow-card-hover max-w-[160px] rotate-2 hidden sm:block">
-                  <p className="font-hand text-sm text-creative-pink leading-snug">
-                    &ldquo;Every child is an artist.&rdquo;
-                  </p>
-                  <p className="text-[10px] text-charcoal/40 mt-1">— Pablo Picasso</p>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Store Notice Banner ── */}
-      <SectionTransition variant="swatches" height="sm" />
-      <section className="border-y border-linen bg-paper">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-charcoal/70">
-            <span className="inline-flex items-center gap-1.5 font-medium text-ink">
-              <MapPin size={14} className="text-honey" />
-              {notice.headline}
-            </span>
-            <span className="hidden sm:inline text-charcoal/30">|</span>
-            <span className="inline-flex items-center gap-1.5">
-              <Truck size={14} className="text-charcoal/50" />
-              {notice.shipping}
-            </span>
-            <span className="hidden sm:inline text-charcoal/30">|</span>
-            <span className="inline-flex items-center gap-1.5 text-honey font-medium">
-              <ShieldCheck size={14} />
-              {notice.tagline}
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Category Grid ── */}
-      <section className="relative py-20 sm:py-28 bg-canvas">
-        <div className="absolute inset-0 honeycomb-accent opacity-20 pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal variant="blurIn">
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
-                Browse by Category
-              </p>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-[-0.02em]">
-                Store Categories
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" staggerDelay={0.06}>
-            {categories.map((cat) => {
-              const external = isExternal(cat.href);
-              const Card = external ? "a" : Link;
-              const cardProps = external
-                ? { href: cat.href, target: "_blank", rel: "noopener noreferrer" }
-                : { href: cat.href };
-
-              return (
-                <StaggerItem key={cat.id}>
-                  <InteractiveCard glowColor="honey" hoverLift={-4}>
-                    <Card
-                      {...cardProps}
-                      className="group block bg-paper border border-linen rounded-card p-6 h-full hover:shadow-card-hover transition-all duration-200 hover:border-honey/30"
-                    >
-                      <div className="w-12 h-12 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-4 group-hover:bg-honey/20 transition-colors">
-                        {categoryIcons[cat.id] ?? <Palette size={24} />}
-                      </div>
-                      <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors flex items-center gap-1.5">
-                        {cat.name}
-                        {external && <ExternalLink size={12} className="text-charcoal/30" />}
-                      </h3>
-                      {cat.description && (
-                        <p className="text-sm text-charcoal/60 line-clamp-2">{cat.description}</p>
-                      )}
-                    </Card>
-                  </InteractiveCard>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      <SectionTransition variant="swatches" height="md" />
-
-      {/* ── Featured Supply Areas ── */}
-      <section className="relative py-20 sm:py-28 bg-ivory">
-        <div className="absolute inset-0 grain-overlay pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal variant="blurIn">
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.15em] text-honey font-semibold mb-3">
-                Curated Collections
-              </p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em]">
-                Featured Supply Areas
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featuredAreas.map((area, i) => (
-              <ScrollReveal key={area.title} delay={i * 0.06} variant="fadeUp">
-                <InteractiveCard glowColor="honey" hoverLift={-4}>
-                  <div className="bg-paper border border-linen rounded-card overflow-hidden hover:shadow-card-hover transition-shadow duration-200">
-                    {area.image ? (
-                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-canvas">
-                        <Image
-                          src={area.image}
-                          alt={area.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      </div>
-                    ) : (
-                      <div className="aspect-[16/9] w-full bg-canvas flex items-center justify-center">
-                        {area.icon}
-                      </div>
-                    )}
-                    <div className="p-5">
-                      <h3 className="font-semibold text-ink mb-1">{area.title}</h3>
-                      <p className="text-sm text-charcoal/60 mb-4">{area.description}</p>
-                      <a
-                        href={area.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-honey hover:text-honey-dark transition-colors"
-                      >
-                        Browse current store selection
-                        <ArrowRight size={14} />
-                      </a>
-                    </div>
+            <div className="lg:col-span-5">
+              <ScrollReveal delay={0.2} variant="blurIn">
+                <div className="relative">
+                  <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-dramatic border border-linen/50">
+                    <Image
+                      src="/images/painting-work/lesson-2-painting-lesson-card.jpg"
+                      alt="Children painting with safe non-toxic art supplies"
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
-                </InteractiveCard>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SectionTransition variant="swatches" height="md" />
-
-      {/* ── Why These Supplies ── */}
-      <section className="relative py-20 sm:py-28 bg-canvas">
-        <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <ScrollReveal variant="blurIn">
-            <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-ink tracking-[-0.02em] mb-6">
-              Materials for Prepared Creative Spaces
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.08} variant="fadeUp">
-            <p className="text-lg text-charcoal/80 leading-relaxed mb-10">
-              Every item in the store is selected with child-centered art environments in mind. 
-              Safe, simple materials that support process-based art, independence, and creative confidence.
-            </p>
-          </ScrollReveal>
-
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-left" staggerDelay={0.08}>
-            {valueProps.map((prop) => (
-              <StaggerItem key={prop.title}>
-                <InteractiveCard hoverLift={-4}>
-                  <div className="bg-paper border border-linen rounded-card p-6 h-full">
-                    <div className="w-10 h-10 rounded-full bg-bee-yellow/10 flex items-center justify-center text-honey mb-3">
-                      {prop.icon}
-                    </div>
-                    <h3 className="font-semibold text-ink mb-2">{prop.title}</h3>
-                    <p className="text-sm text-charcoal/70">{prop.description}</p>
+                  <div className="absolute -bottom-4 -left-4 bg-paper rounded-2xl p-4 shadow-soft border border-linen/50">
+                    <p className="font-serif text-2xl font-medium text-honey">50+</p>
+                    <p className="text-xs text-charcoal/60">Products curated</p>
                   </div>
-                </InteractiveCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      <SectionTransition variant="swatches" height="md" />
-
-      {/* ── Store Help / Support ── */}
-      <section className="relative py-16 sm:py-20 bg-ivory border-t border-linen">
-        <div className="absolute inset-0 grain-overlay pointer-events-none" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal variant="blurIn">
-            <div className="text-center mb-10">
-              <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-[-0.02em]">
-                Store Help & Support
-              </h2>
+                </div>
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {supportLinks.map((link) => {
-              const external = isExternal(link.href);
-              const LinkComp = external ? "a" : Link;
-              const props = external
-                ? { href: link.href, target: "_blank", rel: "noopener noreferrer" }
-                : { href: link.href };
-
-              return (
-                <LinkComp
-                  key={link.id}
-                  {...props}
-                  className="inline-flex items-center gap-2 rounded-button bg-paper border border-linen px-4 py-2.5 text-sm text-charcoal/80 hover:border-honey/40 hover:text-ink transition-colors"
-                >
-                  {supportIcons[link.id] ?? <HelpCircle size={14} />}
-                  {link.name}
-                  {external && <ExternalLink size={12} className="text-charcoal/30" />}
-                </LinkComp>
-              );
-            })}
           </div>
         </div>
       </section>
 
-      {/* ── Related Paths ── */}
-      <section className="relative py-16 sm:py-20 bg-canvas border-t border-linen">
-        <div className="absolute inset-0 honeycomb-accent opacity-15 pointer-events-none" />
+      {/* ── Categories ── */}
+      <section id="categories" className="py-16 sm:py-20 bg-paper border-y border-linen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ScrollReveal variant="blurIn">
-            <div className="text-center mb-10">
-              <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-ink tracking-[-0.02em] mb-3">
-                Explore the Ecosystem
+          <ScrollReveal>
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl sm:text-4xl font-medium text-ink tracking-tight">
+                Shop by Category
               </h2>
-              <p className="text-charcoal/70">
-                Supplies work best alongside curriculum, books, and training.
+              <p className="mt-3 text-charcoal/60 max-w-xl mx-auto">
+                Everything you need for your atelier, classroom, or homeschool art shelf.
               </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {relatedPaths.map((item, i) => (
-              <ScrollReveal key={item.href} delay={i * 0.06} variant="fadeUp">
-                <InteractiveCard hoverLift={-4}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+            {topCategories.map((cat, i) => {
+              const count = getProductsByCategory(cat.id).length;
+              return (
+                <ScrollReveal key={cat.id} delay={i * 0.05}>
                   <Link
-                    href={item.href}
-                    className="group block bg-paper border border-linen rounded-card p-6 hover:shadow-card-hover transition-shadow duration-200 h-full"
+                    href={`/art-supplies/${cat.slug}`}
+                    className="group block p-5 sm:p-6 bg-white rounded-2xl border border-linen/60 hover:border-honey/30 hover:shadow-soft transition-all duration-300"
                   >
-                    <div className="w-10 h-10 rounded-full bg-canvas flex items-center justify-center text-honey mb-3 group-hover:bg-honey/10 transition-colors">
-                      {item.icon}
+                    <div className="w-11 h-11 rounded-xl bg-canvas flex items-center justify-center text-honey mb-4 group-hover:bg-honey/10 transition-colors">
+                      {categoryIcons[cat.id] || <ShoppingBag size={22} />}
                     </div>
-                    <h3 className="font-semibold text-ink mb-1 group-hover:text-honey transition-colors">
-                      {item.title}
+                    <h3 className="font-serif text-base font-medium text-ink group-hover:text-honey transition-colors">
+                      {cat.name}
                     </h3>
-                    <p className="text-sm text-charcoal/60">{item.description}</p>
+                    <p className="text-xs text-charcoal/50 mt-1">{count} products</p>
                   </Link>
-                </InteractiveCard>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── Final CTA ── */}
-      <FinalCTA
-        title="Ready to browse current supplies?"
-        description="The existing store is still open while the new catalog is being prepared. Explore available materials and check back for updates."
-        primaryCta={{
-          label: "Visit Current Store",
-          href: notice.storefrontUrl,
-        }}
-        secondaryCta={{
-          label: "Explore Art Books",
-          href: "/bookstore",
-        }}
-      />
+      {/* ── Featured Products ── */}
+      {featuredProducts.length > 0 && (
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <h2 className="font-serif text-3xl sm:text-4xl font-medium text-ink tracking-tight">
+                  Featured Supplies
+                </h2>
+                <p className="mt-2 text-charcoal/60">
+                  Hand-picked favorites from the store.
+                </p>
+              </div>
+              <Link
+                href="/art-supplies/paints"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-honey hover:text-honey/80 transition-colors"
+              >
+                View all
+                <ArrowRight size={16} />
+              </Link>
+            </div>
 
-      {/* ── Fine Print ── */}
-      <section className="py-8 bg-ivory border-t border-linen">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs text-charcoal/50 leading-relaxed">
-            Purchases currently open in the existing Volusion store while the new catalog is being migrated.
-            All inventory, pricing, and checkout remain on the legacy storefront until ecommerce integration is verified.
-          </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+              {featuredProducts.map((product, i) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  categorySlug={product.categoryIds[0]}
+                  index={i}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Store Info ── */}
+      <section className="py-16 sm:py-20 bg-paper border-t border-linen">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6">
+              <div className="w-12 h-12 rounded-full bg-canvas flex items-center justify-center mx-auto mb-4">
+                <ShieldCheck className="w-5 h-5 text-honey" />
+              </div>
+              <h3 className="font-serif text-lg font-medium text-ink mb-2">Curated & Safe</h3>
+              <p className="text-sm text-charcoal/60 leading-relaxed">
+                Every product is personally selected by Spramani Elaun for safety, quality, and educational value.
+              </p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-12 h-12 rounded-full bg-canvas flex items-center justify-center mx-auto mb-4">
+                <Palette className="w-5 h-5 text-honey" />
+              </div>
+              <h3 className="font-serif text-lg font-medium text-ink mb-2">Montessori Aligned</h3>
+              <p className="text-sm text-charcoal/60 leading-relaxed">
+                Materials support process-based, child-led art exploration in prepared environments.
+              </p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-12 h-12 rounded-full bg-canvas flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="w-5 h-5 text-honey" />
+              </div>
+              <h3 className="font-serif text-lg font-medium text-ink mb-2">Teacher Approved</h3>
+              <p className="text-sm text-charcoal/60 leading-relaxed">
+                Used in classrooms, homeschools, and studios worldwide for over a decade.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
-    </>
+
+      {/* ── CTA ── */}
+      <section className="py-16 sm:py-20 bg-ink text-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl font-medium tracking-tight mb-4">
+            Ready to stock your art shelf?
+          </h2>
+          <p className="text-white/70 mb-8 leading-relaxed">
+            Browse our full catalog of safe, non-toxic art supplies. New checkout coming soon — 
+            for now, complete your purchase through our trusted Volusion store.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/art-supplies/paints"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-honey text-white font-medium rounded-xl hover:bg-honey/90 transition-colors"
+            >
+              Start Shopping
+              <ArrowRight size={18} />
+            </Link>
+            <a
+              href="https://atosb-raxtf.volusion.store/default.asp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-medium rounded-xl hover:bg-white/10 transition-colors"
+            >
+              Volusion Store
+              <ExternalLink size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
-
-// ── Data ─────────────────────────────────────────────────────
-
-// NOTE: Individual Volusion category URLs are pending verification.
-// All featured area links route to the root storefront until exact category
-// slug URLs are confirmed on the live Volusion store.
-const storefrontRoot = "https://atosb-raxtf.volusion.store/";
-
-const featuredAreas = [
-  {
-    title: "Paints",
-    description: "Watercolor, tempera, and acrylic paints selected for child-safe creative exploration.",
-    href: storefrontRoot,
-    image: "/images/child-watercolor-painting.jpg",
-    icon: <Palette size={28} className="text-charcoal/20" />,
-  },
-  {
-    title: "Drawing Materials",
-    description: "Pencils, charcoal, pastels, and quality paper for mark-making and observation.",
-    href: storefrontRoot,
-    image: undefined,
-    icon: <Pencil size={28} className="text-charcoal/20" />,
-  },
-  {
-    title: "Clay",
-    description: "Modeling clay and sculpting tools for sensory-rich three-dimensional exploration.",
-    href: storefrontRoot,
-    image: undefined,
-    icon: <Shapes size={28} className="text-charcoal/20" />,
-  },
-  {
-    title: "Paper",
-    description: "Watercolor paper, drawing paper, and specialty papers for every medium.",
-    href: storefrontRoot,
-    image: undefined,
-    icon: <FileText size={28} className="text-charcoal/20" />,
-  },
-  {
-    title: "Art Teaching Books",
-    description: "Guides and resources for educators building art programs in Montessori and homeschool settings.",
-    href: storefrontRoot,
-    image: undefined,
-    icon: <GraduationCap size={28} className="text-charcoal/20" />,
-  },
-  {
-    title: "Art Curriculum",
-    description: "Complete curriculum materials for painting, drawing, clay, and color theory instruction.",
-    href: storefrontRoot,
-    image: "/images/painting-curriculum.jpg",
-    icon: <BookOpen size={28} className="text-charcoal/20" />,
-  },
-];
-
-const valueProps = [
-  {
-    title: "Child-Centered",
-    description: "Materials chosen for small hands, developing coordination, and independent use.",
-    icon: <ShieldCheck size={20} />,
-  },
-  {
-    title: "Process-Based",
-    description: "Supplies that support exploration and discovery rather than rigid outcomes.",
-    icon: <Paintbrush size={20} />,
-  },
-  {
-    title: "Non-Toxic & Safe",
-    description: "Premium safe non-toxic art supplies you can trust in any learning environment.",
-    icon: <ShieldCheck size={20} />,
-  },
-];
-
-const relatedPaths = [
-  {
-    title: "Art Books",
-    description: "Curriculum guides and teaching references for your shelf.",
-    href: "/bookstore",
-    icon: <Library size={18} />,
-  },
-  {
-    title: "Painting Curriculum",
-    description: "Sequenced painting lessons for the Montessori environment.",
-    href: "/curriculum/painting",
-    icon: <Palette size={18} />,
-  },
-  {
-    title: "About",
-    description: "Learn about the Nature of Art method and mission.",
-    href: "/about",
-    icon: <User size={18} />,
-  },
-  {
-    title: "Free Resources",
-    description: "Video lessons, checklists, and guides to get started.",
-    href: "/free-resources",
-    icon: <Newspaper size={18} />,
-  },
-];

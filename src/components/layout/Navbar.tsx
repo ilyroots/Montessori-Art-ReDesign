@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { mainNavigation } from "@/config/siteNavigation";
 import { Logo } from "./Logo";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/lib/store/useCart";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const { totalItems, toggleCart } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -87,8 +89,23 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile Toggle */}
+          {/* Actions */}
           <div className="flex items-center gap-2">
+            {/* Cart */}
+            <button
+              onClick={toggleCart}
+              className="relative p-2 text-ink rounded-md hover:bg-canvas transition-colors"
+              aria-label={`Cart (${totalItems} items)`}
+            >
+              <ShoppingBag size={20} />
+              {totalItems > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-honey text-white text-[10px] font-semibold rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 text-ink rounded-md hover:bg-canvas transition-colors"

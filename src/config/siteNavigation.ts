@@ -30,8 +30,11 @@ export const mainNavigation: NavItem[] = [
     label: "Shop",
     href: "/art-supplies",
     children: [
+      { label: "All Supplies", href: "/art-supplies", description: "Browse all art materials" },
+      { label: "Paints", href: "/art-supplies/paints", description: "Safe non-toxic paints" },
+      { label: "Drawing", href: "/art-supplies/drawing", description: "Pencils, crayons & more" },
+      { label: "Clay", href: "/art-supplies/clay", description: "Modeling & sculpture" },
       { label: "Art Books", href: "/bookstore", description: "Guides & curriculum books" },
-      { label: "Art Store", href: "/art-supplies", description: "Montessori art materials" },
     ],
   },
   {
